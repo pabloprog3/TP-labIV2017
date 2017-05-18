@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-05-2017 a las 04:56:59
+-- Tiempo de generación: 18-05-2017 a las 18:35:26
 -- Versión del servidor: 5.6.25
 -- Versión de PHP: 5.6.11
 
@@ -114,10 +114,6 @@ CREATE TABLE IF NOT EXISTS `cliente` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
--- RELACIONES PARA LA TABLA `cliente`:
---
-
---
 -- Volcado de datos para la tabla `cliente`
 --
 
@@ -140,10 +136,6 @@ CREATE TABLE IF NOT EXISTS `detalle_pago` (
   `pagos_faltantes` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
---
--- RELACIONES PARA LA TABLA `detalle_pago`:
---
-
 -- --------------------------------------------------------
 
 --
@@ -160,12 +152,6 @@ CREATE TABLE IF NOT EXISTS `duenio` (
   `fecha_nac` date DEFAULT NULL,
   `id_propiedad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
-
---
--- RELACIONES PARA LA TABLA `duenio`:
---   `id_propiedad`
---       `propiedad` -> `id_propiedad`
---
 
 -- --------------------------------------------------------
 
@@ -188,12 +174,6 @@ CREATE TABLE IF NOT EXISTS `empleados` (
   `correo` varchar(30) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `estado` char(1) COLLATE utf8_spanish2_ci DEFAULT 'a'
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
-
---
--- RELACIONES PARA LA TABLA `empleados`:
---   `id_sucursal`
---       `sucursal` -> `id_sucursal`
---
 
 --
 -- Volcado de datos para la tabla `empleados`
@@ -231,12 +211,6 @@ CREATE TABLE IF NOT EXISTS `propiedad` (
   `foto4` varchar(25) COLLATE utf8_spanish2_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
---
--- RELACIONES PARA LA TABLA `propiedad`:
---   `id_sucursal`
---       `sucursal` -> `id_sucursal`
---
-
 -- --------------------------------------------------------
 
 --
@@ -253,15 +227,30 @@ CREATE TABLE IF NOT EXISTS `reserva` (
   `deposito_inicial` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
+-- --------------------------------------------------------
+
 --
--- RELACIONES PARA LA TABLA `reserva`:
---   `id_cliente`
---       `cliente` -> `id_cliente`
---   `id_empleado`
---       `empleados` -> `id_empleado`
---   `id_propiedad`
---       `propiedad` -> `id_propiedad`
+-- Estructura de tabla para la tabla `reservas_aceptadas`
 --
+
+CREATE TABLE IF NOT EXISTS `reservas_aceptadas` (
+  `id` int(11) NOT NULL,
+  `num_reserva` int(11) NOT NULL,
+  `id_cliente` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reservas_canceladas`
+--
+
+CREATE TABLE IF NOT EXISTS `reservas_canceladas` (
+  `id` int(11) NOT NULL,
+  `id_cliente` int(11) NOT NULL,
+  `num_reserva` int(11) NOT NULL,
+  `fecha_cancel` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- --------------------------------------------------------
 
@@ -280,10 +269,6 @@ CREATE TABLE IF NOT EXISTS `sucursal` (
   `foto2` varchar(25) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `foto3` varchar(25) COLLATE utf8_spanish2_ci DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
-
---
--- RELACIONES PARA LA TABLA `sucursal`:
---
 
 --
 -- Volcado de datos para la tabla `sucursal`
@@ -342,6 +327,18 @@ ALTER TABLE `reserva`
   ADD KEY `fk_reserva_empleado` (`id_empleado`);
 
 --
+-- Indices de la tabla `reservas_aceptadas`
+--
+ALTER TABLE `reservas_aceptadas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `reservas_canceladas`
+--
+ALTER TABLE `reservas_canceladas`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `sucursal`
 --
 ALTER TABLE `sucursal`
@@ -376,6 +373,16 @@ ALTER TABLE `empleados`
 --
 ALTER TABLE `propiedad`
   MODIFY `id_propiedad` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `reservas_aceptadas`
+--
+ALTER TABLE `reservas_aceptadas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `reservas_canceladas`
+--
+ALTER TABLE `reservas_canceladas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `sucursal`
 --

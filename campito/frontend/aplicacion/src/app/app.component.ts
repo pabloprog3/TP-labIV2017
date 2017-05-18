@@ -6,5 +6,20 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Inmobiliarias Campito';
+  title = 'Inmobiliarias El Campito S.A.';
+
+  private visible:boolean=false;
+
+
+  
+  
+  private mostrarLogin() {
+    this.visible=true;
+  }
+
+  private ocultarLogin(){
+    this.visible=false;
+  }
+
 }
+
