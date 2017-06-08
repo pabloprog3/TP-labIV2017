@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 
+import {LoginComponent} from './componentes/login/login.component';
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,18 +11,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Inmobiliarias El Campito S.A.';
 
-  private visible:boolean=false;
-
-
   
-  
-  private mostrarLogin() {
-    this.visible=true;
-  }
-
-  private ocultarLogin(){
-    this.visible=false;
-  }
 
 }
 

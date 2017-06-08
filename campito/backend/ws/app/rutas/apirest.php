@@ -1,12 +1,58 @@
 <?php
 
+require __DIR__ . '/vendor/autoload.php';
+use \Firebase\JWT\JWT;
+
 require_once $_SERVER['DOCUMENT_ROOT']."/TP-labIV2017/campito/backend/ws/app/libs/cliente.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/TP-labIV2017/campito/backend/ws/app/libs/empleado.php";
 
-//-----------------------------------------RUTAS DE CLIENTES--------------------------------------
+$key = "key_crypt";
 
+//-------------------------------------------VERIFICAR LOGIN PARA JWT------------------------------
+$app->post("/login", function () use($app)
+{
+	$correo = $app->request->post("correo");
+	$passw = $app->request->post("passw");
+
+	//verificar si existe en la base de datos
+$empleado = new Empleado();
+$empleado_data = $empleado->verificarLogin($correo, $passw);
+
+if($empleado_data){
+	$token = array(
+    "iss" => "http://example.org",
+    "aud" => "http://example.com",
+    "iat" => time(),
+    "exp" => time() + 3600,
+    "data"=> []
+	);
+}
+
+if(!$empleado_data){
+	$cliente = new Cliente();
+	$cliente_data = $cliente->verificarLogin($correo, $passw);
+	
+	if($cliente_data){
+		$token = array(
+    		"iss" => "http://example.org",
+    		"aud" => "http://example.com",
+    		"iat" => time(),
+    		"exp" => time() + 3600,
+    		"data"=> []
+		);
+	}
+}
+
+$jwt = JWT::encode($token, $key);
+
+});
+
+
+
+//-----------------------------------------RUTAS DE CLIENTES--------------------------------------
 $app->get("/clientes", function () use($app)
 {
+	// RUTA: http://localhost:8080/TP-labIV2017/campito/backend/ws/vendor/slim/slim/clientes
     $clientesJSON = Cliente::TraerTodos();
     $app->response->headers->set("Content-Type", "application/json");
 	$app->response->status(200);

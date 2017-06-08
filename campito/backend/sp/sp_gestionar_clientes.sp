@@ -13,7 +13,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `gestionar_clientes`(
 BEGIN
 	case accion
     when 'traer_todos' then
-		select * from cliente where estatus='a';
+		select * from cliente where estado='a';
 	when 'traer_id' then
 		select * from cliente where id_cliente=_id_cliente;
 	when 'insertar' then

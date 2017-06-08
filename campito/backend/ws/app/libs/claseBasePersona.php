@@ -67,7 +67,10 @@ abstract class Persona
          $this->$fecha_nac=$valor;
     }
 
+    //verificar login-jwt
+    abstract protected function verificarLogin($correo, $passw);
 
+   
 
 
 }

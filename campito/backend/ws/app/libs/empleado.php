@@ -11,7 +11,12 @@ class Empleado extends Persona
     private $foto=null;
     private $sueldo=null;
 
-    function __construct($_nombre, $_apellido, $_dni, $_passw, $_telefono, $_correo, $_fecha_nac, $_id_sucursal, $_tipo_empleado, $_foto, $_sueldo)
+    function __construct(){
+        
+    }
+
+
+    function __construct1($_nombre, $_apellido, $_dni, $_passw, $_telefono, $_correo, $_fecha_nac, $_id_sucursal, $_tipo_empleado, $_foto, $_sueldo)
     {
         parent::__construct($_nombre, $_apellido, $_dni, $_passw, $_telefono, $_correo, $_fecha_nac);
         $this->id_sucursal = $_id_sucursal;
@@ -106,6 +111,19 @@ class Empleado extends Persona
         $conn = null;
     }
 
+    public function verificarLogin($correo, $passw){
+        $empleados=self::TraerTodos();
+        foreach ($empleados as $item){
+                 $usuario=array('correo'=>$item['correo'], 'rol'=>$item['tipo_emp']);
+                 break;
+        }
+
+        //si no existe devuelve null
+        if($usuario==null)
+            return null;
+        else
+            return $usuario;
+    }
 
 }
 ?>

@@ -5,11 +5,17 @@ require_once  $_SERVER['DOCUMENT_ROOT']."/TP-labIV2017/campito/backend/ws/app/li
 
 class Cliente extends Persona{
 
-     function __construct(){
+    function __construct(){
+        
+    }
+
+     function __construct1(){
         parent::__construct($_nombre, $_apellido, $_dni, $_passw, $_telefono, $_correo, $_fecha_nac);
     }
 
+
     //metodos para la base de datos
+
     public static function TraerTodos(){
         $conn=ConexionPDO::getConexion();
         $sql = 'call gestionar_clientes("traer_todos", 0,"","","","","","",null)';
@@ -82,6 +88,26 @@ class Cliente extends Persona{
         $conn=null;
     }
 
-}
+     public function verificarLogin($correo, $passw){
+        $usuario=null;
+
+        //verifico si existe en la tabla de clientes
+	    $clientes = self::TraerTodos();
+        foreach ($clientes as $item) {
+            if($item['correo']==$correo && $item['passw']==$passw){
+                //grabo los datos que devuelve el token
+                $usuario=array('correo'=>$item['correo'], 'rol'=>'cliente');
+                break;
+            }
+        }
+
+        //si no existe devuelve null
+        if($usuario!=null)
+            return null;
+        else
+            return $usuario;
+    }
+
+}//fin clase
 
 ?>
