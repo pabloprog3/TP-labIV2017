@@ -1,25 +1,75 @@
+
+<link href="https://fonts.googleapis.com/css?family=Calligraffitti|Gloria+Hallelujah|Monoton" rel="stylesheet">
+<body> 
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+        <!--  <span class="sr-only">Toggle navigation</span>  -->
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <!--<a class="navbar-brand" onclick="mostrarLoging()">Login</a> -->
+      
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+      <ul class="nav navbar-nav">
+        <!--<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Link</a></li> -->
+        
+      </ul>
+  
+      <ul class="nav navbar-nav navbar-right">
+        <li><a [routerLink]="['/registrarse']">Registrarse</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div id="principal">
+    <img style="width:1050px;height:300px" src="../../../assets/fotos/bg.jpg" />
+
+    <div class="textodiv" style="color:#000000;">
+      <h1 id="titulo"> {{title}}</h1>
+    </div>
+      
+
+
+
 <div class="container">
   <div class="row">
     
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">        
         <form class="form-horizontal" role="form">
   <div class="form-group">
-    <label for="mail" class="col-md-2" sr-only>Email</label>
+    <label for="mail" class="col-md-2" sr-only></label>
     <div class="col-md-10">
       <input type="email" class="form-control" id="mail"
-             placeholder="Email">
+             placeholder="Email" [ngModelOptions]="{standalone: true}" [(ngModel)]="email">
     </div>
 
-     <label for="passw" class="col-md-2" sr-only>Password</label>
+     <label for="passw" class="col-md-2" sr-only></label>
     <div class="col-md-10">
       <input type="password" class="form-control" id="passw"
-             placeholder="Password">
+             placeholder="Password" [ngModelOptions]="{standalone: true}" [(ngModel)]="passw">
     </div>
 
    </div>
-    <input type="button" class="btn btn-primary" value="Ingresar">
-    <input type="button" class="btn btn-info" value="Cerrar">
+    <input type="button" class="btn btn-primary" (click)="loginUsuario(email)" value="Ingresar">
+    <!--<input type="button" class="btn btn-info" value="Cerrar"> -->
+    
+  
+
+    <input type="button" (click)="btnAdministrador()" class="btn btn-success btn-xs" value="Administrador" />
+    <input type="button" (click)="btnEncargado()" class="btn btn-success btn-xs" value="Encargado" />
+    <input type="button" (click)="btnEmpleado()" class="btn btn-success btn-xs" value="Empleado" />
+    <input type="button" (click)="btnCliente()" class="btn btn-success btn-xs" value="Cliente" />
     </form>
     </div>
   </div>
 </div>
+

@@ -1,3 +1,23 @@
-form{
 
+#principal{
+  background-image: url('../../../assets/fotos/bg.jpg');
+
+  float:right;
+  position:relative;
 }
+#principal .textodiv {
+
+  width:320px;
+  position:absolute;
+  top:10px;
+  left:14px;
+}
+
+#titulo{
+  font-family: 'Monoton', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;
+  text-align: right;
+  position: absolute;
+  background: rgba(0, 0, 0, 0);
+  color: rgb(110, 10, 9);
+}
+

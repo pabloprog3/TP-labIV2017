@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+
 
 import {LoginComponent} from './componentes/login/login.component';
-
 
 @Component({
   selector: 'app-root',
@@ -9,9 +10,10 @@ import {LoginComponent} from './componentes/login/login.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Inmobiliarias El Campito S.A.';
-
   
 
-}
+  constructor(private rouuter: Router){}
 
+
+
+}

@@ -1,12 +1,10 @@
 <?php
 
-require __DIR__ . '/vendor/autoload.php';
-use \Firebase\JWT\JWT;
+ header("Access-Control-Allow-Origin: *");
 
 require_once $_SERVER['DOCUMENT_ROOT']."/TP-labIV2017/campito/backend/ws/app/libs/cliente.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/TP-labIV2017/campito/backend/ws/app/libs/empleado.php";
-
-$key = "key_crypt";
+require_once $_SERVER['DOCUMENT_ROOT']."/TP-labIV2017/campito/backend/ws/app/rutas/AuthValid.php";
 
 //-------------------------------------------VERIFICAR LOGIN PARA JWT------------------------------
 $app->post("/login", function () use($app)
@@ -14,37 +12,10 @@ $app->post("/login", function () use($app)
 	$correo = $app->request->post("correo");
 	$passw = $app->request->post("passw");
 
-	//verificar si existe en la base de datos
-$empleado = new Empleado();
-$empleado_data = $empleado->verificarLogin($correo, $passw);
-
-if($empleado_data){
-	$token = array(
-    "iss" => "http://example.org",
-    "aud" => "http://example.com",
-    "iat" => time(),
-    "exp" => time() + 3600,
-    "data"=> []
-	);
-}
-
-if(!$empleado_data){
-	$cliente = new Cliente();
-	$cliente_data = $cliente->verificarLogin($correo, $passw);
-	
-	if($cliente_data){
-		$token = array(
-    		"iss" => "http://example.org",
-    		"aud" => "http://example.com",
-    		"iat" => time(),
-    		"exp" => time() + 3600,
-    		"data"=> []
-		);
-	}
-}
-
-$jwt = JWT::encode($token, $key);
-
+	//devolver token
+	$auth = new AuthValidate();
+	$token=$auth->getToken($correo, $passw);
+	print_r($token);
 });
 
 
@@ -175,6 +146,18 @@ $app->delete("/empleados/(:id)", function() use($app){
 	$app->response->status(200);
 	//$app->response->body($clienteJSON);
 });
+
+
+
+//----------------------------------RUTAS DE PROPIEDADES--------------------------------------------
+
+//-------------------------------SUBIR FOTOS--------------------------------------------------------
+//$app->fotos("/fotos", function() use($app){
+
+//$data = json_decode($app->request->getBody());
+
+//});
+
 
 
 ?>

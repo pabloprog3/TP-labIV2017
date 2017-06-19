@@ -12,7 +12,7 @@ in _fecha_nac date,
 in _sueldo float,
 in _passw varchar(15),
 in _telefono varchar(10),
-in _correo varchar(30)
+in _correo varchar(40)
 )
 BEGIN
 
@@ -20,7 +20,7 @@ BEGIN
     when 'traer_todos' then
 		select * from empleados where estado='a';
 	when 'traer_id' then
-		select * from empleados where id_empleado=_id;
+		select * from empleados where correo=_correo;
 	when 'insertar' then
 		insert into empleados(id_sucursal, tipo_emp, nombre, apellido, dni, foto, fecha_nac, sueldo, passw, telefono, correo)
 			values(_id_sucursal, _tipo_emp, _nombre, _apellido, _dni, _foto, _fecha_nac, _sueldo, _passw, _telefono, _correo);

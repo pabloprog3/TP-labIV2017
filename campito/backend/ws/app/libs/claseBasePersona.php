@@ -12,9 +12,10 @@ abstract class Persona
     private $telefono=null;
     private $correo=null;
     private $fecha_nac=null;
+    //private $categoria;
 
 
-    function __construct($_nombre, $_apellido, $_dni, $_passw, $_telefono, $_correo, $_fecha_nac)
+    function __construct($_nombre, $_apellido, $_dni, $_passw, $_telefono, $_correo, $_fecha_nac)//, $_categoria)
     {
         $this->nombre=$_nombre;
         $this->$apellido=$_apellido;
@@ -23,6 +24,7 @@ abstract class Persona
         $this->$telefono=$_telefono;
         $this->$correo=$_correo;
         $this->$fecha_nac=$_fecha_nac;
+	//$this->categoria = $_categoria;
     }
 
     public function getNombre(){
@@ -43,6 +45,7 @@ abstract class Persona
     public function getFechaNacimiento(){
         return $this->fecha_nac;
     }
+	
 
 
     public function setNombre($valor){
@@ -66,6 +69,8 @@ abstract class Persona
     public function setFechaNacimiento($valor){
          $this->$fecha_nac=$valor;
     }
+
+   
 
     //verificar login-jwt
     abstract protected function verificarLogin($correo, $passw);

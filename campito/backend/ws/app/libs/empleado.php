@@ -40,14 +40,15 @@ class Empleado extends Persona
     }
 
     public static function TraerPorId($id){
+        //por parametro le paso el correo
         $dbPDO = new ConexionPDO();
 	    $conn = $dbPDO->getConexion();
-        $sql = 'call gestionar_empleados("traer_id", ?, null, "","","","","",null,null,"","","")';
+        $sql = 'call gestionar_empleados("traer_id", null, null, "","","","","",null,null,"","",?)';
 	    $dbQuery = $conn->prepare($sql);
-        $dbQuery->bindParam(1,$id,PDO::PARAM_INT);
+        $dbQuery->bindParam(1,$id,PDO::PARAM_STR);
 	    $dbQuery->execute();
 	    $empleado = $dbQuery->fetchAll(PDO::FETCH_ASSOC);
-	 
+        //var_dump($empleado);
 	    $conn = null;
         return json_encode($empleado);
     }
@@ -112,17 +113,8 @@ class Empleado extends Persona
     }
 
     public function verificarLogin($correo, $passw){
-        $empleados=self::TraerTodos();
-        foreach ($empleados as $item){
-                 $usuario=array('correo'=>$item['correo'], 'rol'=>$item['tipo_emp']);
-                 break;
-        }
 
-        //si no existe devuelve null
-        if($usuario==null)
-            return null;
-        else
-            return $usuario;
+
     }
 
 }

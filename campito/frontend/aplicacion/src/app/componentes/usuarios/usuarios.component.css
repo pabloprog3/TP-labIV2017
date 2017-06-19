@@ -1,0 +1,29 @@
+#legendClient{
+    color: white;
+    font-weight: bold;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+.subtitulo{
+    text-align: center;
+    text-shadow: 1px 1px #fff, 0 0 #99f, 2px 3px 1px #e3e3e3; 
+}
+
+.legendProp{
+    text-align: center;
+    color: rgb(100, 90, 100);
+    font-stretch: semi-condensed;
+    font-weight: bold;
+    
+}
+
+.campo{
+    font-family: 'Architects Daughter', cursive;
+    color: rgb(90, 35, 1);
+    
+    margin: 10px 10px 10px 10px;
+}
+
+.pbody{
+    background-color: rgba(10,1, 1, 0.2);
+}

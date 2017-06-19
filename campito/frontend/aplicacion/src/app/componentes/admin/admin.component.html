@@ -1,0 +1,29 @@
+   <html>
+    <body class="bodi">
+    
+
+    <div class="container"  >   
+        <div style="background-color: rgb(200, 10, 10);" class="row">
+            <div  class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <div id="mySidenav" class="sidenav">
+                  <a id="about" [routerLink]="['/usuarios']">Usuarios</a>      
+                  <!--<a href="#" id="about">Usuarios</a>-->
+                  <a href="#" id="blog">Sucursales</a>
+                  <a href="#" id="projects">Estadisticas</a>
+                  <a id="contact" [routerLink]="['/login']">Salir</a>
+                  <!--<a r id="contact">Salir</a>-->
+                </div>
+            </div>
+            
+            
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+ 
+
+  </body>
+
+   </html>

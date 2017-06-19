@@ -9,8 +9,8 @@ class Cliente extends Persona{
         
     }
 
-     function __construct1(){
-        parent::__construct($_nombre, $_apellido, $_dni, $_passw, $_telefono, $_correo, $_fecha_nac);
+     function __construct1($_nombre, $_apellido, $_dni, $_passw, $_telefono, $_correo, $_fecha_nac){
+        parent::__construct($_nombre, $_apellido, $_dni, $_passw, $_telefono, $_correo, $_fecha_nac);//, $_categoria);
     }
 
 
@@ -27,11 +27,12 @@ class Cliente extends Persona{
     }
 
     public static function TraerPorId($id){
+        //por parametro le paso el correo
         $dbPDO = new ConexionPDO();
 	    $conn = $dbPDO->getConexion();
-        $sql='call gestionar_clientes("traer_id", ?, "", "", "", "", "", "",null)';
+        $sql='call gestionar_clientes("traer_id", null, "", "", "", "", "", ?,null)';
 	    $dbQuery = $conn->prepare($sql);
-	    $dbQuery->bindParam(1,$id,PDO::PARAM_INT);
+	    $dbQuery->bindParam(1,$id,PDO::PARAM_STR);
         $dbQuery->execute();
         
         $cliente = $dbQuery->fetchAll(PDO::FETCH_ASSOC);
@@ -40,11 +41,11 @@ class Cliente extends Persona{
         return json_encode($cliente);
     }
 
-    public static function Insertar($nombre, $apellido, $dni, $passw, $telefono, $correo, $fecha_nac)
+    public static function Insertar($nombre, $apellido, $dni, $passw, $telefono, $correo, $fecha_nac, $categoria)
     {
         $dbPDO = new ConexionPDO();
 	    $conn = $dbPDO->getConexion();
-        $sql='call gestionar_clientes("insertar",null, ?, ?, ?, ?, ?, ?, ?)';
+        $sql='call gestionar_clientes("insertar",null, ?, ?, ?, ?, ?, ?, ?, ?)';
 	    $dbQuery = $conn->prepare($sql);
         $dbQuery->bindParam(1,$nombre,PDO::PARAM_STR);
         $dbQuery->bindParam(2,$apellido,PDO::PARAM_STR);
@@ -52,7 +53,8 @@ class Cliente extends Persona{
         $dbQuery->bindParam(4,$passw,PDO::PARAM_STR);
         $dbQuery->bindParam(5,$telefono,PDO::PARAM_STR);
         $dbQuery->bindParam(6,$correo,PDO::PARAM_STR);
-        $dbQuery->bindParam(7,$fecha_nac,PDO::PARAM_STR);
+        $dbQuery->bindParam(7,$fecha_nac);
+        $dbQuery->bindParam(8,$categoria,PDO::PARAM_STR);
         $dbQuery->execute();
         
         $conn = null;
@@ -89,23 +91,7 @@ class Cliente extends Persona{
     }
 
      public function verificarLogin($correo, $passw){
-        $usuario=null;
 
-        //verifico si existe en la tabla de clientes
-	    $clientes = self::TraerTodos();
-        foreach ($clientes as $item) {
-            if($item['correo']==$correo && $item['passw']==$passw){
-                //grabo los datos que devuelve el token
-                $usuario=array('correo'=>$item['correo'], 'rol'=>'cliente');
-                break;
-            }
-        }
-
-        //si no existe devuelve null
-        if($usuario!=null)
-            return null;
-        else
-            return $usuario;
     }
 
 }//fin clase
