@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
+//import {AuthenticationService} from '../../servicios/athentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Auth } from "../../servicios/auth.service";
+import { Usuario } from '../../clases/Usuario';
 
 
 @Component({
@@ -12,41 +14,51 @@ export class LoginComponent implements OnInit {
     title = 'Inmobiliarias El Campito S.A.';
     email: string="";
     passw: string="";
-    // model:any={};
+    //model:any={};
+    error: string;
+    user: Usuario = new Usuario('','');
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private auth: Auth){}   //, private auth: Auth) { }
+    
 
   ngOnInit() {
-
+    // reset login status
+    this.auth.logout();
   }
 
    btnAdministrador(){
-    this.email = 'admin@admin.com';
-    this.passw = '3333';
+    this.user.correo = 'admin@admin.com';
+    this.user.passw = '3333';
   }
 
   btnEncargado(){
-    this.email = 'encargado@encargado.com.ar';
-    this.passw = '1111';
+    this.user.correo = 'encargado@encargado.com.ar';
+    this.user.passw = '1111';
   }
 
   btnEmpleado(){
-    this.email = 'empleado@empleado.com';
-    this.passw = '0000';
+    this.user.correo = 'empleado@empleado.com';
+    this.user.passw = '0000';
   }
 
   btnCliente(){
-    this.email = 'cliente@cliente.com.ar';
-    this.passw = 'cliente';
+    this.user.correo = 'cliente@cliente.com.ar';
+    this.user.passw = 'cliente';
   }
   
-  loginUsuario(email){
-      //console.log(email);
-      if (email == 'admin@admin.com') {
+  loginUsuario(){
+  
+      if (this.user.correo == 'admin@admin.com') {
         this.router.navigate(['/admin']);
       }
       else 
-        console.log('no');
+        console.log('no admin');
+
+      if (this.user.correo == 'cliente@cliente.com.ar') {
+        this.router.navigate(['/cliente']);
+      }
+      else 
+        console.log('no cliente');
   }
 
 

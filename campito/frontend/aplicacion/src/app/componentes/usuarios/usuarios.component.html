@@ -111,7 +111,7 @@
                 
 
           </div>
-          <div class="panel-footer">
+          <div *ngIf="perfil==cliente"  class="panel-footer">
             <a [routerLink]="['listaClientes']">Ver listado de Clientes</a>
             <a style="text-align:center; margin-left: 620px" [routerLink]="['/admin']">Ir al Panel de Administracion</a>
             

@@ -18,7 +18,7 @@ class Cliente extends Persona{
 
     public static function TraerTodos(){
         $conn=ConexionPDO::getConexion();
-        $sql = 'call gestionar_clientes("traer_todos", 0,"","","","","","",null)';
+        $sql = 'call gestionar_clientes("traer_todos", 0,"","","","","","",null,"")';
         $dbQuery = $conn->prepare($sql);
 	    $dbQuery->execute();
 	    $clientes = $dbQuery->fetchAll(PDO::FETCH_ASSOC);

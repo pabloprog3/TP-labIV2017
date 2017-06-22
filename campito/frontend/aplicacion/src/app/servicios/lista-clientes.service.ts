@@ -15,16 +15,24 @@ export class ListaClientesService {
 
 
   getClientes(): Observable<Cliente[]>{
-      return this.http.get(this.apiUrl).map(this.getDatos).catch(this.error);
+      return this.http.get(this.apiUrl, this.getOptions()).map(this.getDatos).catch(this.error);
   }
 
   getClienteCorreo(correo: string): Observable<Cliente>{
     //console.log('correo en lista-clientes.service.ts: ', correo); LLEGA OK
-    return this.http.get(this.apiUrl + '/' + correo).map(this.getDatos).catch(this.error);
+    return this.http.get(this.apiUrl + '/' + correo, this.getOptions()).map(this.getDatos).catch(this.error);
   }
 
-  private postCliente(entidad: Cliente): Observable<Cliente>{
-    return this.http.post(this.apiUrl, entidad).map(this.getDatos).catch(this.error);
+  postCliente(entidad: Cliente): Observable<Cliente>{
+    return this.http.post(this.apiUrl, entidad, this.getOptions()).map(this.getDatos).catch(this.error);
+  }
+
+  deleteCliente(entidad: Cliente){
+    return this.http.delete(this.apiUrl + '/' + entidad.correo).catch(this.error);
+  }
+
+  updateCliente(entidad: Cliente){
+    return this.http.put(this.apiUrl, entidad).catch(this.error);
   }
 
   private getDatos(data: Response){
@@ -42,10 +50,10 @@ export class ListaClientesService {
 
 
 
-  /*private getOptions(): RequestOptions{
-    let auth = new Headers({ 'Authorization': 'Bearer' + localStorage.setItem('token') });
+  private getOptions(): RequestOptions{
+    let auth = new Headers({ 'Authorization': 'Bearer' + localStorage.getItem('token') });
     let options = new RequestOptions({headers: auth});
     return options;
-  }*/
+  }
 
 }

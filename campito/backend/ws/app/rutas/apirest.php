@@ -6,16 +6,24 @@ require_once $_SERVER['DOCUMENT_ROOT']."/TP-labIV2017/campito/backend/ws/app/lib
 require_once $_SERVER['DOCUMENT_ROOT']."/TP-labIV2017/campito/backend/ws/app/libs/empleado.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/TP-labIV2017/campito/backend/ws/app/rutas/AuthValid.php";
 
-//-------------------------------------------VERIFICAR LOGIN PARA JWT------------------------------
-$app->post("/login", function () use($app)
+//-------------------------------------------LOGIN JWT------------------------------
+
+//http://localhost:8080/TP-labIV2017/campito/backend/ws/vendor/slim/slim/auth
+$app->post("/auth", function () use($app)
 {
 	$correo = $app->request->post("correo");
 	$passw = $app->request->post("passw");
 
+	//echo $correo;
+	//echo $passw;
+
 	//devolver token
 	$auth = new AuthValidate();
 	$token=$auth->getToken($correo, $passw);
-	print_r($token);
+	$app->response->headers->set("Content-Type", "application/X-www-form-urlencoded");
+	$app->response->status(200);
+	$app->response->body($token);
+	//print_r($token);
 });
 
 
@@ -30,9 +38,9 @@ $app->get("/clientes", function () use($app)
 	$app->response->body($clientesJSON);
 });
 
-$app->get("/clientes/(:id)", function ($id) use($app)
+$app->get("/clientes/(:correo)", function ($correo) use($app)
 {
-    $clientesJSON = Cliente::TraerPorId($id);
+    $clientesJSON = Cliente::TraerPorId($correo);
     $app->response->headers->set("Content-Type", "application/json");
 	$app->response->status(200);
 	$app->response->body($clientesJSON);
@@ -51,20 +59,20 @@ $app->post("/clientes", function() use($app){
     $clienteJSON = Cliente::Insertar($nombre, $apellido, $dni, $passw, $telefono, $correo, $fecha_nac);
 	$app->response->headers->set("Content-Type", "application/json");
 	$app->response->status(200);
-	//$app->response->body($clienteJSON);
+	$app->response->body($clienteJSON);
 });
 
-$app->put("/clientes/(:id)", function() use($app){
-    $id = $app->request->post("id");
+$app->put("/clientes/(:correo)", function($correo) use($app){
+    //$id = $app->request->post("id");
 	$nombre = $app->request->post("nombre");
 	$apellido = $app->request->post("apellido");
     $dni = $app->request->post("dni");
 	$passw = $app->request->post("passw");
 	$telefono = $app->request->post("telefono");
-    $correo = $app->request->post("correo");
+    //$correo = $app->request->post("correo");
 	$fecha_nac = $app->request->post("fecha_nac");
 	
-    $clienteJSON = Cliente::Insertar($id, $nombre, $apellido, $dni, $passw, $telefono, $correo, $fecha_nac);
+    $clienteJSON = Cliente::Actualizar($id, $nombre, $apellido, $dni, $passw, $telefono, $correo, $fecha_nac);
 	$app->response->headers->set("Content-Type", "application/json");
 	$app->response->status(200);
 	//$app->response->body($clienteJSON);

@@ -9,15 +9,19 @@ import {RegistrarClienteComponent} from './registrar-cliente/registrar-cliente.c
 //import {UsuariosComponent} from './usuarios/usuarios.component';
 //import {ListaClientesComponent} from './lista-clientes/lista-clientes.component';
 import {AppComponent} from '../app.component';
+import { AuthGuard } from '../auth-guard';
+
+import { ClienteComponent } from "./cliente/cliente.component";
  
 const APP_ROUTES: Routes = [
   { path: 'admin', component: AdminComponent },
-  { path: 'login', component: LoginComponent},
-  {path: 'registrarse', component: RegistrarClienteComponent},
+  { path: 'login', component: LoginComponent },
+  { path: 'registrarse', component: RegistrarClienteComponent },
+  { path: 'cliente', component: ClienteComponent },
   //{path: 'usuarios', component: UsuariosComponent},
   //{path:'usuarios/listaClientes', component: ListaClientesComponent},
   { path: '**', pathMatch: 'full', redirectTo: 'login' },
-  { path: '', pathMatch: 'full',  redirectTo: 'login' }
+  { path: '', component: LoginComponent, canActivate: [AuthGuard] }
 ];
  
 export const APP_ROUTING = RouterModule.forRoot(APP_ROUTES, {useHash :true}); 

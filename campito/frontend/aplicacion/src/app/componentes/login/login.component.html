@@ -49,19 +49,21 @@
     <label for="mail" class="col-md-2" sr-only></label>
     <div class="col-md-10">
       <input type="email" class="form-control" id="mail"
-             placeholder="Email" [ngModelOptions]="{standalone: true}" [(ngModel)]="email">
+             placeholder="Email" [ngModelOptions]="{standalone: true}"  [(ngModel)]="user.correo" #correo="ngModel" required />
     </div>
 
      <label for="passw" class="col-md-2" sr-only></label>
     <div class="col-md-10">
       <input type="password" class="form-control" id="passw"
-             placeholder="Password" [ngModelOptions]="{standalone: true}" [(ngModel)]="passw">
+             placeholder="Password" [ngModelOptions]="{standalone: true}"  [(ngModel)]="user.passw" #passw="ngModel" required />
     </div>
 
    </div>
-    <input type="button" class="btn btn-primary" (click)="loginUsuario(email)" value="Ingresar">
-    <!--<input type="button" class="btn btn-info" value="Cerrar"> -->
-    
+    <input type="button" class="btn btn-primary" (click)="loginUsuario()" value="Ingresar">
+
+    <div *ngIf="error" class="alert alert-danger" >
+      {{error}}
+    </div>
   
 
     <input type="button" (click)="btnAdministrador()" class="btn btn-success btn-xs" value="Administrador" />

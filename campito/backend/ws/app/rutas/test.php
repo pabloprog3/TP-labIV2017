@@ -92,8 +92,8 @@ $empleadoEncontrado = null;
 /*--------------------------------------------------------------------------------------------*/
 
 /**/           
-        $correo="encargado@encargado.com.ar";
-        $passw="1111";
+        $correo="admin@admin.com";
+        $passw="3333";
         $empleadoEncontrado=null;
         //var_dump($empleadoEncontrado); NULL
         $empleadoEncontrado = json_decode(Empleado::TraerPorId($correo));
@@ -110,6 +110,7 @@ $empleadoEncontrado = null;
                  //verifico la password
                  //print_r($empleadoEncontrado);
                  if ($empleadoEncontrado[0]->passw==$passw) {
+                     print_r($empleadoEncontrado);
                     return $usuario = $empleadoEncontrado;
                 }
             }else{
@@ -117,6 +118,7 @@ $empleadoEncontrado = null;
                 $clienteEncontrado = Cliente::TraerPorId($correo);
                 if ($clienteEncontrado[0]->passw==$correo) {
                     if ($clienteEncontrado[0]->passw==$passw) {
+                        print_r($clienteEncontrado);
                         return $usuario = $clienteEncontrado;
                     }
                 }           

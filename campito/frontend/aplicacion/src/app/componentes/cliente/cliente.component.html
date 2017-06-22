@@ -1,0 +1,62 @@
+<div class="container">
+
+
+<div class="alert alert-info">
+  <h3><strong>Conozca nuestras sucursales </strong>consulte el mapa en Ver detalles</h3>
+</div>
+
+
+
+    <div class="row">
+      
+      
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+       <link rel="" type="" href="www.google.com.ar"> <img width="100px" src="../../../assets/fotos/sucursales/darquier/1.png" alt="local_turdera"> 
+        <br>
+        <strong>Av. Antártida Argentina 202,</strong>
+        <br>
+        <p>Buenos Aires, Turdera</p>
+        <input class="btn btn-xs btn-info" (click)="verDetalle('turdera')" type="button" name="verLocal" value="Ver Detalle">
+         <input class="btn btn-xs btn-warning" [disabled]="ocultarmapturdera" (click)="ocultarMapa('turdera')" type="button" name="verLocal" value="Ocultar Mapa">
+        <div  *ngIf="mostrarTurdera" >
+          <agm-map style="height: 300px; width: 300px;" [latitude]="lat" [longitude]="lng">
+              <agm-marker [latitude]="lat" [longitude]="lng"> </agm-marker>
+          </agm-map>
+        </div>
+      </div>
+      
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <img width="100px" src="../../../assets/fotos/sucursales/mejia/1.png" alt="local_ramosmejia">
+         <br>
+        <strong>Av. de Mayo 316,</strong>
+        <br>
+        <p>Buenos Aires, Ramos Mejía</p>
+       <input class="btn btn-xs btn-info" (click)="verDetalle('ramosmejia')" type="button" name="verLocal" value="Ver Detalle">
+       <input class="btn btn-xs btn-warning" [disabled]="ocultarmapramosmejia" (click)="ocultarMapa('ramosmejia')" type="button" name="verLocal" value="Ocultar Mapa">
+       <div *ngIf="mostrarRamosMejia" >
+          <agm-map style="height: 300px; width: 300px;" [latitude]="lat" [longitude]="lng">
+              <agm-marker [latitude]="lat" [longitude]="lng"> </agm-marker>
+          </agm-map>
+        </div>
+      </div>
+
+
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+         <img width="200px" src="../../../assets/fotos/sucursales/monte/1.jpg" alt="local_caba">
+         <br>
+        <strong>La Pampa 5029</strong>
+        <br>
+        <p>Capital Federal</p>
+        <input class="btn btn-xs btn-info" (click)="verDetalle('caba')" type="button" name="verLocal" value="Ver Detalle">
+        <input class="btn btn-xs btn-warning" [disabled]="ocultarmapcaba" (click)="ocultarMapa('caba')" type="button" name="verLocal" value="Ocultar Mapa">
+        <div *ngIf="mostrarCaba" >
+          <agm-map style="height: 300px; width: 300px;" [latitude]="lat" [longitude]="lng">
+              <agm-marker [latitude]="lat" [longitude]="lng"> </agm-marker>
+          </agm-map>
+        </div>
+      </div>
+
+    </div>
+    
+
+</div>

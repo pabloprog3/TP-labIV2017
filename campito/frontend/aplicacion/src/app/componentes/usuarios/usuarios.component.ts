@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import {Router} from '@angular/router';
 import {SubirArchivosComponent} from '../subir-archivos/subir-archivos.component';
 import {ListaClientesComponent} from '../lista-clientes/lista-clientes.component';
@@ -18,7 +18,7 @@ export class UsuariosComponent implements OnInit {
    alquilerBool: boolean = false;
    mostrarTxtVenta: boolean = false;
    VentaBool: boolean = false;
-   
+   @Input() perfil: string;
    model;
 
   constructor(private router: Router) { }
