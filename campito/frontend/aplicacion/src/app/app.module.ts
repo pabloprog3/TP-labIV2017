@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AgmCoreModule } from '@agm/core';
@@ -24,8 +24,13 @@ import { RegistrarClienteComponent } from './componentes/registrar-cliente/regis
 import { Auth } from './servicios/auth.service';
 import { AuthGuard } from './auth-guard';
 import { ClienteComponent } from './componentes/cliente/cliente.component';
-import { PropiedadesComponent } from './componentes/propiedades/propiedades.component';
-
+import { ListaPropiedadesComponent } from './componentes/lista-propiedades/lista-propiedades.component';
+//import { PropiedadesComponent } from './componentes/propiedades/propiedades.component';
+import { SucursalesService } from './servicios/sucursales.service';
+import { ListaSucursalesComponent } from './componentes/lista-sucursales/lista-sucursales.component';
+//import { GOOGLE_MAPS_PROVIDERS } from 'angular2-google-map';
+//import { PdfmakeModule } from 'ng-pdf-make';
+import { PropiedadService } from './servicios/propiedad.service';
 
 
 
@@ -41,19 +46,22 @@ import { PropiedadesComponent } from './componentes/propiedades/propiedades.comp
     PerfilClienteComponent,
     RegistrarClienteComponent,
     ClienteComponent,
-    PropiedadesComponent
+    ListaPropiedadesComponent,
+    ListaSucursalesComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     AgmCoreModule.forRoot({ apiKey: 'AIzaSyBgZFLq8XuoNexPw7bLNns9fgiIOfDVvaU' }),
     HttpModule,
     APP_ROUTING,
     AdminRoutingModule,
-    FileUploadModule
+    FileUploadModule,
+    //PdfmakeModule
   
   ],
-  providers: [ListaClientesService,  Auth, AuthGuard], //AUTH_PROVIDERS,
+  providers: [ListaClientesService, SucursalesService, PropiedadService,  Auth, AuthGuard], //AUTH_PROVIDERS,
   bootstrap: [AppComponent]
 })
 export class AppModule { }

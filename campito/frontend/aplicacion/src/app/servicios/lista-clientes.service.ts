@@ -4,27 +4,36 @@ import {Observable} from 'rxjs/Observable';
 import  'rxjs/add/observable/throw';
 import  'rxjs/add/operator/catch';
 import  'rxjs/add/operator/map';
-import {Cliente} from '../clases/Cliente';
+import { Cliente } from '../clases/Cliente';
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class ListaClientesService {
   
   private apiUrl: string = 'http://localhost:8080/TP-labIV2017/campito/backend/ws/vendor/slim/slim/clientes';
+  private cliente: Object;
   
   constructor(private http: Http) { }
 
 
   getClientes(): Observable<Cliente[]>{
-      return this.http.get(this.apiUrl, this.getOptions()).map(this.getDatos).catch(this.error);
+      return this.http.get(this.apiUrl).map(this.getDatos).catch(this.error);
   }
+
+ /* getClienteCorreo(correo: string): Observable<Cliente>{
+    //console.log('correo en lista-clientes.service.ts: ', correo); LLEGA OK
+    return this.http.get(this.apiUrl + '/' + correo).map(this.getDatos).catch(this.error);
+  } */
 
   getClienteCorreo(correo: string): Observable<Cliente>{
-    //console.log('correo en lista-clientes.service.ts: ', correo); LLEGA OK
-    return this.http.get(this.apiUrl + '/' + correo, this.getOptions()).map(this.getDatos).catch(this.error);
-  }
+    //console.log('correo en lista-clientes.service.ts: ', correo);  //LLEGA OK
+    return this.http.get(this.apiUrl + '/' + correo)
+        .map(r => r.json())
+        .catch(this.error);
+    }
 
   postCliente(entidad: Cliente): Observable<Cliente>{
-    return this.http.post(this.apiUrl, entidad, this.getOptions()).map(this.getDatos).catch(this.error);
+    return this.http.post(this.apiUrl, entidad).map(this.getDatos).catch(this.error);
   }
 
   deleteCliente(entidad: Cliente){
@@ -32,7 +41,10 @@ export class ListaClientesService {
   }
 
   updateCliente(entidad: Cliente){
-    return this.http.put(this.apiUrl, entidad).catch(this.error);
+    let eJson = JSON.stringify(entidad);
+    return this.http.put(this.apiUrl, eJson)
+          .map(result => result.json())
+          .catch(this.error);
   }
 
   private getDatos(data: Response){

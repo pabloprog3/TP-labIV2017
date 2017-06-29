@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-
-import { AgmMap, AgmMarker } from '@agm/core';
-
+import { Component, OnInit, Input } from '@angular/core';
+//import { AgmMap, AgmMarker } from '@agm/core';
+import { ListaSucursalesComponent } from '../lista-sucursales/lista-sucursales.component';
+import { SucursalesService } from '../../servicios/sucursales.service';
+import { Router } from '@angular/router';
+import { PropiedadService } from '../../servicios/propiedad.service';
 
 @Component({
   selector: 'app-cliente',
@@ -10,80 +12,51 @@ import { AgmMap, AgmMarker } from '@agm/core';
 })
 export class ClienteComponent implements OnInit {
   private pathImages: string = '../../../assets/fotos/sucursales';
-  mostrarTurdera: boolean;
-  mostrarRamosMejia: boolean;
-  mostrarCaba:boolean;
   lat: number;
   lng: number;
-  ocultarmapturdera: boolean;
-  ocultarmapramosmejia: boolean;
-  ocultarmapcaba: boolean;
   map: any;
+  mapaVisible: boolean;
+  listaPropiedades: Object;
+  public titulomapa: string;
 
-  constructor() { }
+  constructor(private servicio: SucursalesService, private router: Router, private servicioProp: PropiedadService) { }
 
   ngOnInit() {
-    this.mostrarCaba = false;
-    this.mostrarRamosMejia = false;
-    this.mostrarTurdera = false;
-    this.ocultarmapturdera = true;
-    this.ocultarmapcaba = true;
-    this.ocultarmapramosmejia = true;
+
+    this.mapaVisible = false;
+    this.titulomapa = 'Ver Mapa';
+    this.cargarPropiedades();
 
   }
 
-
-  verDetalle(valor){
-    switch (valor) {
-      case 'turdera':
-              this.lat = -34.808611;
-              this.lng = -58.223730;
-              this.mostrarTurdera = true;
-              this.ocultarmapturdera = false;
-        break;
-
-        case 'ramosmejia':
-               this.lat = -34.643833;
-               this.lng = -58.564960;
-               this.mostrarRamosMejia=true;
-               this.ocultarmapramosmejia = false;
-          break;
-    
-        case 'caba':
-               this.lat = -34.579466;
-               this.lng = -58.479797;
-               this.mostrarCaba = true;
-               this.ocultarmapcaba = false;
-          break;
-    
-      default:
-        break;
-    }
+mostrarMapaBool(){
+  if (this.mapaVisible == false) {
+    this.mapaVisible = true;
+    this.titulomapa = 'Ocultar Mapa';
+  }else{
+    this.mapaVisible = false;
+    this.titulomapa = 'Ver Mapa';
   }
+}
 
 
-ocultarMapa(valor){
-    switch (valor) {
-      case 'turdera':
-              this.ocultarmapturdera = true;
-              this.mostrarTurdera = false;
-        break;
 
-        case 'ramosmejia':
-               this.ocultarmapramosmejia = true;
-               this.mostrarRamosMejia=false;
-          break;
-    
-        case 'caba':
-             this.ocultarmapcaba = true;
-             this.mostrarCaba = false;
-          break;
-    
-      default:
-        break;
-    }
-  }
+cargarPropiedades(){
+  
+  this.servicioProp.getPropiedades().subscribe(
+    data => { this.listaPropiedades = data;
+    });
 
+}
+
+comprar(){
+
+}
+
+
+alquilar(){
+  
+}
 
 
 

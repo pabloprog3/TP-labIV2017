@@ -18,7 +18,7 @@ class Cliente extends Persona{
 
     public static function TraerTodos(){
         $conn=ConexionPDO::getConexion();
-        $sql = 'call gestionar_clientes("traer_todos", 0,"","","","","","",null,"")';
+        $sql = 'select * from cliente where estado="a"';
         $dbQuery = $conn->prepare($sql);
 	    $dbQuery->execute();
 	    $clientes = $dbQuery->fetchAll(PDO::FETCH_ASSOC);
@@ -26,13 +26,13 @@ class Cliente extends Persona{
         return json_encode($clientes);
     }
 
-    public static function TraerPorId($id){
+    public static function TraerPorId($correo){
         //por parametro le paso el correo
         $dbPDO = new ConexionPDO();
 	    $conn = $dbPDO->getConexion();
-        $sql='call gestionar_clientes("traer_id", null, "", "", "", "", "", ?,null)';
+        $sql='select * from cliente where correo=?';
 	    $dbQuery = $conn->prepare($sql);
-	    $dbQuery->bindParam(1,$id,PDO::PARAM_STR);
+	    $dbQuery->bindParam(1,$correo,PDO::PARAM_STR);
         $dbQuery->execute();
         
         $cliente = $dbQuery->fetchAll(PDO::FETCH_ASSOC);
@@ -45,7 +45,8 @@ class Cliente extends Persona{
     {
         $dbPDO = new ConexionPDO();
 	    $conn = $dbPDO->getConexion();
-        $sql='call gestionar_clientes("insertar",null, ?, ?, ?, ?, ?, ?, ?, ?)';
+        $sql='insert into cliente(nombre, apelldio, dni, passw, telefono, correo, fecha_nac, categoria)
+			values(?, ?, ?, ?, ?, ?, ?, ?);';
 	    $dbQuery = $conn->prepare($sql);
         $dbQuery->bindParam(1,$nombre,PDO::PARAM_STR);
         $dbQuery->bindParam(2,$apellido,PDO::PARAM_STR);

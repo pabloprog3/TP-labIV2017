@@ -3,6 +3,7 @@
  header("Access-Control-Allow-Origin: *");
 
 require_once $_SERVER['DOCUMENT_ROOT']."/TP-labIV2017/campito/backend/ws/app/libs/cliente.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/TP-labIV2017/campito/backend/ws/app/libs/sucursales.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/TP-labIV2017/campito/backend/ws/app/libs/empleado.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/TP-labIV2017/campito/backend/ws/app/rutas/AuthValid.php";
 
@@ -20,7 +21,7 @@ $app->post("/auth", function () use($app)
 	//devolver token
 	$auth = new AuthValidate();
 	$token=$auth->getToken($correo, $passw);
-	$app->response->headers->set("Content-Type", "application/X-www-form-urlencoded");
+	$app->response->headers->set("Content-Type", "application/x-www-form-urlencoded");
 	$app->response->status(200);
 	$app->response->body($token);
 	//print_r($token);
@@ -159,12 +160,34 @@ $app->delete("/empleados/(:id)", function() use($app){
 
 //----------------------------------RUTAS DE PROPIEDADES--------------------------------------------
 
+$app->get("/propiedades", function () use($app)
+{
+    $clientesJSON = Sucursales::traerTodosPropiedades();
+    $app->response->headers->set("Content-Type", "application/json");
+	$app->response->status(200);
+	$app->response->body($clientesJSON);
+});
+
+
+
 //-------------------------------SUBIR FOTOS--------------------------------------------------------
 //$app->fotos("/fotos", function() use($app){
 
 //$data = json_decode($app->request->getBody());
 
 //});
+
+
+
+
+//-----------------------------------RUTA SUCURSALES------------------------------------------------
+$app->get("/sucursales", function () use($app)
+{
+    $clientesJSON = Sucursales::traerTodos();
+    $app->response->headers->set("Content-Type", "application/json");
+	$app->response->status(200);
+	$app->response->body($clientesJSON);
+});
 
 
 

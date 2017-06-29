@@ -1,0 +1,45 @@
+
+<div class="container-fluid">
+
+  <div class="row">
+    
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    
+        <agm-map 
+        [zoom]="zoom" 
+        style="height: 300px; width: 1000"
+        [latitude]=-34.808611
+        [longitude]=-58.223730
+        >
+              
+            <agm-marker [openInfoWindow]=true [latitude]=-34.808611 [longitude]=-58.223730 >
+            <agm-info-window>
+                  <strong>Av. Antártida Argentina 202,</strong>
+                    <br>
+                  <p>Buenos Aires, Turdera</p>
+              </agm-info-window>
+               </agm-marker>
+            <agm-marker [openInfoWindow]=true [latitude]=-34.643833 [longitude]=-58.564960 > 
+
+              <agm-info-window>
+                  <strong>Av. de Mayo 316,</strong>
+                    <br>
+                   <p>Buenos Aires, Ramos Mejía</p>
+              </agm-info-window>
+            </agm-marker>
+            
+            <agm-marker [openInfoWindow]=true [latitude]=-34.579466 [longitude]=-58.479797 >
+              <agm-info-window>
+                      <strong>La Pampa 5029</strong>
+                      <br>
+                      <p>Capital Federal</p>
+              </agm-info-window>
+            
+            </agm-marker>
+        </agm-map>
+    </div>
+
+  </div>
+
+
+</div>

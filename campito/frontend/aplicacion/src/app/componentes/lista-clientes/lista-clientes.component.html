@@ -1,4 +1,9 @@
 <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+    
+
+<button type="button" class="btn btn-info" (click)="exportarCSV()">CSV</button>
+<button type="button" class="btn btn-info" (click)="exportarPDF()">PDF</button>
+
 
 <h2 class="campo" style="text-align:center;">LISTA DE CLIENTES</h2>
 
@@ -20,8 +25,8 @@
             <td style="text-align: center;"> {{ item["dni"] }} </td>
             <td style="text-align: center;"> {{ item["telefono"] }} </td>
             <td style="text-align: center;"> {{ item["correo"] }} </td>
-            <td style="text-align: center;"> <input (click)="editarCliente(item['correo'])" type="button" class="btn btn-sm btn-warning" name="editar" value="Editar"> </td>
-            <td style="text-align: center;"> <input (click)="borrarCliente(item['correo'])" type="button" class="btn btn-sm btn-danger" name="borrar" value="Eliminar"> </td>
+            <td style="text-align: center;"> <input (click)="editarCliente(item)" type="button" class="btn btn-sm btn-warning" name="editar" value="Editar"> </td>
+            <td style="text-align: center;"> <input (click)="borrarCliente(item)" type="button" class="btn btn-sm btn-danger" name="borrar" value="Eliminar"> </td>
             
         </tr>
 

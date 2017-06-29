@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import {Router} from '@angular/router';
-import {SubirArchivosComponent} from '../subir-archivos/subir-archivos.component';
+//import {SubirArchivosComponent} from '../subir-archivos/subir-archivos.component';
 import {ListaClientesComponent} from '../lista-clientes/lista-clientes.component';
 import {PerfilClienteComponent} from '../perfil-cliente/perfil-cliente.component';
+import {Cliente} from '../../clases/Cliente';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class UsuariosComponent implements OnInit {
    VentaBool: boolean = false;
    @Input() perfil: string;
    model;
+   cliente: Cliente;
 
   constructor(private router: Router) { }
 

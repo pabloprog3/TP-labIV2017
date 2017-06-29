@@ -2,61 +2,63 @@
 
 
 <div class="alert alert-info">
-  <h3><strong>Conozca nuestras sucursales </strong>consulte el mapa en Ver detalles</h3>
+  <h3><strong>Conozca nuestras sucursales </strong><label *ngIf="titulomapa" style="color:rgb(200,100,25);" (click)="mostrarMapaBool()" >{{titulomapa}}</label></h3>
+  <a class="text text-danger" [routerLink]="['/login']"> Salir</a>
+</div>
+
+
+<div class="container" *ngIf="mapaVisible" >
+  <app-lista-sucursales> </app-lista-sucursales>
+
 </div>
 
 
 
-    <div class="row">
-      
-      
-      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-       <link rel="" type="" href="www.google.com.ar"> <img width="100px" src="../../../assets/fotos/sucursales/darquier/1.png" alt="local_turdera"> 
-        <br>
-        <strong>Av. Antártida Argentina 202,</strong>
-        <br>
-        <p>Buenos Aires, Turdera</p>
-        <input class="btn btn-xs btn-info" (click)="verDetalle('turdera')" type="button" name="verLocal" value="Ver Detalle">
-         <input class="btn btn-xs btn-warning" [disabled]="ocultarmapturdera" (click)="ocultarMapa('turdera')" type="button" name="verLocal" value="Ocultar Mapa">
-        <div  *ngIf="mostrarTurdera" >
-          <agm-map style="height: 300px; width: 300px;" [latitude]="lat" [longitude]="lng">
-              <agm-marker [latitude]="lat" [longitude]="lng"> </agm-marker>
-          </agm-map>
-        </div>
-      </div>
-      
-      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-        <img width="100px" src="../../../assets/fotos/sucursales/mejia/1.png" alt="local_ramosmejia">
-         <br>
-        <strong>Av. de Mayo 316,</strong>
-        <br>
-        <p>Buenos Aires, Ramos Mejía</p>
-       <input class="btn btn-xs btn-info" (click)="verDetalle('ramosmejia')" type="button" name="verLocal" value="Ver Detalle">
-       <input class="btn btn-xs btn-warning" [disabled]="ocultarmapramosmejia" (click)="ocultarMapa('ramosmejia')" type="button" name="verLocal" value="Ocultar Mapa">
-       <div *ngIf="mostrarRamosMejia" >
-          <agm-map style="height: 300px; width: 300px;" [latitude]="lat" [longitude]="lng">
-              <agm-marker [latitude]="lat" [longitude]="lng"> </agm-marker>
-          </agm-map>
-        </div>
-      </div>
-
-
-      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-         <img width="200px" src="../../../assets/fotos/sucursales/monte/1.jpg" alt="local_caba">
-         <br>
-        <strong>La Pampa 5029</strong>
-        <br>
-        <p>Capital Federal</p>
-        <input class="btn btn-xs btn-info" (click)="verDetalle('caba')" type="button" name="verLocal" value="Ver Detalle">
-        <input class="btn btn-xs btn-warning" [disabled]="ocultarmapcaba" (click)="ocultarMapa('caba')" type="button" name="verLocal" value="Ocultar Mapa">
-        <div *ngIf="mostrarCaba" >
-          <agm-map style="height: 300px; width: 300px;" [latitude]="lat" [longitude]="lng">
-              <agm-marker [latitude]="lat" [longitude]="lng"> </agm-marker>
-          </agm-map>
-        </div>
-      </div>
-
-    </div>
+<div class="row">
+  
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     
+
+  
+<div class="table-responsive">
+  <table class="table table-condensed  table-hover">
+    <thead>
+      <tr>
+        <th style="color: blue; text-align:center;">Id</th>
+        <th style="color: blue; text-align:center;" >Tipo Propiedad</th>
+        <th style="color: blue; text-align:center;" >Numero Piso</th>
+        <th style="color: blue; text-align:center;" >Numero dpto.</th>
+        <th style="color: blue; text-align:center;" >Direccion</th>
+        <th style="color: blue; text-align:center;" >Localidad</th>
+        <th style="color: blue; text-align:center;" >Provincia</th>
+        <th style="color: blue; text-align:center;" >Alquiler? </th>
+        <th style="color: blue; text-align:center;" >Venta?</th>
+        <th style="color: blue; text-align:center;" >Precio Alquiler</th>
+        <th style="color: blue; text-align:center;" >Precio Venta</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of listaPropiedades">
+        <td style="text-align: center;">{{item["id_propiedad"]}}</td>
+        <td style="text-align: center;">{{item["tipo_prop"]}}</td>
+        <td style="text-align: center;">{{item["num_piso"]}}</td>
+        <td style="text-align: center;">{{item["num_deptp"]}}</td>
+        <td style="text-align: center;">{{item["direccion"]}}</td>
+        <td style="text-align: center;">{{item[localidad]}}</td>
+        <td style="text-align: center;">{{item["provincia"]}}</td>
+        <td style="text-align: center;">{{item["disponibilidad_alquiler"]}}</td>
+        <td style="text-align: center;">{{item["disponibilidad_venta"]}}</td>
+        <td style="text-align: center;">${{item["precio_alquiler"]}}</td>
+        <td style="text-align: center;">${{item["precio_venta"]}}</td>
+        <td style="text-align: center;"><input (click)="comprar(item)" type="button" class="btn btn-sm btn-primary" name="comprar" value="Comprar"></td>
+        <td style="text-align: center;"><input (click)="alquilar(item)" type="button" class="btn btn-sm btn-warning" name="alquilar" value="Alquilar"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+  </div>
+</div>
 
 </div>
