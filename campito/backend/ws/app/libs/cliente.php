@@ -41,11 +41,11 @@ class Cliente extends Persona{
         return json_encode($cliente);
     }
 
-    public static function Insertar($nombre, $apellido, $dni, $passw, $telefono, $correo, $fecha_nac, $categoria)
+    public static function Insertar($nombre, $apellido, $dni, $passw, $telefono, $correo, $fecha_nac, $categoria, $sucursal, $tipo_propiedad, $piso, $num_dpto, $provincia, $localidad, $precio_alquiler, $dias, $precio_venta)
     {
         $dbPDO = new ConexionPDO();
 	    $conn = $dbPDO->getConexion();
-        $sql='insert into cliente(nombre, apelldio, dni, passw, telefono, correo, fecha_nac, categoria)
+        $sql='insert into propiedad(nombre, apelldio, dni, passw, telefono, correo, fecha_nac, categoria, sucursal, tipo_propiedad, piso, num_dpto, provincia, localidad, precio_alquiler, dias, precio_venta)
 			values(?, ?, ?, ?, ?, ?, ?, ?);';
 	    $dbQuery = $conn->prepare($sql);
         $dbQuery->bindParam(1,$nombre,PDO::PARAM_STR);
@@ -56,6 +56,15 @@ class Cliente extends Persona{
         $dbQuery->bindParam(6,$correo,PDO::PARAM_STR);
         $dbQuery->bindParam(7,$fecha_nac);
         $dbQuery->bindParam(8,$categoria,PDO::PARAM_STR);
+        $dbQuery->bindParam(9,$sucursal,PDO::PARAM_STR);
+        $dbQuery->bindParam(10,$tipo_propiedad,PDO::PARAM_STR);
+        $dbQuery->bindParam(11,$piso,PDO::PARAM_INT);
+        $dbQuery->bindParam(12,$num_dpto, PDO::PARAM_STR);
+        $dbQuery->bindParam(13,$provincia,PDO::PARAM_STR);
+        $dbQuery->bindParam(14,$localidad, PDO::PARAM_STR);
+        $dbQuery->bindParam(15,$precio_alquiler);
+        $dbQuery->bindParam(16,$dias,PDO::PARAM_STR);
+        $dbQuery->bindParam(17,$precio_venta);
         $dbQuery->execute();
         
         $conn = null;

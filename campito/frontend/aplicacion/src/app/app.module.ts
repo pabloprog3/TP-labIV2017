@@ -31,7 +31,11 @@ import { ListaSucursalesComponent } from './componentes/lista-sucursales/lista-s
 //import { GOOGLE_MAPS_PROVIDERS } from 'angular2-google-map';
 //import { PdfmakeModule } from 'ng-pdf-make';
 import { PropiedadService } from './servicios/propiedad.service';
+import { EmpleadosService } from './servicios/empleados.service';
+import { ListaEmpleadosComponent } from './componentes/lista-empleados/lista-empleados.component';
 
+//import { UPLOAD_DIRECTIVES, NgFileSelectDirective } from '../../node_modules/ng2-uploader/ng2-uploader';
+import { Ng2UploaderModule } from 'ng2-uploader';
 
 
 @NgModule({
@@ -47,7 +51,10 @@ import { PropiedadService } from './servicios/propiedad.service';
     RegistrarClienteComponent,
     ClienteComponent,
     ListaPropiedadesComponent,
-    ListaSucursalesComponent
+    ListaSucursalesComponent,
+    ListaEmpleadosComponent,
+    //UPLOAD_DIRECTIVES,
+    //NgFileSelectDirective,
   ],
   imports: [
     BrowserModule,
@@ -58,10 +65,12 @@ import { PropiedadService } from './servicios/propiedad.service';
     APP_ROUTING,
     AdminRoutingModule,
     FileUploadModule,
+    Ng2UploaderModule
+    //UPLOAD_DIRECTIVES,
     //PdfmakeModule
   
   ],
-  providers: [ListaClientesService, SucursalesService, PropiedadService,  Auth, AuthGuard], //AUTH_PROVIDERS,
+  providers: [ListaClientesService, EmpleadosService, SucursalesService, PropiedadService,  Auth, AuthGuard], //AUTH_PROVIDERS,
   bootstrap: [AppComponent]
 })
 export class AppModule { }

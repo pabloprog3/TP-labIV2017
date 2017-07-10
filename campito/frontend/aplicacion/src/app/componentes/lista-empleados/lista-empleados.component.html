@@ -1,0 +1,44 @@
+<link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+    
+
+<button type="button" class="btn btn-info" (click)="exportarCSV()">CSV</button>
+<button type="button" class="btn btn-info" (click)="exportarPDF()">PDF</button>
+
+
+
+<div class="table-responsive">
+<table class="table table-hover">
+    <thead>
+        <tr>
+           <!-- <th style="color: blue; text-align:center;" class="encabezados">Id</th> -->
+            <th style="color: blue; text-align:center;" class="encabezados">Tipo Empleado</th>
+            <th style="color: blue; text-align:center;" class="encabezados">Nombre</th>
+            <th style="color: blue; text-align:center;" class="encabezados">Apellido</th>
+            <th style="color: blue; text-align:center;" class="encabezados">DNI</th>
+            <th style="color: blue; text-align:center;" class="encabezados">Telefono</th>
+            <th style="color: blue; text-align:center;" class="encabezados">Sueldo</th>
+            <th style="color: blue; text-align:center;" class="encabezados">Correo</th>
+            <th style="color: blue; text-align:center;" class="encabezados">Cumpleaños</th>
+            <th style="color: blue; text-align:center;" class="encabezados">Foto</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of lista" >
+            <!--<td style="text-align: center;"> {{ item["id_empleado"] }} </td>-->
+            <td style="text-align: center;"> {{ item["tipo_emp"] }} </td>
+            <td style="text-align: center;"> {{ item["nombre"] }} </td>
+            <td style="text-align: center;"> {{ item["apellido"] }} </td>
+            <td style="text-align: center;"> {{ item["dni"] }} </td>
+            <td style="text-align: center;"> {{ item["telefono"] }} </td>
+            <td style="text-align: center;"> {{ item["sueldo"] }} </td>
+            <td style="text-align: center;"> {{ item["correo"] }} </td>
+            <td style="text-align: center;"> {{ item["fecha_nac"] }} </td>
+            <td style="text-align: center;"> <img src='foto' ></td>
+            <td style="text-align: center;"> <input (click)="editarEmpleado(item)" type="button" class="btn btn-sm btn-warning" name="editar" value="Editar"> </td>
+            <td style="text-align: center;"> <input (click)="borrarEmpleado(item)" type="button" class="btn btn-sm btn-danger" name="borrar" value="Eliminar"> </td>
+            
+        </tr>
+
+    </tbody>
+</table>
+</div>

@@ -13,56 +13,43 @@ import { FormGroup, Validators, FormBuilder, Validator } from '@angular/forms';
 })
 export class PerfilClienteComponent implements OnInit {
 
-   cliente: Cliente[] = new Array<Cliente>(); 
-   //cliente: Cliente[];
-   //cliente: Cliente;
+   cliente: Cliente;
+
    clienteForm: FormGroup;
-  mostrarPropiedad:boolean=false;
-  categoria:string;
+   mostrarPropiedad:boolean=false;
+   categoria:string;
 
   constructor(private route: ActivatedRoute, private servicio: ListaClientesService, 
-    private location: Location, private fb: FormBuilder) {       
-      
- 
+    private location: Location, private fb: FormBuilder, private router: Router) {     
 
-      //this.crearForm();
       this.clienteForm = this.fb.group({
       nombre: '',
       apellido: '',
       dni: '',
       telefono: '',
       correo: '',
-      categoria:''
   });
 
 }
 
   ngOnInit() {    
       let correo = this.route.snapshot.params['correo'];
-      if(!correo)
+      if(!correo){
         return;
+      }
       else{
         this.cargarCliente(correo);
-        console.log('nombre: ', this.cliente["nombre"]);
-        this.mostrarDatos();
       }
-
-
   }
-
-
-
-
 
 cargarCliente(correo){
       this.servicio.getClienteCorreo(correo)     
         .subscribe(
-          r => this.cliente.push(r),
+          r => this.cliente=r,
           er => console.log(er),
           () => this.mostrarDatos()
-         //console.log(this.cliente)
         );
-        //console.log(this.cliente)
+     
 }
 
 
@@ -78,33 +65,24 @@ mostrarDatos(){
 }
 
   volver(){
-    //console.log(this.cliente);
     this.location.back();
   }
 
-/*
-  updateCliente(entidad){
-    if (!entidad)
-      return ;
-    
-    this.servicio.updateCliente(entidad)
-      .subscribe(
-        result => console.log(result),
-        er => console.log(er)
-      )
-  } 
 
-*/
   mostrarForm(categoria){
-   //console.log(this.categoria);
-   if (categoria=='due') {
-     this.mostrarPropiedad = true;
-   }
-   else{
-     this.mostrarPropiedad = false;
-   }
+     if (categoria=='due') {
+       this.mostrarPropiedad = true;
+     }
+     else{
+       this.mostrarPropiedad = false;
+     }
     
   }
 
+
+updateCliente(){
+    this.servicio.updateCliente(this.clienteForm.value).subscribe();
+    this.router.navigate(['usuarios']);
+}
 
 }

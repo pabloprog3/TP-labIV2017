@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Cliente} from '../../clases/Cliente';
 import {ListaClientesService} from '../../servicios/lista-clientes.service';
@@ -9,14 +9,15 @@ import { FormsModule } from "@angular/forms";
   styleUrls: ['./registrar-cliente.component.css']
 })
 export class RegistrarClienteComponent implements OnInit {
-  cliente: Cliente;
+  private perfil: string = "cliente";
+ cliente: Cliente = new Cliente("","","","","","","","");
 
   constructor(private router: Router, servicio: ListaClientesService) { }
 
 
   ngOnInit() {
-    this.cliente=new Cliente("","","","","","","","");
- 
+    //this.cliente=new Cliente("","","","","","","","");
+
   }
 
 

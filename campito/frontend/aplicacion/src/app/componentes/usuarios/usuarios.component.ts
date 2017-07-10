@@ -1,15 +1,24 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, NgZone } from '@angular/core';
 import {Router} from '@angular/router';
 //import {SubirArchivosComponent} from '../subir-archivos/subir-archivos.component';
 import {ListaClientesComponent} from '../lista-clientes/lista-clientes.component';
 import {PerfilClienteComponent} from '../perfil-cliente/perfil-cliente.component';
+
 import {Cliente} from '../../clases/Cliente';
+
+import { ListaClientesService } from '../../servicios/lista-clientes.service';
+import { EmpleadosService } from '../../servicios/empleados.service'
+
+
+import { FormGroup, FormBuilder, Validators} from '@angular/forms';
+//import {UPLOAD_DIRECTIVES } from '../../../../node_modules/ng2-uploader/ng2-uploader';
 
 
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.component.html',
-  styleUrls: ['./usuarios.component.css']
+  styleUrls: ['./usuarios.component.css'],
+  //directives: [UPLOAD_DIRECTIVES],
 })
 export class UsuariosComponent implements OnInit {
    mostrarPropiedad: boolean; //si el radioButton es dueño, muestra el formulario de propiedades
@@ -19,23 +28,90 @@ export class UsuariosComponent implements OnInit {
    alquilerBool: boolean = false;
    mostrarTxtVenta: boolean = false;
    VentaBool: boolean = false;
-   @Input() perfil: string;
-   model;
+   mostrarEmpleados: boolean=false;
+   mostrarClientes: boolean = true;
+   @Input() perfil: string='';
+   //model;
+   form: FormGroup;
+   formEmp: FormGroup;
    cliente: Cliente;
 
-  constructor(private router: Router) { }
+   //variables necesarias para la foto
+   sizeLimit = 20000;
+   uploadFile: any;
+   @Input() options: Object = {
+         url: 'http://localhost:8080/TP-labIV2017/campito/backend/ws/apirest/public/index.php/empleados/foto'
+   };
+  
+  
+  constructor(private router: Router, private fb: FormBuilder, private fbe: FormBuilder, private servicio: ListaClientesService, private servicioEmp: EmpleadosService) {
+    this.crearControles();
+    this.crearControlesEmpleado();
+   }
 
   ngOnInit() {
     this.mostrarPropiedad = false;
     this.datosDpto = false;
     this.categoria = "clie";
 
+    if (this.perfil=="cliente") {
+      this.mostrarEmpleados = false;
+    }
+    else{
+      this.mostrarEmpleados = true;
+    }
+
+
   }
 
+  
+  /*beforeUpload(uploadingFile): void {
+    if (uploadingFile.size > this.sizeLimit) {
+      uploadingFile.setAbort();
+      alert('Archivo demasiado pesado');
+    }
+  }*/
 
+  handleUpload(data): void {
+        console.log(data);
+        if (data && data.response) {
+            data = JSON.parse(data.response);
+            this.uploadFile = data;
+        }
+    }
+
+
+  crearControlesEmpleado(){
+    this.formEmp = this.fbe.group({
+        id_sucursal: '',
+        tipo_emp: '',
+        nombre: '',
+        apellido: '',
+        dni: '',
+        foto: '',
+        fecha_nac: '',
+        sueldo: '',
+        passw: '',
+        telefono: '',
+        correo:''
+    });
+  }
+
+  crearControles(){
+    this.form = this.fb.group({
+        nombre: '',
+        apellido: '',
+        dni: '',
+        passw: '',
+        telefono: '',
+        correo: ''
+    });
+  }
+  
   mostrarForm(categoria){
    //console.log(this.categoria);
    if (categoria=='due') {
+     //console.log("categoria: ", categoria);
      this.mostrarPropiedad = true;
    }
    else{
@@ -72,9 +148,27 @@ export class UsuariosComponent implements OnInit {
     }
   }
 
-  submit(){
-
-
+  
+  guardarCliente(){
+    this.servicio.postCliente(this.form.value)
+        .subscribe(
+          resp => console.log(resp),
+          err => console.log(err),
+        );
+        this.form.reset();
   }
+
+  
+
+  guardarEmpleado(){
+    this.servicioEmp.postEmpleado(this.formEmp.value)
+        .subscribe(
+         // resp => console.log(resp),
+         // err => console.log(err),
+        );
+        this.formEmp.reset();
+  }
+
+
 
 }

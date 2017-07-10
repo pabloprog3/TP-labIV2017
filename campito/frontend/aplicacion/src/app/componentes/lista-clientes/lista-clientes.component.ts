@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import {Cliente} from '../../clases/Cliente';
 import { ListaClientesService } from "../../servicios/lista-clientes.service";
@@ -16,6 +17,7 @@ export class ListaClientesComponent implements OnInit {
 
   lista: Array<Cliente>;
 
+  
   constructor(private servicio: ListaClientesService, private router: Router) {
       this.servicio.getClientes().subscribe(data => { 
       this.lista = data;
@@ -28,22 +30,30 @@ export class ListaClientesComponent implements OnInit {
 
   ngOnInit() {
   
-    
-    console.log('lista: ', this.lista);
+    //console.log('lista: ', this.lista);
   }
 
 
  editarCliente(item: Cliente){
-  //console.log("ID: ", correo);
-  
-  this.router.navigate(['/usuarios/perfilCliente/', item.correo]);
+  let correo = item.correo
+  console.log('llevando correo: ', correo);
+  this.router.navigate(['/usuarios/perfilCliente/', correo]);
+
 
  }
 
  borrarCliente(item: Cliente){
-  this.router.navigate(['/usuarios/perfilCliente/',  item.correo]);
+  //this.router.navigate(['/usuarios/perfilCliente/',  item.correo]);
+  this.servicio.deleteCliente(item).subscribe();
+  this.goLista();
  }
   
+
+
+
+goLista(){
+  this.router.navigate(['usuarios']);
+}
 
 exportarCSV(){
  var data = JSON.stringify(this.lista);

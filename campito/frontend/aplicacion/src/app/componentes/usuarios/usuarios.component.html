@@ -2,10 +2,9 @@
 <link href="https://fonts.googleapis.com/css?family=Architects+Daughter|Rajdhani" rel="stylesheet">
 
 <div class="container-fluid">
-  
   <div class="row">
     
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div *ngIf="mostrarClientes" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
       <div class="panel panel-primary">
         <div class="panel-heading">
           <legend id="legendClient">CLIENTES </legend></div>
@@ -13,112 +12,116 @@
 
               <p class="legendProp">AGREGAR NUEVO</p>
               
-              <form action="post" (ngSubmit)="submit()" class="form-inline"  role="form">
+              <form  class="form-inline" role="form" [formGroup]="form">
               
                 <div class="form-group">
                   <label   class="control-label campo" for="">Nombre:</label>
-                  <input style="text-align:center" type="text" style="margin:10px 0px 15px" class="form-control input-sm" id="" placeholder="Nombre">
+                  <input style="text-align:center" formControlName="nombre"  type="text" style="margin:10px 0px 15px" class="form-control input-sm" id="nombre" name="nombre" placeholder="Nombre">
                 </div>
                  <div class="form-group">
                   <label   class="control-label campo" for="">Apellido:</label>
-                  <input style="text-align:center" type="text" style="margin:10px 0px 15px" class="form-control input-sm" id="" placeholder="Apellido">
+                  <input style="text-align:center" formControlName="apellido"  type="text" style="margin:10px 0px 15px" class="form-control input-sm" id="apellido" name="apellido" placeholder="Apellido">
                 </div>
                 <div class="form-group">
                   <label   class="control-label campo" for="">DNI:</label>
-                  <input style="text-align:center" type="text" style="margin:10px 0px 15px" class="form-control input-sm" id="" placeholder="DNI">
+                  <input style="text-align:center" formControlName="dni"  type="text" style="margin:10px 0px 15px" class="form-control input-sm" id="dni" name="dni" placeholder="DNI">
                 </div>
                 <br>
                 <div class="form-group">
                   <label   class="control-label campo" for="">PASSWORD:</label>
-                  <input style="text-align:center" type="password" style="margin:10px 0px 15px" class="form-control input-sm" id="" placeholder="PASSWORD">
+                  <input style="text-align:center" formControlName="passw"  type="password" style="margin:10px 0px 15px" class="form-control input-sm" id="passw" name="passw" placeholder="PASSWORD">
                 </div>
                 <div class="form-group">
                   <label   class="control-label campo" for="">Telefono:</label>
-                  <input style="text-align:center" type="text" style="margin:10px 0px 15px" class="form-control input-sm" id="" placeholder="Telefono">
+                  <input style="text-align:center" formControlName="telefono"  type="text" style="margin:10px 0px 15px" class="form-control input-sm" id="telefono" name="telefono" placeholder="Telefono">
                 </div>
                  <div class="form-group">
                   <label   class="control-label campo" for="">Correo:</label>
-                  <input style="text-align:center" type="email" class="form-control input-sm" id="" placeholder="Correo">
+                  <input style="text-align:center" formControlName="correo"  type="email" class="form-control input-sm" id="correo" name="correo" placeholder="Correo">
                 </div>
-                 <div class="form-group">
-                  <label   class="control-label campo" for="">Fecha de Nacimiento:</label>
-                  <input type="date" class="form-control input-sm" id="fecha_nac">
-                </div>
-                
-                <div class="form-inline" style="text-align:center">
-                  <label for="categoria" class="campo">Categoria:</label>
-                  <input  type="radio"  [(ngModel)]="categoria" (change)="mostrarForm(categoria)"  name="categoria" value="clie"><span class="campo">Cliente</span>
-                  <input  type="radio"  [(ngModel)]="categoria" (change)="mostrarForm(categoria)" name="categoria" value="due" focus><span class="campo">Dueño</span>
-                </div>
-        
-                <br>
-                <div class="form-inline" *ngIf="mostrarPropiedad" >
-                      <p class="legendProp">DATOS DE LA PROPIEDAD</p>
-                      <br>
-                      <label for="propiedad">¿En qué sucursal desea publicar la propiedad?</label>
-                      <div class="form-group">
-                        <select  id="sucursal" class="form-control campo">
-                          <option  value="1" selected>Ramos Mejía </option>
-                          <option  value="2">Capital Federal</option>
-                          <option  value="3">Turdera</option> 
-                        </select>
-                      </div>
-                      <br> 
-                       <div   class="form-group">
-                        <label for="tipo_prop">¿Casa o Departamento?</label>
-                          <select #tipo (change)="mostrarDatosDpto(tipo.value)" id="tipo_propiedad" class="form-control campo">
-                          <option  value="casa" selected>Casa</option>
-                          <option  value="departamento">Departamento</option>
-                        </select>
-
-                        <div class="form-group" *ngIf="datosDpto" >
-                          <input type="number" class="input-sm form-control" name="piso" placeholder="piso">
-                          <input type="text"   class="input-sm form-control" name="num_dpto" placeholder="Ingrese num o letra del dpto.">
-                        </div>
-
-                        <br>
-                        
-                        <div class="form-group">
-                            <label for="provincia" class="campo">Provincia:</label>
-                            <input type="text" class="campo" name="provincia" placeholder="Provincia">
-                        </div>
-                        <div class="form-group">
-                            <label for="localidad" class="input-sm campo">Localidad:</label>
-                            <input type="text" class="form-controil input-sm campo" name="localidad" placeholder="Localidad">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="disponibilidad" class="input-label" class="campo">Disponibilidad:</label>
-                            <input type="checkbox" [(ngModel)]="alquilerBool" [ngModelOptions]="{standalone: true}" [checked]="ngModel" (change)="mostrarTXTAlquiler(alquilerBool)">    
-                            <input placeholder="ingresar precio alquiler se aplica una comisión del 3.5%" *ngIf="alquilerBool" type="number" class="form-control input-sm" name="precio_alquiler" value="precio alquiler">Alquiler                       
-                            <input type="checkbox" [(ngModel)]="ventaBool" [ngModelOptions]="{standalone: true}" [checked]="ngModel" (change)="mostrarTXTVenta(ventaBool)">    
-                            <input placeholder="ingresar precio venta (se aplica una comisión del 5%)" *ngIf="ventaBool" type="number" class="form-control input-sm" name="precio_venta" value="precio venta">Venta                      
-                        </div>
-
-                      <!--  <div class="form-group">
-                            <app-subir-archivos></app-subir-archivos>
-
-                        </div>  -->
-
-
-                      </div>
-
-                </div>
-
-                <button type="submit" class="btn btn-success btn-block">REGISTRAR CLIENTE</button>
+                <button (click)="guardarCliente()" class="btn btn-success btn-block">REGISTRAR CLIENTE</button>
               </form>
-              
-                
-
+    
           </div>
-          <div *ngIf="perfil==cliente"  class="panel-footer">
-            <a [routerLink]="['listaClientes']">Ver listado de Clientes</a>
-            <a style="text-align:center; margin-left: 620px" [routerLink]="['/admin']">Ir al Panel de Administracion</a>
+           <div class="panel-footer">
+              <a [routerLink]="['listaClientes']">Ver listado de Clientes</a>
+              <a style="text-align:center; margin-left: 620px" [routerLink]="['/admin']">Ir al Panel de Administracion</a>
             
-          </div>
-          </div>
+            </div>
     </div>
     
+
+    <div class="row">
+    
+    <div *ngIf="mostrarEmpleados"  class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <legend id="legendClient">EMPLEADOS </legend></div>
+          <div class="panel-body pbody">
+
+              <p class="legendProp">AGREGAR NUEVO</p>
+              
+              <form  class="form-inline" role="form" [formGroup]="formEmp">
+
+                <div class="form-group">
+                  <label   class="control-label campo" for="">Selecciona sucursal destino:</label>
+                  <select formControlName="id_sucursal" class="form-control">
+                    <option [selected]="true" value=1>Ramos Mejía</option>
+                    <option value=2>Capital Federal</option>
+                    <option value=3>Turdera</option>
+                  </select>
+                </div>
+
+                <div class="radio" >
+                    <input formControlName="tipo_emp" type="radio"  value="encargado">Encargado
+                    <input formControlName="tipo_emp" type="radio"  value="empleado">Empleado
+                </div>
+              
+                <div class="form-group">
+                  <label   class="control-label campo" for="">Nombre:</label>
+                  <input style="text-align:center" formControlName="nombre"  type="text" style="margin:10px 0px 15px" class="form-control input-sm" id="nombre" name="nombre" placeholder="Nombre">
+                </div>
+                 <div class="form-group">
+                  <label   class="control-label campo" for="">Apellido:</label>
+                  <input style="text-align:center" formControlName="apellido"  type="text" style="margin:10px 0px 15px" class="form-control input-sm" id="apellido" name="apellido" placeholder="Apellido">
+                </div>
+                <div class="form-group">
+                  <label   class="control-label campo" for="">DNI:</label>
+                  <input style="text-align:center" formControlName="dni"  type="text" style="margin:10px 0px 15px" class="form-control input-sm" id="dni" name="dni" placeholder="DNI">
+                </div>
+                <br>
+                <div class="form-group">
+                  <label   class="control-label campo" for="">PASSWORD:</label>
+                  <input style="text-align:center" formControlName="passw"  type="password" style="margin:10px 0px 15px" class="form-control input-sm" id="passw" name="passw" placeholder="PASSWORD">
+                </div>
+                <div class="form-group">
+                  <label   class="control-label campo" for="">Telefono:</label>
+                  <input style="text-align:center" formControlName="telefono"  type="text" style="margin:10px 0px 15px" class="form-control input-sm" id="telefono" name="telefono" placeholder="Telefono">
+                </div>
+                <div class="form-group">
+                  <label   class="control-label campo" for="">Sueldo:</label>
+                  <input style="text-align:center" formControlName="sueldo"  type="text" style="margin:10px 0px 15px" class="form-control input-sm" id="telefono" name="telefono" placeholder="Sueldo">
+                </div>
+                 <div class="form-group">
+                  <label   class="control-label campo" for="">Correo:</label>
+                  <input style="text-align:center" formControlName="correo"  type="email" class="form-control input-sm" id="correo" name="correo" placeholder="Correo">
+                </div>
+                <div class="form-group">
+                  <label   class="control-label campo" for="">Fecha denacimiento:</label>
+                  <input style="text-align:center" formControlName="fecha_nac"  type="date" class="form-control input-sm" id="correo" name="correo" placeholder="Correo">
+                </div>
+
+
+                <button (click)="guardarEmpleado()" class="btn btn-success btn-block">REGISTRAR EMPLEADO</button>
+              </form>
+
+        </div>
+         <div class="panel-footer">
+              <a [routerLink]="['listaEmpleados']">Ver listado de Empleados</a>
+              <a style="text-align:center; margin-left: 430px" [routerLink]="['/admin']">Ir al Panel de Administracion</a>
+            
+            </div>
+    </div>
 
 
 <div class="container-fluid">

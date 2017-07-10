@@ -19,7 +19,6 @@ export class LoginComponent implements OnInit {
     user: Usuario = new Usuario('','');
 
   constructor(private router: Router, private auth: Auth){}   //, private auth: Auth) { }
-    
 
   ngOnInit() {
     // reset login status
@@ -51,14 +50,13 @@ export class LoginComponent implements OnInit {
       if (this.user.correo == 'admin@admin.com') {
         this.router.navigate(['/admin']);
       }
-      else 
-        console.log('no admin');
+        //console.log('no admin');
 
       if (this.user.correo == 'cliente@cliente.com.ar') {
         this.router.navigate(['/cliente']);
       }
       else 
-        console.log('no cliente');
+        return;
   }
 
 

@@ -9,6 +9,7 @@ import {EmpleadosComponent} from '../empleados/empleados.component';
 import {ListaClientesService} from '../../servicios/lista-clientes.service';
 import {ListaClientesComponent} from '../lista-clientes/lista-clientes.component';
 import {PerfilClienteComponent} from '../perfil-cliente/perfil-cliente.component';
+import { ListaEmpleadosComponent } from '../lista-empleados/lista-empleados.component';
  
 const ADMIN_ROUTES: Routes = [
   
@@ -16,7 +17,8 @@ const ADMIN_ROUTES: Routes = [
         //{path: 'usuarios', component:UsuariosComponent},
         {path: 'empleados', component:EmpleadosComponent},
         {path: 'listaClientes', component:ListaClientesComponent},
-        {path: 'perfilCliente/:correo', component:PerfilClienteComponent}
+        {path: 'perfilCliente/:correo', component:PerfilClienteComponent},
+        {path: 'listaEmpleados', component:ListaEmpleadosComponent}
     ]
   }
 

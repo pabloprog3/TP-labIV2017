@@ -1,6 +1,9 @@
 <?php
 
  header("Access-Control-Allow-Origin: *");
+ header('Access-Control-Allow-Credentials','true');
+ header('Access-Control-Allow','GET,POST,PUT,PATCH,DELELE,OPTIONS');
+ //header('Access-Control-Allow-Headers','Content-Type, Authorization,X-XSRF-TOKEN,X-CSRF-TOKEN','CSRF-TOKEN','XSRF-TOKEN');
 
 require_once $_SERVER['DOCUMENT_ROOT']."/TP-labIV2017/campito/backend/ws/app/libs/cliente.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/TP-labIV2017/campito/backend/ws/app/libs/sucursales.php";
@@ -55,10 +58,10 @@ $app->post("/clientes", function() use($app){
 	$passw = $app->request->post("passw");
 	$telefono = $app->request->post("telefono");
     $correo = $app->request->post("correo");
-	$fecha_nac = $app->request->post("fecha_nac");
+	$fecha_nac = $app->request->post("fecha");
 	
     $clienteJSON = Cliente::Insertar($nombre, $apellido, $dni, $passw, $telefono, $correo, $fecha_nac);
-	$app->response->headers->set("Content-Type", "application/json");
+	$app->response->headers->set("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
 	$app->response->status(200);
 	$app->response->body($clienteJSON);
 });
