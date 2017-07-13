@@ -13,41 +13,43 @@ class AuthValidate{
     private $keyToken="key_crypt";
     private $usuario=null;
     private $empleadoEncontrado=null;
+    private $clienteEncontrado=null;
 
     public function validarUsuario($correo, $passw){
+    
+        $clienteEncontrado = json_decode(Cliente::TraerPorId($correo));
+        //var_dump($clienteEncontrado);
+        if ($clienteEncontrado) {
+           //encontro el cliente => valido password
+           if ($clienteEncontrado[0]->passw == $passw) {
+              return $clienteEncontrado;
+           }
+           else{
+              return 'password invalid';
+           }
+        } 
         
         $empleadoEncontrado = json_decode(Empleado::TraerPorId($correo));
-        //var_dump($empleadoEncontrado);
-        
-        if (empty($empleadoEncontrado)) {
-            return $usuario='usuario inválido';
-        }else{
-        
-            if ($empleadoEncontrado[0]->correo==$correo) {
-                 //encontro el empleado
-                 //verifico la password
-                 //print_r($empleadoEncontrado);
-                 if ($empleadoEncontrado[0]->passw==$passw) {
-                    return $usuario = $empleadoEncontrado;
-                }
-            }else{
-                //no encontro a un empleado, busca si es cliente
-                $clienteEncontrado = Cliente::TraerPorId($correo);
-                if ($clienteEncontrado[0]->passw==$correo) {
-                    if ($clienteEncontrado[0]->passw==$passw) {
-                        return $usuario = $clienteEncontrado;
-                    }
-                }
+        if($empleadoEncontrado){
+            if ($empleadoEncontrado[0]->passw == $passw) {
+                return $empleadoEncontrado;
+            }
+            else{
+                return 'password invalid';
             }
         }
-    }   
-        
+
+        if(!$clienteEncontrado && !$empleadoEncontrado){
+            return 'usuario invalido';
+        }
+ 
+}
 
     public function getToken($correo, $passw){
         $jwt;
         $usuario = $this->validarUsuario($correo, $passw);
         
-        if ($usuario != 'usuario inválido') {
+        if ($usuario != 'usuario invalido' && $usuario != 'password invalid') {
            $token = array(
                 "iss" => "http://example.org",
                 "aud" => "http://example.com",

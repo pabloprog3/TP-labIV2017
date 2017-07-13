@@ -3,7 +3,7 @@
 
 <div class="alert alert-info">
   <h3><strong>Conozca nuestras sucursales </strong><label *ngIf="titulomapa" style="color:rgb(200,100,25);" (click)="mostrarMapaBool()" >{{titulomapa}}</label></h3>
-  <a class="text text-danger" [routerLink]="['/login']"> Salir</a>
+  <a class="text text-danger" [routerLink]="['/login']" (click)="salir()"> Salir</a>
 </div>
 
 

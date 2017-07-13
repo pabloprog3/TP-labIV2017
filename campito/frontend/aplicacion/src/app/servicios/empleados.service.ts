@@ -40,12 +40,12 @@ export class EmpleadosService {
   }
 
   deleteEmpleado(entidad: any){
-    return this.http.delete(this.apiUrl + '/eliminar' + entidad.correo).catch(this.error);
+    return this.http.delete(this.apiUrl + '/eliminar/' + entidad.correo).catch(this.error);
   }
 
   updateEmpleado(entidad: any){
     let eJson = JSON.stringify(entidad);
-    return this.http.put(this.apiUrl + '/actualizar' + entidad.correo, eJson)
+    return this.http.put(this.apiUrl + '/actualizar/' + entidad.correo, eJson)
           .map(result => result.json())
           .catch(this.error);
   }

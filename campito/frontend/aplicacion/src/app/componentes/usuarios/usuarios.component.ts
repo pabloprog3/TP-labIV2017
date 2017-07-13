@@ -28,7 +28,7 @@ export class UsuariosComponent implements OnInit {
    alquilerBool: boolean = false;
    mostrarTxtVenta: boolean = false;
    VentaBool: boolean = false;
-   mostrarEmpleados: boolean=false;
+   mostrarEmpleados: boolean;
    mostrarClientes: boolean = true;
    @Input() perfil: string='';
    //model;
@@ -53,6 +53,7 @@ export class UsuariosComponent implements OnInit {
     this.mostrarPropiedad = false;
     this.datosDpto = false;
     this.categoria = "clie";
+    //console.log('perfil:', this.perfil ); OK
 
     if (this.perfil=="cliente") {
       this.mostrarEmpleados = false;
@@ -169,6 +170,8 @@ export class UsuariosComponent implements OnInit {
         this.formEmp.reset();
   }
 
-
+volver(){
+  this.router.navigate(['/login']);
+}
 
 }

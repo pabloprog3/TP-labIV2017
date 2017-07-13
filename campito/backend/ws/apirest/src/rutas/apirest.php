@@ -25,15 +25,19 @@ $app->add(function ($req, $res, $next) {
             ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
-$app->post("/auth", function () use($app)
+$app->post("/auth", function (Request $request, Response $response) use($app)
 {
-	$correo = $app->request->post("correo");
-	$passw = $app->request->post("passw");
+	$correo = $request->getParam('correo');
+	$passw = $request->getParam('passw');
+
 
 	//devolver token
 	$auth = new AuthValidate();
-	$token=$auth->getToken($correo, $passw);
+	$token=array('token'=> $auth->getToken($correo, $passw));
+
+	return json_encode($token);
 });
+
 
 
 
@@ -134,7 +138,7 @@ $app->put("/empleados/actualizar/{correo}", function(Request $request, Response 
     $clienteJSON = Empleado::Actualizar($id_sucursal, $tipo_empleado, $nombre, $apellido, $dni, $foto, $fecha_nac, $sueldo, $passw, $telefono, $correo);
 });
 
-$app->delete("/empleados/{correo}", function(Request $request, Response $response) use($app){
+$app->delete("/empleados/eliminar/{correo}", function(Request $request, Response $response) use($app){
     $correo = $request->getAttribute('correo');
     Empleado::Eliminar($correo);
 });

@@ -41,9 +41,11 @@
                 </div>
                 <button (click)="guardarCliente()" class="btn btn-success btn-block">REGISTRAR CLIENTE</button>
               </form>
+              <br>
+              <button (click)="volver()" class="btn btn-info btn-block">SALIR</button>
     
           </div>
-           <div class="panel-footer">
+           <div *ngIf="mostrarEmpleados" class="panel-footer">
               <a [routerLink]="['listaClientes']">Ver listado de Clientes</a>
               <a style="text-align:center; margin-left: 620px" [routerLink]="['/admin']">Ir al Panel de Administracion</a>
             
@@ -111,19 +113,19 @@
                   <input style="text-align:center" formControlName="fecha_nac"  type="date" class="form-control input-sm" id="correo" name="correo" placeholder="Correo">
                 </div>
 
-
                 <button (click)="guardarEmpleado()" class="btn btn-success btn-block">REGISTRAR EMPLEADO</button>
               </form>
 
         </div>
-         <div class="panel-footer">
+         <div *ngIf="mostrarEmpleados"  class="panel-footer">
+         
               <a [routerLink]="['listaEmpleados']">Ver listado de Empleados</a>
               <a style="text-align:center; margin-left: 430px" [routerLink]="['/admin']">Ir al Panel de Administracion</a>
             
             </div>
     </div>
 
-
+ 
 <div class="container-fluid">
   
   <div class="row">

@@ -42,14 +42,20 @@ class Empleado extends Persona
 
     public static function TraerPorId($correo){
         //por parametro le paso el correo
-        $dbPDO = new ConexionPDO();
-	    $conn = $dbPDO->getConexion();
-        $sql = 'select * from empleados where correo=?';
-	    $dbQuery = $conn->prepare($sql);
-        $dbQuery->bindParam(1,$correo,PDO::PARAM_STR);
-	    $dbQuery->execute();
-	    $empleado = $dbQuery->fetchAll(PDO::FETCH_OBJ);
-        //var_dump($empleado);
+        //$dbPDO = new ConexionPDO();
+	    //$conn = $dbPDO->getConexion();
+        //$conn=ConexionPDO::getConexion();
+        $bd='campito';
+        $user='root';
+        $passw='';
+        $conn = new PDO('mysql:host=localhost;dbname='.$bd.';charset=utf8', $user, $passw);
+        //var_dump($conn);
+        //$sql = 'select * from empleados where correo=:correo';
+	    $dbQuery = $conn->prepare('select * from empleados where correo = :correo');
+	    $dbQuery->bindParam(':correo',$correo);
+        $dbQuery->execute();
+        
+        $empleado = $dbQuery->fetchAll(PDO::FETCH_ASSOC);
 	    $conn = null;
         return json_encode($empleado);
     }

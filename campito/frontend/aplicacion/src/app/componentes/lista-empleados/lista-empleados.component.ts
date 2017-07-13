@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 //import {Cliente} from '../../clases/Cliente';
 import { EmpleadosService } from "../../servicios/empleados.service";
 import { Angular2Csv } from 'angular2-csv/Angular2-csv';
+import { Empleado } from '../../clases/Empleado';
 
 @Component({
   selector: 'app-lista-empleados',
@@ -24,10 +25,23 @@ export class ListaEmpleadosComponent implements OnInit {
   }
 
 
+editarEmpleado(item: Empleado){
+
+}
+
+borrarEmpleado(item: Empleado){
+  this.servicio.deleteEmpleado(item).subscribe();
+  this.goLista();
+}
+
+goLista(){
+  this.router.navigate(['usuarios']);
+}
+
 exportarCSV(){
  var data = JSON.stringify(this.lista);
  
-var options = { 
+  var options = { 
     fieldSeparator: ',',
     quoteStrings: '"',
     decimalseparator: '.',
@@ -36,7 +50,7 @@ var options = {
     useBom: false
   };
  
-new Angular2Csv(data, 'Reporte_Clientes.txt', options);
+  new Angular2Csv(data, 'Reporte_Empleados', options);
 }
 
 }

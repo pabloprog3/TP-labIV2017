@@ -28,15 +28,15 @@ class Cliente extends Persona{
 
     public static function TraerPorId($correo){
         //por parametro le paso el correo
-        $dbPDO = new ConexionPDO();
-	    $conn = $dbPDO->getConexion();
-        $sql='select * from cliente where correo=?';
+        //$dbPDO = new ConexionPDO();
+	    //$conn = $dbPDO->getConexion();
+        $conn=ConexionPDO::getConexion();
+        $sql='select * from cliente where correo=:correo';
 	    $dbQuery = $conn->prepare($sql);
-	    $dbQuery->bindParam(1,$correo,PDO::PARAM_STR);
+	    $dbQuery->bindParam(':correo',$correo);
         $dbQuery->execute();
         
         $cliente = $dbQuery->fetchAll(PDO::FETCH_ASSOC);
-
 	    $conn = null;
         return json_encode($cliente);
     }

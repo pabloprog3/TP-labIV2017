@@ -5,6 +5,8 @@ import { SucursalesService } from '../../servicios/sucursales.service';
 import { Router } from '@angular/router';
 import { PropiedadService } from '../../servicios/propiedad.service';
 
+import { AutService } from '../../servicios/aut.service';
+
 @Component({
   selector: 'app-cliente',
   templateUrl: './cliente.component.html',
@@ -19,7 +21,7 @@ export class ClienteComponent implements OnInit {
   listaPropiedades: Object;
   public titulomapa: string;
 
-  constructor(private servicio: SucursalesService, private router: Router, private servicioProp: PropiedadService) { }
+  constructor(private auth: AutService, private servicio: SucursalesService, private router: Router, private servicioProp: PropiedadService) { }
 
   ngOnInit() {
 
@@ -56,6 +58,10 @@ comprar(){
 
 alquilar(){
   
+}
+
+salir(){
+  this.auth.logOut();
 }
 
 

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 //import {AuthenticationService} from '../../servicios/athentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Auth } from "../../servicios/auth.service";
+import { AutService } from "../../servicios/aut.service";
 import { Usuario } from '../../clases/Usuario';
+import { AuthHttp } from 'angular2-jwt';
+import { LoginService } from '../../servicios/login.service';
 
 
 @Component({
@@ -17,12 +19,13 @@ export class LoginComponent implements OnInit {
     //model:any={};
     error: string;
     user: Usuario = new Usuario('','');
+    jwt;
 
-  constructor(private router: Router, private auth: Auth){}   //, private auth: Auth) { }
+  constructor(private router: Router, private auth: AutService, public authHttp: AuthHttp, private servicio: LoginService){} 
 
   ngOnInit() {
     // reset login status
-    this.auth.logout();
+    this.auth.logOut();
   }
 
    btnAdministrador(){
@@ -46,17 +49,38 @@ export class LoginComponent implements OnInit {
   }
   
   loginUsuario(){
-  
-      if (this.user.correo == 'admin@admin.com') {
-        this.router.navigate(['/admin']);
-      }
-        //console.log('no admin');
+    //console.log('usuario:', this.user)
+      this.servicio.postUser(this.user).subscribe(
+          data => {
+            localStorage.setItem('token', data.token)
+            
+            this.auth = new AutService(this.router);
+            let perfil = this.auth.getToken().data[0]['perfil'];
+            //console.log('perfil: ', perfil);
 
-      if (this.user.correo == 'cliente@cliente.com.ar') {
-        this.router.navigate(['/cliente']);
-      }
-      else 
-        return;
+            switch (perfil) {
+              case 'administrador':
+                      this.router.navigate(['/admin']);
+                break;
+
+              case 'cliente':
+                      this.router.navigate(['/cliente']);
+                break;
+
+                case 'empleado':
+                      this.router.navigate(['/empleado']);
+                break;
+
+                case 'encargado':
+                      this.router.navigate(['/encargado']);
+                break;
+            
+              default:
+                this.router.navigate(['/login']);
+                break;
+            }
+
+        });
   }
 
 

@@ -12,7 +12,6 @@ import { AdminComponent } from './componentes/admin/admin.component';
 import {APP_ROUTING} from './componentes/app.routes';
 import {AdminRoutingModule} from './componentes/admin/admin-routing.module';
 import { UsuariosComponent } from './componentes/usuarios/usuarios.component';
-import { EmpleadosComponent } from './componentes/empleados/empleados.component';
 import {SubirArchivosComponent} from './componentes/subir-archivos/subir-archivos.component';
 import {FileUploadModule} from  '../../node_modules/ng2-file-upload';
 import {ListaClientesService} from './servicios/lista-clientes.service';
@@ -21,8 +20,8 @@ import { PerfilClienteComponent } from './componentes/perfil-cliente/perfil-clie
 import { RegistrarClienteComponent } from './componentes/registrar-cliente/registrar-cliente.component';
 //import {AuthenticationService} from './servicios/athentication.service';
 //import { AUTH_PROVIDERS } from 'angular2-jwt';
-import { Auth } from './servicios/auth.service';
-import { AuthGuard } from './auth-guard';
+import { AutService } from './servicios/aut.service';
+import { VerificarJWTService } from './servicios/verificar-jwt.service';
 import { ClienteComponent } from './componentes/cliente/cliente.component';
 import { ListaPropiedadesComponent } from './componentes/lista-propiedades/lista-propiedades.component';
 //import { PropiedadesComponent } from './componentes/propiedades/propiedades.component';
@@ -36,6 +35,11 @@ import { ListaEmpleadosComponent } from './componentes/lista-empleados/lista-emp
 
 //import { UPLOAD_DIRECTIVES, NgFileSelectDirective } from '../../node_modules/ng2-uploader/ng2-uploader';
 import { Ng2UploaderModule } from 'ng2-uploader';
+import { PerfilEmpleadoComponent } from './componentes/perfil-empleado/perfil-empleado.component';
+import { EmpleadosComponent } from './componentes/empleados/empleados.component';
+import { AuthModule } from './auth.module';
+import {LoginService} from './servicios/login.service';
+
 
 
 @NgModule({
@@ -53,6 +57,8 @@ import { Ng2UploaderModule } from 'ng2-uploader';
     ListaPropiedadesComponent,
     ListaSucursalesComponent,
     ListaEmpleadosComponent,
+    PerfilEmpleadoComponent,
+    EmpleadosComponent
     //UPLOAD_DIRECTIVES,
     //NgFileSelectDirective,
   ],
@@ -65,12 +71,13 @@ import { Ng2UploaderModule } from 'ng2-uploader';
     APP_ROUTING,
     AdminRoutingModule,
     FileUploadModule,
-    Ng2UploaderModule
+    Ng2UploaderModule,
+    AuthModule
     //UPLOAD_DIRECTIVES,
     //PdfmakeModule
   
   ],
-  providers: [ListaClientesService, EmpleadosService, SucursalesService, PropiedadService,  Auth, AuthGuard], //AUTH_PROVIDERS,
+  providers: [ListaClientesService, EmpleadosService, SucursalesService, PropiedadService, LoginService, AutService, VerificarJWTService], //AUTH_PROVIDERS,
   bootstrap: [AppComponent]
 })
 export class AppModule { }
