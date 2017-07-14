@@ -1,3 +1,28 @@
-<p>
-  lista-propiedades works!
-</p>
+   <div class="container">    
+      <div class="row">
+          <div  *ngFor="let item of listaPropiedades" class="panel panel-primary col-xs-12 col-sm-6 col-md-3 col-lg-3">   
+                    <div class = "panel-heading">
+                        <h3 class = "panel-title">{{item["direccion"]}}, {{item["localidad"]}}</h3>
+                    </div>
+                    <div class = "panel-body">
+                      <img style="width: 150px; height: 80px" src="../../../assets/fotos/propiedades/{{item['foto1']}}">
+                      <p><strong>¿Alquiler?: </strong>{{item["disponibilidad_alquiler"] | uppercase}} </p>
+                      <p><strong>Valor por día: ${{item["precio_alquiler"]}}</strong>
+                      <p><strong>¿Venta?: </strong>{{item["disponibilidad_venta"] | uppercase}} </p>
+                      <p><strong>Valor total: ${{item["precio_venta"]}}</strong>
+                      <br>
+                      <input type="button" (click)="irDetalle(item)" name="detalles" value="Ver Detalles" class="btn btn-block btn-warning">
+                    </div>
+                    
+          </div>
+             
+             
+      </div>
+      <!--  (click)="irDetalle(item)" -->
+          <app-detalle-propiedad [propiedad]="propiedad" [mostrarBtnAlquiler]="mostrarBtnAlquiler" *ngIf="mostrarDetalle" ></app-detalle-propiedad>
+   </div>
+
+
+   
+   
+  

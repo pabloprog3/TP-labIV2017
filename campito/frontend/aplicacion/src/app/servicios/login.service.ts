@@ -23,12 +23,6 @@ export class LoginService {
       return this.http.post(this.apiUrl, JSON.stringify(user), this.options).map(this.getDatos).catch(this.error);
   }
 
-   private extractData(res: Response) {
-    let body = res.json();    
-    
-    return body || { };
-  }
-
 
   private getDatos(data: Response){
     let datos = data.json();
@@ -38,7 +32,6 @@ export class LoginService {
     
   private error(error: any){
     let msg = (error.message) ? error.message: 'Error desconocido';
-    //console.log(msg); 
     return Observable.throw(msg);
   }
 

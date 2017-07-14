@@ -62,22 +62,27 @@ class Empleado extends Persona
 
     public static function Insertar($id_sucursal, $tipo_empleado, $nombre, $apellido, $dni, $foto, $fecha_nac, $sueldo, $passw, $telefono, $correo)
     {
-        $dbPDO = new ConexionPDO();
-	    $conn = $dbPDO->getConexion();
-        $sql = 'insert into empleados (id_sucursal, tipo_emp, nombre, apellido, dni, foto, fecha_nac, sueldo, passw, telefono, correo)
-                values (?,?,?,?,?,?,?,?,?,?,?)';
+        //$dbPDO = new ConexionPDO();
+	    //$conn = $dbPDO->getConexion();
+        $bd='campito';
+        $user='root';
+        $passw='';
+        $conn = new PDO('mysql:host=localhost;dbname='.$bd.';charset=utf8', $user, $passw);
+        
+        $sql = 'INSERT INTO empleados (id_sucursal, perfil, nombre, apellido, dni, foto, fecha_nac, sueldo, passw, telefono, correo)
+                VALUES (:id_sucursal, :perfil, :nombre, :apellido, :dni, :foto, :fecha_nac, :sueldo, :passw, :telefono, :correo)';
 	    $dbQuery = $conn->prepare($sql);
-        $dbQuery->bindParam(1,$id_sucursal,PDO::PARAM_INT);
-        $dbQuery->bindParam(2,$tipo_empleado,PDO::PARAM_STR);
-        $dbQuery->bindParam(3,$nombre,PDO::PARAM_STR);
-        $dbQuery->bindParam(4,$apellido,PDO::PARAM_STR);
-        $dbQuery->bindParam(5,$dni,PDO::PARAM_STR);
-        $dbQuery->bindParam(6,$foto,PDO::PARAM_STR);
-        $dbQuery->bindParam(7,$fecha_nac,PDO::PARAM_STR);
-        $dbQuery->bindParam(8,$sueldo,PDO::PARAM_STR);
-        $dbQuery->bindParam(9,$passw,PDO::PARAM_STR);
-        $dbQuery->bindParam(10,$telefono,PDO::PARAM_STR);
-        $dbQuery->bindParam(11,$correo,PDO::PARAM_STR);
+        $dbQuery->bindParam(':id_sucursal',$id_sucursal);
+        $dbQuery->bindParam(':perfil',$tipo_empleado);
+        $dbQuery->bindParam(':nombre',$nombre);
+        $dbQuery->bindParam(':apellido',$apellido);
+        $dbQuery->bindParam(':dni',$dni);
+        $dbQuery->bindParam(':foto',$foto);
+        $dbQuery->bindParam(':fecha_nac',$fecha_nac);
+        $dbQuery->bindParam(':sueldo',$sueldo);
+        $dbQuery->bindParam(':passw',$passw);
+        $dbQuery->bindParam(':telefono',$telefono);
+        $dbQuery->bindParam(':correo',$correo);
         $dbQuery->execute();
         
         $conn = null;
@@ -99,7 +104,7 @@ class Empleado extends Persona
     public static function Actualizar($id_suc, $tipo_empleado, $nombre, $apellido, $dni, $foto, $fecha_nac, $sueldo, $passw, $telefono, $correo){
         $dbPDO = new ConexionPDO();
 	    $conn = $dbPDO->getConexion();
-	    $sql = 'update empleados set id_sucursal=?, tipo_empleado=?, nombre=?, apellido=?, dni=?, foto=?, fecha_nac=?, sueldo=?, passw=?, telefono=?, correo=?';
+	    $sql = 'update empleados set id_sucursal=?, perfil=?, nombre=?, apellido=?, dni=?, foto=?, fecha_nac=?, sueldo=?, passw=?, telefono=?, correo=?';
         $dbQuery = $conn->prepare($sql);
 
         $dbQuery->bindParam(1,$id_suc);

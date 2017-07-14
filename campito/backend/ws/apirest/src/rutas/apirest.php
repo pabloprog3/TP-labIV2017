@@ -7,9 +7,9 @@ use \Psr\Http\Message\ResponseInterface as Response;
 $app = new \Slim\App;
 
 require_once $_SERVER['DOCUMENT_ROOT']."/TP-labIV2017/campito/backend/ws/apirest/src/model/cliente.php";
-require_once $_SERVER['DOCUMENT_ROOT']."/TP-labIV2017/campito/backend/ws/apirest/src/model/sucursales.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/TP-labIV2017/campito/backend/ws/apirest/src/model/empleado.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/TP-labIV2017/campito/backend/ws/apirest/src/rutas/AuthValid.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/TP-labIV2017/campito/backend/ws/apirest/src/model/sucursales.php";
 
 //-------------------------------------------LOGIN JWT------------------------------
 
@@ -158,12 +158,15 @@ $app->post("/empleados/foto", function(Request $request, Response $response) use
 
 //----------------------------------RUTAS DE PROPIEDADES--------------------------------------------
 
-$app->get("/propiedades", function () use($app)
+$app->get("/propiedades/{id}", function (Request $request, Response $response) use($app)
 {
-    $clientesJSON = Sucursales::traerTodosPropiedades();
-    $app->response->headers->set("Content-Type", "application/json");
-	$app->response->status(200);
-	$app->response->body($clientesJSON);
+	$id = $request->getAttribute('id');
+    return $propiedadesJSON = Sucursales::traerPropiedadId($id);
+});
+
+$app->get("/propiedades", function (Request $request, Response $response) use($app)
+{
+    return $propiedadesJSON = Sucursales::traerTodosPropiedades();
 });
 
 
@@ -183,5 +186,44 @@ $app->get("/sucursales", function () use($app)
 });
 
 
+
+//-----------------------------------TRANSACCIONES--------------------------------------------------
+
+//--------------------------------------ALQUILER----------------------------------------------------------
+$app->post("/alquiler/agregar", function(Request $request, Response $response) use($app){
+	$id_propiedad = $request->getParam('id_propiedad');
+	$correo_due = $request->getParam('correo_due');
+	$correo_cli = $request->getParam('correo_cli');
+	$precio = $request->getParam('precio');
+	$comision = $request->getParam('comision');
+	$fecha = $request->getParam('fecha');
+	$dias= $request->getParam('dias');
+
+
+	try{
+		Sucursales::insertarAlquiler($id_propiedad, $correo_due, $correo_cli, $precio, $comision, $fecha, $dias);
+		echo '{ "notice": {"text": "Registro de alquiler agregado"}';
+	} catch(PDOException $e){
+		echo '{ "error": {"text": ' .$e->getMessage().'}';
+	}
+});
+
+
+//--------------------------------------COMPRAR----------------------------------------------------------
+$app->post("/comprar/agregar", function(Request $request, Response $response) use($app){
+	$id_propiedad = $request->getParam('id_propiedad');
+	$correo_due = $request->getParam('correo_due');
+	$correo_cli = $request->getParam('correo_cli');
+	$precio = $request->getParam('precio');
+	$comision = $request->getParam('comision');
+	$fecha = $request->getParam('fecha');
+
+	try{
+		Sucursales::insertarCompra($id_propiedad, $correo_due, $correo_cli, $precio, $comision, $fecha);
+		echo '{ "notice": {"text": "Registro de compra agregado"}';
+	} catch(PDOException $e){
+		echo '{ "error": {"text": ' .$e->getMessage().'}';
+	}
+});
 
 ?>

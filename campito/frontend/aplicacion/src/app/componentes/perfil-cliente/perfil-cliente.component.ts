@@ -61,7 +61,7 @@ mostrarDatos(){
           correo: this.cliente[0].correo,
           telefono: this.cliente[0].telefono
        });
-       console.log(this.clienteForm.getRawValue());
+       //console.log(this.clienteForm.getRawValue());
 }
 
   volver(){

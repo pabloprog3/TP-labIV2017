@@ -4,8 +4,8 @@ import {Observable} from 'rxjs/Observable';
 import  'rxjs/add/observable/throw';
 import  'rxjs/add/operator/catch';
 import  'rxjs/add/operator/map';
-//import { Cliente } from '../clases/Cliente';
 import 'rxjs/add/operator/toPromise';
+import { Empleado } from '../clases/Empleado';
 
 @Injectable()
 export class EmpleadosService {
@@ -22,21 +22,15 @@ export class EmpleadosService {
       return this.http.get(this.apiUrl).map(this.getDatos).catch(this.error);
   }
 
- /* getClienteCorreo(correo: string): Observable<Cliente>{
-    //console.log('correo en lista-clientes.service.ts: ', correo); LLEGA OK
-    return this.http.get(this.apiUrl + '/' + correo).map(this.getDatos).catch(this.error);
-  } */
 
   getEmpleadoCorreo(correo: string): Observable<any>{
-    //console.log('correo en lista-clientes.service.ts: ', correo);  //LLEGA OK
     return this.http.get(this.apiUrl + '/' + correo)
         .map(r => r.json())
         .catch(this.error);
     }
 
   postEmpleado(entidad: any): Observable<any>{
-    //let body = JSON.stringify(entidad);
-    return this.http.post(this.apiUrl + '/agregar', entidad, this.options).map(this.getDatos).catch(this.error);
+    return this.http.post(this.apiUrl + '/agregar', JSON.stringify(entidad), this.options).map(this.getDatos).catch(this.error);
   }
 
   deleteEmpleado(entidad: any){
@@ -52,7 +46,6 @@ export class EmpleadosService {
 
   private getDatos(data: Response){
     let datos = data.json();
-    //console.log('Datos: ', datos); //DEVUELVE OK LA DATA
     return  datos || [];
   }
 

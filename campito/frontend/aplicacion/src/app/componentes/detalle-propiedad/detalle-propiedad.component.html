@@ -1,0 +1,60 @@
+
+<div  id="carousel-id" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-id" data-slide-to="0" class=""></li>
+        <li data-target="#carousel-id" data-slide-to="1" class="active"></li>
+        <li data-target="#carousel-id" data-slide-to="2" class=""></li>
+    </ol>
+    <div  class="carousel-inner">
+        <div class="item active">
+            <img style="width: 300px" alt="First slide" [src]="propiedad['foto1']">
+            <div class="container">
+                <div style="color:aqua" class="carousel-caption">
+                    <h4 style="color: red">{{propiedad['direccion']}}, {{propiedad['localidad']}}</h4><br>
+                    <strong><p style="color: red">Contacto: {{propiedad['telefono']}} o {{propiedad['correo']}}</p></strong>
+                    <p style="color: teal; font-size: 15px">Dueño: {{propiedad['apellido_duenio'] | uppercase}}, {{propiedad['nombre_duenio']}}</p>
+                    <button (click)="registrarCompra()" type="button" value="" class="btn btn-xs btn-primary">Comprar ${{propiedad['precio_venta']}}</button>
+                    <br><br>
+                    <div *ngIf= 'mostrarBtnAlquiler'>
+                        <button (click)="mostrarTXTAlquiler()"  type="button" value="Alquilar" class="btn btn-xs btn-primary">Alquilar ${{propiedad['precio_alquiler']}} / día</button>
+                        <div  *ngIf= 'mostrarTxtAlquiler' >
+                                <input   type="number" [(ngModel)]="dias_alquiler" placeholder="ingresar cantidad de dias" class="form-control form-control-xs">
+                                <p> Monto Total: ${{propiedad['precio_alquiler'] * dias_alquiler}}</p>
+                                <input type="button" value="Confirmar" class="btn btn-xs btn-danger" (click)="registrarAlquiler()">
+     
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img style="width: 300px"  alt="Second slide" [src]="propiedad['foto2']">
+            <div class="container">
+                <div class="carousel-caption">
+                  
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img style="width: 300px"  alt="Third slide" [src]="propiedad['foto3']">
+            <div class="container">
+                <div class="carousel-caption">
+                   
+                </div>
+            </div>
+        </div>
+
+        <div class="item">
+            <img *ngIf="propiedad['foto4']"  style="width: 300px"  alt="Four slide" [src]="propiedad['foto4']">
+            <div class="container">
+                <div class="carousel-caption">
+                   
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <a class="left carousel-control" href="#carousel-id" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+    <a class="right carousel-control" href="#carousel-id" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+</div>
+

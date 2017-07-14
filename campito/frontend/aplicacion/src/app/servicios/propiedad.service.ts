@@ -9,7 +9,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class PropiedadService {
 
-private apiUrl: string = 'http://localhost:8080/TP-labIV2017/campito/backend/ws/vendor/slim/slim/propiedades';
+private apiUrl: string = 'http://localhost:8080/TP-labIV2017/campito/backend/ws/apirest/public/index.php/propiedades';
 
   constructor(private http: Http) { }
 
@@ -18,6 +18,9 @@ getPropiedades(): Observable<Object>{
       return this.http.get(this.apiUrl).map(this.getDatos).catch(this.error);
   }
 
+getPropiedadId(id): Observable<Object>{
+    return this.http.get(this.apiUrl + '/' + id).map(this.getDatos).catch(this.error);
+    }
 
 
 

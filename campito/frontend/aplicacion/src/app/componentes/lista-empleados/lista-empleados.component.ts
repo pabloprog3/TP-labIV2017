@@ -26,7 +26,8 @@ export class ListaEmpleadosComponent implements OnInit {
 
 
 editarEmpleado(item: Empleado){
-
+  let correo = item.correo
+  this.router.navigate(['/usuarios/perfilEmpleado/', correo]);
 }
 
 borrarEmpleado(item: Empleado){

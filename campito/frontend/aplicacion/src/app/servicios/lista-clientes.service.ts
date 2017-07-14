@@ -61,11 +61,4 @@ export class ListaClientesService {
   }
 
 
-
-  private getOptions(): RequestOptions{
-    let auth = new Headers({ 'Authorization': 'Bearer' + localStorage.getItem('token') });
-    let options = new RequestOptions({headers: auth});
-    return options;
-  }
-
 }

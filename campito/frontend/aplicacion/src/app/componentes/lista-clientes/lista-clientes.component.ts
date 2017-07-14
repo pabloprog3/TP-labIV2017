@@ -36,10 +36,7 @@ export class ListaClientesComponent implements OnInit {
 
  editarCliente(item: Cliente){
   let correo = item.correo
-  console.log('llevando correo: ', correo);
   this.router.navigate(['/usuarios/perfilCliente/', correo]);
-
-
  }
 
  borrarCliente(item: Cliente){

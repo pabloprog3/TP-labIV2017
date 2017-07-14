@@ -10,7 +10,12 @@ import { LoginComponent } from './componentes/login/login.component';
 import { AdminComponent } from './componentes/admin/admin.component';
 
 import {APP_ROUTING} from './componentes/app.routes';
+
+
 import {AdminRoutingModule} from './componentes/admin/admin-routing.module';
+import { ClienteRoutingModule } from './componentes/cliente/cliente-routing/cliente-routing.module';
+
+
 import { UsuariosComponent } from './componentes/usuarios/usuarios.component';
 import {SubirArchivosComponent} from './componentes/subir-archivos/subir-archivos.component';
 import {FileUploadModule} from  '../../node_modules/ng2-file-upload';
@@ -18,13 +23,13 @@ import {ListaClientesService} from './servicios/lista-clientes.service';
 import { ListaClientesComponent } from './componentes/lista-clientes/lista-clientes.component';
 import { PerfilClienteComponent } from './componentes/perfil-cliente/perfil-cliente.component';
 import { RegistrarClienteComponent } from './componentes/registrar-cliente/registrar-cliente.component';
-//import {AuthenticationService} from './servicios/athentication.service';
-//import { AUTH_PROVIDERS } from 'angular2-jwt';
+
+
 import { AutService } from './servicios/aut.service';
 import { VerificarJWTService } from './servicios/verificar-jwt.service';
 import { ClienteComponent } from './componentes/cliente/cliente.component';
 import { ListaPropiedadesComponent } from './componentes/lista-propiedades/lista-propiedades.component';
-//import { PropiedadesComponent } from './componentes/propiedades/propiedades.component';
+
 import { SucursalesService } from './servicios/sucursales.service';
 import { ListaSucursalesComponent } from './componentes/lista-sucursales/lista-sucursales.component';
 //import { GOOGLE_MAPS_PROVIDERS } from 'angular2-google-map';
@@ -37,8 +42,10 @@ import { ListaEmpleadosComponent } from './componentes/lista-empleados/lista-emp
 import { Ng2UploaderModule } from 'ng2-uploader';
 import { PerfilEmpleadoComponent } from './componentes/perfil-empleado/perfil-empleado.component';
 import { EmpleadosComponent } from './componentes/empleados/empleados.component';
-import { AuthModule } from './auth.module';
+import { AuthModule } from './componentes/auth/auth.module';
 import {LoginService} from './servicios/login.service';
+import { DetallePropiedadComponent } from './componentes/detalle-propiedad/detalle-propiedad.component';
+import { TransaccionesService } from './servicios/transacciones.service'
 
 
 
@@ -58,9 +65,8 @@ import {LoginService} from './servicios/login.service';
     ListaSucursalesComponent,
     ListaEmpleadosComponent,
     PerfilEmpleadoComponent,
-    EmpleadosComponent
-    //UPLOAD_DIRECTIVES,
-    //NgFileSelectDirective,
+    EmpleadosComponent,
+    DetallePropiedadComponent
   ],
   imports: [
     BrowserModule,
@@ -70,14 +76,13 @@ import {LoginService} from './servicios/login.service';
     HttpModule,
     APP_ROUTING,
     AdminRoutingModule,
+    ClienteRoutingModule,
     FileUploadModule,
     Ng2UploaderModule,
     AuthModule
-    //UPLOAD_DIRECTIVES,
-    //PdfmakeModule
   
   ],
-  providers: [ListaClientesService, EmpleadosService, SucursalesService, PropiedadService, LoginService, AutService, VerificarJWTService], //AUTH_PROVIDERS,
+  providers: [ListaClientesService, EmpleadosService, SucursalesService, PropiedadService, LoginService, AutService, VerificarJWTService, TransaccionesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

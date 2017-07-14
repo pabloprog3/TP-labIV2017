@@ -153,10 +153,11 @@ export class UsuariosComponent implements OnInit {
   guardarCliente(){
     this.servicio.postCliente(this.form.value)
         .subscribe(
-          resp => console.log(resp),
-          err => console.log(err),
+         // resp => console.log(resp),
+         // err => console.log(err),
         );
         this.form.reset();
+        this.goLista();
   }
 
   
@@ -168,7 +169,14 @@ export class UsuariosComponent implements OnInit {
          // err => console.log(err),
         );
         this.formEmp.reset();
+        this.goLista();
   }
+
+
+goLista(){
+  this.router.navigate(['usuarios']);
+}
+
 
 volver(){
   this.router.navigate(['/login']);

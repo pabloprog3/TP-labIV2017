@@ -12,7 +12,7 @@ import {LoginComponent} from './componentes/login/login.component';
 export class AppComponent {
   
 
-  constructor(private rouuter: Router){}
+  constructor(private router: Router){}
 
 
 

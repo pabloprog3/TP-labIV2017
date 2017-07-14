@@ -15,7 +15,7 @@ export class ListaSucursalesComponent implements OnInit {
   lista: Object;
   @Input() mapaVisible:boolean;
   //@Input('lista') listaSuc;
-  zoom:number = 8;
+  zoom:number = 10;
   latitud:number;
   longitud:number;
 
@@ -26,7 +26,7 @@ export class ListaSucursalesComponent implements OnInit {
    this.servicio.getSucursales().toPromise().then(
      (data) => { this.lista = data;
      });
-  console.log("Lista: ", this.lista);
+  //console.log("Lista: ", this.lista);
 }
 
 

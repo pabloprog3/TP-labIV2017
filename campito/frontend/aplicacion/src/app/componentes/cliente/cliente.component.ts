@@ -13,12 +13,12 @@ import { AutService } from '../../servicios/aut.service';
   styleUrls: ['./cliente.component.css']
 })
 export class ClienteComponent implements OnInit {
-  private pathImages: string = '../../../assets/fotos/sucursales';
+  //private pathImages: string = '../../../assets/fotos/sucursales';
   lat: number;
   lng: number;
   map: any;
   mapaVisible: boolean;
-  listaPropiedades: Object;
+  //listaPropiedades: Object;
   public titulomapa: string;
 
   constructor(private auth: AutService, private servicio: SucursalesService, private router: Router, private servicioProp: PropiedadService) { }
@@ -27,7 +27,7 @@ export class ClienteComponent implements OnInit {
 
     this.mapaVisible = false;
     this.titulomapa = 'Ver Mapa';
-    this.cargarPropiedades();
+    //this.cargarPropiedades();
 
   }
 
@@ -42,14 +42,14 @@ mostrarMapaBool(){
 }
 
 
-
+/*
 cargarPropiedades(){
   
   this.servicioProp.getPropiedades().subscribe(
     data => { this.listaPropiedades = data;
     });
 
-}
+} */
 
 comprar(){
 
