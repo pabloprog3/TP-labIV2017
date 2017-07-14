@@ -36,7 +36,8 @@ export class DetallePropiedadComponent implements OnInit {
         precio: '',
         comision: '',
         fecha: '',
-        dias: ''
+        dias: '',
+        id_sucursal: 0
       });
    }
 
@@ -70,9 +71,10 @@ export class DetallePropiedadComponent implements OnInit {
           precio: this.propiedad['precio_alquiler'] * this.dias_alquiler,
           comision: this.propiedad['precio_alquiler'] * this.dias_alquiler * 0.035,
           fecha: this.fecha,
-          dias: this.dias_alquiler
+          dias: this.dias_alquiler,
+          id_sucursal: this.propiedad['id_sucursal']
        });
-    
+    console.log(this.form.value);
     this.servicioTrx.postAlquiler(this.form.value).subscribe();
     this.form.reset();
     
@@ -92,6 +94,7 @@ export class DetallePropiedadComponent implements OnInit {
           precio: this.propiedad['precio_venta'],
           comision: this.propiedad['precio_venta'] * 0.048,
           fecha: this.fecha,
+          id_sucursal: this.propiedad['id_sucursal']
        });
     
     this.servicioTrx.postCompra(this.form.value).subscribe();

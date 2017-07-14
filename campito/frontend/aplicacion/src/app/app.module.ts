@@ -34,6 +34,7 @@ import { SucursalesService } from './servicios/sucursales.service';
 import { ListaSucursalesComponent } from './componentes/lista-sucursales/lista-sucursales.component';
 //import { GOOGLE_MAPS_PROVIDERS } from 'angular2-google-map';
 //import { PdfmakeModule } from 'ng-pdf-make';
+//import { DetallesPropiedadComponent } from './src/app/componentes/detalles-propiedad';
 import { PropiedadService } from './servicios/propiedad.service';
 import { EmpleadosService } from './servicios/empleados.service';
 import { ListaEmpleadosComponent } from './componentes/lista-empleados/lista-empleados.component';
@@ -45,7 +46,10 @@ import { EmpleadosComponent } from './componentes/empleados/empleados.component'
 import { AuthModule } from './componentes/auth/auth.module';
 import {LoginService} from './servicios/login.service';
 import { DetallePropiedadComponent } from './componentes/detalle-propiedad/detalle-propiedad.component';
-import { TransaccionesService } from './servicios/transacciones.service'
+import { TransaccionesService } from './servicios/transacciones.service';
+import { EncargadoComponent } from './componentes/encargado/encargado.component';
+import { EstadisticasComponent } from './componentes/estadisticas/estadisticas.component';
+import { ChartsModule } from 'ng2-charts';
 
 
 
@@ -66,7 +70,9 @@ import { TransaccionesService } from './servicios/transacciones.service'
     ListaEmpleadosComponent,
     PerfilEmpleadoComponent,
     EmpleadosComponent,
-    DetallePropiedadComponent
+    DetallePropiedadComponent,
+    EncargadoComponent,
+    EstadisticasComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +85,8 @@ import { TransaccionesService } from './servicios/transacciones.service'
     ClienteRoutingModule,
     FileUploadModule,
     Ng2UploaderModule,
-    AuthModule
+    AuthModule,
+    ChartsModule
   
   ],
   providers: [ListaClientesService, EmpleadosService, SucursalesService, PropiedadService, LoginService, AutService, VerificarJWTService, TransaccionesService],

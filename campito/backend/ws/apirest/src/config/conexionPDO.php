@@ -2,9 +2,9 @@
 
 final class ConexionPDO 
 {
-	private static $bd='campito';
-	private static $user='root';
-	private static $passw='';
+	private static $bd='id2237525_campito';
+	private static $user='id2237525_pablo';
+	private static $passw='123456';
 	private static $instanciaPDO=null;
     
 	public static function getConexion()

@@ -9,7 +9,7 @@ import { FormsModule } from "@angular/forms";
   styleUrls: ['./registrar-cliente.component.css']
 })
 export class RegistrarClienteComponent implements OnInit {
-  private perfil: string = "cliente";
+  public perfil: string = "cliente";
  cliente: Cliente = new Cliente("","","","","","","","");
 
   constructor(private router: Router, servicio: ListaClientesService) { }

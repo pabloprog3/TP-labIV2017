@@ -20,7 +20,8 @@ const APP_ROUTES: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registrarse', component: RegistrarClienteComponent },
   { path: 'cliente', component: ClienteComponent},
-  { path: 'empleado', component: EmpleadosComponent},
+  { path: 'encargado', component: AdminComponent},
+  { path: 'empleado', component: RegistrarClienteComponent},
   { path: '**', pathMatch: 'full', redirectTo: 'login' },
   { path: '', component: LoginComponent}
 ];

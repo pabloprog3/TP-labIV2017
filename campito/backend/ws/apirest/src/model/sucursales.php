@@ -42,9 +42,10 @@ class Sucursales
     }
 
 
-    public static function insertarAlquiler($id_propiedad, $correo_due, $correo_cli, $precio, $comision, $fecha, $dias){
+    public static function insertarAlquiler($id_propiedad, $correo_due, $correo_cli, $precio, $comision, $fecha, $dias,$id_sucursal){
         $conn=ConexionPDO::getConexion();
-        $sql = 'INSERT INTO alquiler(correo_due, correo_cli, precio, comision, fecha, dias, id_propiedad) VALUES (?,?,?,?,?,?,?)';
+        $sql = 'INSERT INTO alquiler(correo_due, correo_cli, precio, comision, fecha, dias, id_propiedad, id_sucursal)
+                 VALUES (?,?,?,?,?,?,?,?)';
         $dbQuery = $conn->prepare($sql);
         $dbQuery->bindParam(1, $correo_due);
         $dbQuery->bindParam(2, $correo_cli);
@@ -53,14 +54,15 @@ class Sucursales
         $dbQuery->bindParam(5, $fecha);
         $dbQuery->bindParam(6, $dias);
         $dbQuery->bindParam(7, $id_propiedad);
+        $dbQuery->bindParam(8, $id_sucursal);
 	    $dbQuery->execute();
 	    $propiedades = $dbQuery->fetchAll(PDO::FETCH_ASSOC);
 	    $conn = null;
     }
 
-    public static function insertarCompra($id_propiedad, $correo_due, $correo_cli, $precio, $comision, $fecha){
+    public static function insertarCompra($id_propiedad, $correo_due, $correo_cli, $precio, $comision, $fecha, $id_sucursal){
         $conn=ConexionPDO::getConexion();
-        $sql1 = 'INSERT INTO venta(correo_due, correo_cli, precio, comision, fecha, id_propiedad) VALUES (?,?,?,?,?,?)';
+        $sql1 = 'INSERT INTO venta(correo_due, correo_cli, precio, comision, fecha, id_propiedad, id_sucursal) VALUES (?,?,?,?,?,?,?)';
         $dbQuery = $conn->prepare($sql1);
         $dbQuery->bindParam(1, $correo_due);
         $dbQuery->bindParam(2, $correo_cli);
@@ -68,6 +70,7 @@ class Sucursales
         $dbQuery->bindParam(4, $comision);
         $dbQuery->bindParam(5, $fecha);
         $dbQuery->bindParam(6, $id_propiedad);
+        $dbQuery->bindParam(7, $id_sucursal);
         $dbQuery->execute();
 	    $propiedades = $dbQuery->fetchAll(PDO::FETCH_ASSOC);
        

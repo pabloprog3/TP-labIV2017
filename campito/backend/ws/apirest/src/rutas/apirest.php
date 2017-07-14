@@ -198,10 +198,11 @@ $app->post("/alquiler/agregar", function(Request $request, Response $response) u
 	$comision = $request->getParam('comision');
 	$fecha = $request->getParam('fecha');
 	$dias= $request->getParam('dias');
+	$id_sucursal = $request->getParam('id_sucursal');
 
 
 	try{
-		Sucursales::insertarAlquiler($id_propiedad, $correo_due, $correo_cli, $precio, $comision, $fecha, $dias);
+		Sucursales::insertarAlquiler($id_propiedad, $correo_due, $correo_cli, $precio, $comision, $fecha, $dias, $id_sucursal);
 		echo '{ "notice": {"text": "Registro de alquiler agregado"}';
 	} catch(PDOException $e){
 		echo '{ "error": {"text": ' .$e->getMessage().'}';
@@ -217,9 +218,10 @@ $app->post("/comprar/agregar", function(Request $request, Response $response) us
 	$precio = $request->getParam('precio');
 	$comision = $request->getParam('comision');
 	$fecha = $request->getParam('fecha');
+	$id_sucursal = $request->getParam('id_sucursal');
 
 	try{
-		Sucursales::insertarCompra($id_propiedad, $correo_due, $correo_cli, $precio, $comision, $fecha);
+		Sucursales::insertarCompra($id_propiedad, $correo_due, $correo_cli, $precio, $comision, $fecha, $id_sucursal);
 		echo '{ "notice": {"text": "Registro de compra agregado"}';
 	} catch(PDOException $e){
 		echo '{ "error": {"text": ' .$e->getMessage().'}';

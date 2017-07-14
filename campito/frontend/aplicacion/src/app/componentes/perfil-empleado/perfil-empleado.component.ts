@@ -75,7 +75,9 @@ mostrarDatos(){
        //console.log(this.clienteForm.getRawValue());
 }
 
-
+modificarEmpleado(){
+  
+}
 
 
 }

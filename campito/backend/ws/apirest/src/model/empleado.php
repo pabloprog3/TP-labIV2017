@@ -45,9 +45,9 @@ class Empleado extends Persona
         //$dbPDO = new ConexionPDO();
 	    //$conn = $dbPDO->getConexion();
         //$conn=ConexionPDO::getConexion();
-        $bd='campito';
-        $user='root';
-        $passw='';
+        $bd='id2237525_campito';
+        $user='id2237525_pablo';
+        $passw='123456';
         $conn = new PDO('mysql:host=localhost;dbname='.$bd.';charset=utf8', $user, $passw);
         //var_dump($conn);
         //$sql = 'select * from empleados where correo=:correo';
@@ -64,9 +64,9 @@ class Empleado extends Persona
     {
         //$dbPDO = new ConexionPDO();
 	    //$conn = $dbPDO->getConexion();
-        $bd='campito';
-        $user='root';
-        $passw='';
+        $bd='id2237525_campito';
+        $user='id2237525_pablo';
+        $passw='123456';
         $conn = new PDO('mysql:host=localhost;dbname='.$bd.';charset=utf8', $user, $passw);
         
         $sql = 'INSERT INTO empleados (id_sucursal, perfil, nombre, apellido, dni, foto, fecha_nac, sueldo, passw, telefono, correo)
