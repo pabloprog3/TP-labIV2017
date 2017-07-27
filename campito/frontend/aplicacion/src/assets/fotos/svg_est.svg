@@ -1,0 +1,58 @@
+
+
+<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 582.09 497.38">
+  <defs>
+    <style>
+          #Layer_1{
+            padding-left: 2em;
+            padding-top: 2em;
+          }
+          #Layer_2{
+            padding-left: 2em;
+            padding-top: 2em;
+          }
+          .cls-1 {
+            fill: none;
+            stroke: #84DCC6;
+            stroke-miterlimit: 10;
+            stroke-width: 40px;
+            stroke-linecap: round;
+          }
+          .cls-2 {
+            fill: none;
+            stroke: #A5FFD6;
+            stroke-miterlimit: 10;
+            stroke-width: 9px;
+            stroke-linecap: round;
+          }
+        </style>
+  </defs>
+  <title>prod-s-line-chart-02</title>
+  <g id="Layer_7" data-name="Layer 7">
+    <path  class=" ARLHWENF_0 cls-1 " x1="2.5" x2="3.25" y2="497.38" d="M2.5,0L3.25,497.38"></path>
+    <path  class=" ARLHWENF_1 cls-1 " x1="3.25" y1="485.46" x2="582.09" y2="485.46" d="M3.25,485.46L582.09,485.46"></path>
+    <path  class=" ARLHWENF_2 cls-1 " x1="492.76" y1="454.99" x2="492.76" y2="43.05" d="M492.76,454.99L492.76,43.05"></path>
+    <path  class=" ARLHWENF_3 cls-1 " x1="354.35" y1="454.99" x2="354.35" y2="141.07" d="M354.35,454.99L354.35,141.07"></path>
+    <path  class=" ARLHWENF_4 cls-1 " x1="214.82" y1="454.99" x2="214.82" y2="254.98" d="M214.82,454.99L214.82,254.98"></path>
+    <path  class=" ARLHWENF_5 cls-1 " x1="75.28" y1="454.99" x2="75.28" y2="339.76" d="M75.28,454.99L75.28,339.76"></path>
+    <path  class=" ARLHWENF_6 cls-1 " x1="5.86" y1="8.61" x2="24.26" y2="8.61" d="M5.86,8.61L24.26,8.61"></path>
+    <path  class=" ARLHWENF_7 cls-1 " x1="4.58" y1="100.34" x2="24.26" y2="100.34" d="M4.58,100.34L24.26,100.34"></path>
+    <path  class=" ARLHWENF_8 cls-1 " x1="4.58" y1="192.07" x2="24.26" y2="192.07" d="M4.58,192.07L24.26,192.07"></path>
+    <path  class=" ARLHWENF_9 cls-1 " x1="4.39" y1="283.79" x2="24.26" y2="283.79" d="M4.39,283.79L24.26,283.79"></path>
+    <path  class=" ARLHWENF_10 cls-1 " x1="3.9" y1="375.52" x2="24.26" y2="375.52" d="M3.9,375.52L24.26,375.52"></path>
+  </g> 
+<g id="Layer_7" data-name="Layer 7">
+    <path  class=" ARLHWENF_0 cls-2 " x1="2.5" x2="3.25" y2="497.38" d="M2.5,0L3.25,497.38"></path>
+    <path  class=" ARLHWENF_1 cls-2 " x1="3.25" y1="485.46" x2="582.09" y2="485.46" d="M3.25,485.46L582.09,485.46"></path>
+    <path  class=" ARLHWENF_2 cls-2 " x1="492.76" y1="454.99" x2="492.76" y2="43.05" d="M492.76,454.99L492.76,43.05"></path>
+    <path  class=" ARLHWENF_3 cls-2 " x1="354.35" y1="454.99" x2="354.35" y2="141.07" d="M354.35,454.99L354.35,141.07"></path>
+    <path  class=" ARLHWENF_4 cls-2 " x1="214.82" y1="454.99" x2="214.82" y2="254.98" d="M214.82,454.99L214.82,254.98"></path>
+    <path  class=" ARLHWENF_5 cls-2 " x1="75.28" y1="454.99" x2="75.28" y2="339.76" d="M75.28,454.99L75.28,339.76"></path>
+    <path  class=" ARLHWENF_6 cls-2 " x1="5.86" y1="8.61" x2="24.26" y2="8.61" d="M5.86,8.61L24.26,8.61"></path>
+    <path  class=" ARLHWENF_7 cls-2 " x1="4.58" y1="100.34" x2="24.26" y2="100.34" d="M4.58,100.34L24.26,100.34"></path>
+    <path  class=" ARLHWENF_8 cls-2 " x1="4.58" y1="192.07" x2="24.26" y2="192.07" d="M4.58,192.07L24.26,192.07"></path>
+    <path  class=" ARLHWENF_9 cls-2 " x1="4.39" y1="283.79" x2="24.26" y2="283.79" d="M4.39,283.79L24.26,283.79"></path>
+    <path  class=" ARLHWENF_10 cls-2 " x1="3.9" y1="375.52" x2="24.26" y2="375.52" d="M3.9,375.52L24.26,375.52"></path>
+  </g>
+<style>.ARLHWENF_0{stroke-dasharray:3523 3525;stroke-dashoffset:3524;animation:ARLHWENF_draw 2000ms ease-out 0ms forwards;}.ARLHWENF_0{stroke-dasharray:497 499;stroke-dashoffset:498;animation:ARLHWENF_draw 2000ms ease-out 100ms forwards;}.ARLHWENF_1{stroke-dasharray:579 581;stroke-dashoffset:580;animation:ARLHWENF_draw 2000ms ease-out 100ms forwards;}.ARLHWENF_2{stroke-dasharray:412 414;stroke-dashoffset:413;animation:ARLHWENF_draw 2000ms ease-out 100ms forwards;}.ARLHWENF_3{stroke-dasharray:314 316;stroke-dashoffset:315;animation:ARLHWENF_draw 2000ms ease-out 100ms forwards;}.ARLHWENF_4{stroke-dasharray:200 202;stroke-dashoffset:201;animation:ARLHWENF_draw 2000ms ease-out 100ms forwards;}.ARLHWENF_5{stroke-dasharray:115 117;stroke-dashoffset:116;animation:ARLHWENF_draw 2000ms ease-out 100ms forwards;}.ARLHWENF_6{stroke-dasharray:18 20;stroke-dashoffset:19;animation:ARLHWENF_draw 2000ms ease-out 100ms forwards;}.ARLHWENF_7{stroke-dasharray:20 22;stroke-dashoffset:21;animation:ARLHWENF_draw 2000ms ease-out 100ms forwards;}.ARLHWENF_8{stroke-dasharray:20 22;stroke-dashoffset:21;animation:ARLHWENF_draw 2000ms ease-out 100ms forwards;}.ARLHWENF_9{stroke-dasharray:20 22;stroke-dashoffset:21;animation:ARLHWENF_draw 2000ms ease-out 100ms forwards;}.ARLHWENF_10{stroke-dasharray:20 22;stroke-dashoffset:21;animation:ARLHWENF_draw 2000ms ease-out 100ms forwards;}@keyframes ARLHWENF_draw{100%{stroke-dashoffset:0;}}@keyframes ARLHWENF_fade{0%{stroke-opacity:1;}94.44444444444444%{stroke-opacity:1;}100%{stroke-opacity:0;}}</style></svg>
+

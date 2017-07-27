@@ -42,6 +42,8 @@ class Sucursales
     }
 
 
+
+
     public static function insertarAlquiler($id_propiedad, $correo_due, $correo_cli, $precio, $comision, $fecha, $dias,$id_sucursal){
         $conn=ConexionPDO::getConexion();
         $sql = 'INSERT INTO alquiler(correo_due, correo_cli, precio, comision, fecha, dias, id_propiedad, id_sucursal)
@@ -83,6 +85,37 @@ class Sucursales
     }
 
     
+    public static function subirFotos($fileUpload, $dni){
+        try{
+    	     $filePath = $_SERVER['DOCUMENT_ROOT']."/TP-labIV2017/campito/frontend/aplicacion/src/assets/fotos/propiedades/";
+             
+             //
+
+			 //$fileUpload['image']['tmp_name'];
+
+        if (isset($fileUpload)) {
+            $originalName = $fileUpload['image']['name'];
+            $ext = '.'.pathinfo($originalName, PATHINFO_EXTENSION);
+            $generatedName = $fileUpload['image']['name'];
+            $filePath = $filePath.$dni.'_'.$generatedName;
+
+            if (move_uploaded_file($fileUpload['image']['tmp_name'], $filePath)) 
+            {
+                echo json_encode(array(
+                    'status'        => true,
+                    'originalName'  => $originalName,
+                    'generatedName' => $generatedName
+                ));
+            }
+			
+        }
+		
+		 $fileUpload;//'{ "notice": {"text": "foto agregada"}';
+
+	} catch(PDOException $e){
+		return '{ "error": {"text": ' .$e->getMessage().'}';
+	}
+    }
 
 }  
 

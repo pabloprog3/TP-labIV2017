@@ -12,6 +12,7 @@ import {PerfilClienteComponent} from '../perfil-cliente/perfil-cliente.component
 import { ListaEmpleadosComponent } from '../lista-empleados/lista-empleados.component';
 import { PerfilEmpleadoComponent } from '../perfil-empleado/perfil-empleado.component';
 import { EstadisticasComponent } from '../estadisticas/estadisticas.component';
+import { AltaPropiedadComponent } from '../alta-propiedad/alta-propiedad.component';
 
 import { VerificarJWTService } from '../../servicios/verificar-jwt.service';
  
@@ -24,10 +25,12 @@ const ADMIN_ROUTES: Routes = [
         {path: 'listaEmpleados', canActivate: [VerificarJWTService], component:ListaEmpleadosComponent},
         {path: 'perfilEmpleado/:correo', canActivate: [VerificarJWTService], component: PerfilEmpleadoComponent},
         {path: 'estadisticas', canActivate: [VerificarJWTService], component:EstadisticasComponent}
+        
     ]
   },
 
-  {path: 'estadisticas', canActivate: [VerificarJWTService], component:EstadisticasComponent}
+  {path: 'estadisticas', canActivate: [VerificarJWTService], component:EstadisticasComponent },
+  { path: 'alta-propiedades', canActivate:[VerificarJWTService], component: AltaPropiedadComponent }
 
 ];
  

@@ -50,7 +50,15 @@ import { TransaccionesService } from './servicios/transacciones.service';
 import { EncargadoComponent } from './componentes/encargado/encargado.component';
 import { EstadisticasComponent } from './componentes/estadisticas/estadisticas.component';
 import { ChartsModule } from 'ng2-charts';
+//import { AltaPropiedadesComponent } from './alta-propiedades/alta-propiedades.component';
+import { AltaPropiedadComponent } from './componentes/alta-propiedad/alta-propiedad.component';
+import {ImageUploadModule} from "angular2-image-upload";
 
+import { EstadisticasService } from './servicios/estadisticas.service';
+
+ //import * as $ from 'jquery'; 
+ import { SpinnerModule } from 'angular2-spinner/dist';
+ import { SpinnerComponent } from 'angular2-spinner/dist'
 
 
 @NgModule({
@@ -72,7 +80,8 @@ import { ChartsModule } from 'ng2-charts';
     EmpleadosComponent,
     DetallePropiedadComponent,
     EncargadoComponent,
-    EstadisticasComponent
+    EstadisticasComponent,
+    AltaPropiedadComponent
   ],
   imports: [
     BrowserModule,
@@ -86,10 +95,12 @@ import { ChartsModule } from 'ng2-charts';
     FileUploadModule,
     Ng2UploaderModule,
     AuthModule,
-    ChartsModule
+    ChartsModule,
+    ImageUploadModule.forRoot(),
+    SpinnerModule.forRoot()
   
   ],
-  providers: [ListaClientesService, EmpleadosService, SucursalesService, PropiedadService, LoginService, AutService, VerificarJWTService, TransaccionesService],
+  providers: [ListaClientesService, EmpleadosService, SucursalesService, PropiedadService, LoginService, AutService, VerificarJWTService, EstadisticasService , TransaccionesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -17,27 +17,63 @@
                 <div class="form-group">
                   <label   class="control-label campo" for="">Nombre:</label>
                   <input style="text-align:center" formControlName="nombre"  type="text" style="margin:10px 0px 15px" class="form-control input-sm" id="nombre" name="nombre" placeholder="Nombre">
+                    <span *ngIf="form.controls.nombre.errors && form.controls.nombre.dirty">
+                      <div class="text text-danger" *ngIf="form.controls.nombre.errors.required" >Dato obligatorio</div>
+                      <div class="text text-danger" *ngIf="form.controls.nombre.errors.minlenght">Mínimo 4 carácteres</div>
+                      <div class="text text-danger" *ngIf="form.controls.nombre.errors.maxlenght">Máximo 35 carácteres</div>
+                      <div class="text text-danger" *ngIf="form.controls.nombre.errors.pattern">Error en el campo del formulario. Dato inválido</div>
+                    </span>
                 </div>
                  <div class="form-group">
                   <label   class="control-label campo" for="">Apellido:</label>
                   <input style="text-align:center" formControlName="apellido"  type="text" style="margin:10px 0px 15px" class="form-control input-sm" id="apellido" name="apellido" placeholder="Apellido">
+                  <span *ngIf="form.controls.apellido.errors && form.controls.apellido.dirty">
+                      <div class="text text-danger" *ngIf="form.controls.apellido.errors.required" >Dato obligatorio</div>
+                      <div class="text text-danger" *ngIf="form.controls.apellido.errors.minlenght">Mínimo 4 carácteres</div>
+                      <div class="text text-danger" *ngIf="form.controls.apellido.errors.maxlenght">Máximo 35 carácteres</div>
+                      <div class="text text-danger" *ngIf="form.controls.apellido.errors.pattern">Error en el campo del formulario. Dato inválido</div>
+                    </span>
                 </div>
                 <div class="form-group">
                   <label   class="control-label campo" for="">DNI:</label>
                   <input style="text-align:center" formControlName="dni"  type="text" style="margin:10px 0px 15px" class="form-control input-sm" id="dni" name="dni" placeholder="DNI">
+                  <span *ngIf="form.controls.dni.errors && form.controls.dni.dirty">
+                      <div class="text text-danger" *ngIf="form.controls.dni.errors.required" >Dato obligatorio</div>
+                      <div class="text text-danger" *ngIf="form.controls.dni.errors.minlenght">Mínimo 8 dígitos</div>
+                      <div class="text text-danger" *ngIf="form.controls.dni.errors.maxlenght">Máximo 10 dígitos</div>
+                      <div class="text text-danger" *ngIf="form.controls.dni.errors.pattern">Error en el campo del formulario. Dato inválido</div>
+                    </span>
                 </div>
                 <br>
                 <div class="form-group">
                   <label   class="control-label campo" for="">PASSWORD:</label>
                   <input style="text-align:center" formControlName="passw"  type="password" style="margin:10px 0px 15px" class="form-control input-sm" id="passw" name="passw" placeholder="PASSWORD">
+                  <span *ngIf="form.controls.passw.errors && form.controls.passw.dirty">
+                      <div class="text text-danger" *ngIf="form.controls.passw.errors.required" >Dato obligatorio</div>
+                      <div class="text text-danger" *ngIf="form.controls.passw.errors.minlenght">Mínimo 4 carácteres</div>
+                      <div class="text text-danger" *ngIf="form.controls.passw.errors.maxlenght">Máximo 15 carácteres</div>
+                      <div class="text text-danger" *ngIf="form.controls.passw.errors.pattern">Error en el campo del formulario. Dato inválido</div>
+                    </span>
                 </div>
                 <div class="form-group">
                   <label   class="control-label campo" for="">Telefono:</label>
                   <input style="text-align:center" formControlName="telefono"  type="text" style="margin:10px 0px 15px" class="form-control input-sm" id="telefono" name="telefono" placeholder="Telefono">
+                  <span *ngIf="form.controls.telefono.errors && form.controls.telefono.dirty">
+                      <div class="text text-danger" *ngIf="form.controls.telefono.errors.required" >Dato obligatorio</div>
+                      <div class="text text-danger" *ngIf="form.controls.telefono.errors.minlenght">Mínimo 4 dígitos</div>
+                      <div class="text text-danger" *ngIf="form.controls.telefono.errors.maxlenght">Máximo 10 dígitos</div>
+                      <div class="text text-danger" *ngIf="form.controls.telefono.errors.pattern">Error en el campo del formulario. Dato inválido</div>
+                    </span>
                 </div>
                  <div class="form-group">
                   <label   class="control-label campo" for="">Correo:</label>
                   <input style="text-align:center" formControlName="correo"  type="email" class="form-control input-sm" id="correo" name="correo" placeholder="Correo">
+                  <span *ngIf="form.controls.correo.errors && form.controls.correo.dirty">
+                      <div class="text text-danger" *ngIf="form.controls.correo.errors.required" >Dato obligatorio</div>
+                      <div class="text text-danger" *ngIf="form.controls.correo.errors.minlenght">Mínimo 4 carácteres</div>
+                      <div class="text text-danger" *ngIf="form.controls.correo.errors.maxlenght">Máximo 30 carácteres</div>
+                      <div class="text text-danger" *ngIf="form.controls.correo.errors.pattern">Error en el campo del formulario. Dato inválido</div>
+                    </span>
                 </div>
                 <button (click)="guardarCliente()" class="btn btn-success btn-block">REGISTRAR CLIENTE</button>
               </form>
@@ -82,35 +118,80 @@
                 <div class="form-group">
                   <label   class="control-label campo" for="">Nombre:</label>
                   <input style="text-align:center" formControlName="nombre"  type="text" style="margin:10px 0px 15px" class="form-control input-sm" id="nombre" name="nombre" placeholder="Nombre">
+                   <span *ngIf="formEmp.controls.nombre.errors && formEmp.controls.nombre.dirty">
+                      <div class="text text-danger" *ngIf="formEmp.controls.nombre.errors.required" >Dato obligatorio</div>
+                      <div class="text text-danger" *ngIf="formEmp.controls.nombre.errors.minlenght">Mínimo 4 carácteres</div>
+                      <div class="text text-danger" *ngIf="formEmp.controls.nombre.errors.maxlenght">Máximo 35 carácteres</div>
+                      <div class="text text-danger" *ngIf="formEmp.controls.nombre.errors.pattern">Error en el campo del formulario. Dato inválido</div>
+                    </span>
                 </div>
                  <div class="form-group">
                   <label   class="control-label campo" for="">Apellido:</label>
                   <input style="text-align:center" formControlName="apellido"  type="text" style="margin:10px 0px 15px" class="form-control input-sm" id="apellido" name="apellido" placeholder="Apellido">
+                  <span *ngIf="formEmp.controls.apellido.errors && formEmp.controls.apellido.dirty">
+                      <div class="text text-danger" *ngIf="formEmp.controls.apellido.errors.required" >Dato obligatorio</div>
+                      <div class="text text-danger" *ngIf="formEmp.controls.apellido.errors.minlenght">Mínimo 4 carácteres</div>
+                      <div class="text text-danger" *ngIf="formEmp.controls.apellido.errors.maxlenght">Máximo 35 carácteres</div>
+                      <div class="text text-danger" *ngIf="formEmp.controls.apellido.errors.pattern">Error en el campo del formulario. Dato inválido</div>
+                    </span>
                 </div>
                 <div class="form-group">
                   <label   class="control-label campo" for="">DNI:</label>
                   <input style="text-align:center" formControlName="dni"  type="text" style="margin:10px 0px 15px" class="form-control input-sm" id="dni" name="dni" placeholder="DNI">
+                  <span *ngIf="formEmp.controls.dni.errors && formEmp.controls.dni.dirty">
+                      <div class="text text-danger" *ngIf="formEmp.controls.dni.errors.required" >Dato obligatorio</div>
+                      <div class="text text-danger" *ngIf="formEmp.controls.dni.errors.minlenght">Mínimo 8 dígitos</div>
+                      <div class="text text-danger" *ngIf="formEmp.controls.dni.errors.maxlenght">Máximo 10 dígitos</div>
+                      <div class="text text-danger" *ngIf="formEmp.controls.dni.errors.pattern">Error en el campo del formulario. Dato inválido</div>
+                    </span>
                 </div>
                 <br>
                 <div class="form-group">
                   <label   class="control-label campo" for="">PASSWORD:</label>
                   <input style="text-align:center" formControlName="passw"  type="password" style="margin:10px 0px 15px" class="form-control input-sm" id="passw" name="passw" placeholder="PASSWORD">
+                  <span *ngIf="formEmp.controls.passw.errors && formEmp.controls.passw.dirty">
+                      <div class="text text-danger" *ngIf="formEmp.controls.passw.errors.required" >Dato obligatorio</div>
+                      <div class="text text-danger" *ngIf="formEmp.controls.passw.errors.minlenght">Mínimo 4 carácteres</div>
+                      <div class="text text-danger" *ngIf="formEmp.controls.passw.errors.maxlenght">Máximo 15 carácteres</div>
+                      <div class="text text-danger" *ngIf="formEmp.controls.passw.errors.pattern">Error en el campo del formulario. Dato inválido</div>
+                    </span>
                 </div>
                 <div class="form-group">
                   <label   class="control-label campo" for="">Telefono:</label>
                   <input style="text-align:center" formControlName="telefono"  type="text" style="margin:10px 0px 15px" class="form-control input-sm" id="telefono" name="telefono" placeholder="Telefono">
+                  <span *ngIf="formEmp.controls.telefono.errors && formEmp.controls.telefono.dirty">
+                      <div class="text text-danger" *ngIf="formEmp.controls.telefono.errors.required" >Dato obligatorio</div>
+                      <div class="text text-danger" *ngIf="formEmp.controls.telefono.errors.minlenght">Mínimo 4 dígitos</div>
+                      <div class="text text-danger" *ngIf="formEmp.controls.telefono.errors.maxlenght">Máximo 10 dígitos</div>
+                      <div class="text text-danger" *ngIf="formEmp.controls.telefono.errors.pattern">Error en el campo del formulario. Dato inválido</div>
+                    </span>
                 </div>
                 <div class="form-group">
                   <label   class="control-label campo" for="">Sueldo:</label>
-                  <input style="text-align:center" formControlName="sueldo"  type="text" style="margin:10px 0px 15px" class="form-control input-sm" id="telefono" name="telefono" placeholder="Sueldo">
+                  <input style="text-align:center" formControlName="sueldo"  type="number" style="margin:10px 0px 15px" class="form-control input-sm" id="telefono" name="telefono" placeholder="Sueldo">
+                  <span *ngIf="formEmp.controls.sueldo.errors && formEmp.controls.sueldo.dirty">
+                      <div class="text text-danger" *ngIf="formEmp.controls.sueldo.errors.required" >Dato obligatorio</div>
+                      <div class="text text-danger" *ngIf="formEmp.controls.sueldo.errors.minlenght">Mínimo 4 dígitos</div>
+                      <div class="text text-danger" *ngIf="formEmp.controls.sueldo.errors.maxlenght">Máximo 7 dígitos</div>
+                      <div class="text text-danger" *ngIf="formEmp.controls.sueldo.errors.pattern">Error en el campo del formulario. Dato inválido</div>
+                    </span>
                 </div>
                  <div class="form-group">
                   <label   class="control-label campo" for="">Correo:</label>
                   <input style="text-align:center" formControlName="correo"  type="email" class="form-control input-sm" id="correo" name="correo" placeholder="Correo">
+                  <span *ngIf="formEmp.controls.correo.errors && formEmp.controls.correo.dirty">
+                      <div class="text text-danger" *ngIf="formEmp.controls.correo.errors.required" >Dato obligatorio</div>
+                      <div class="text text-danger" *ngIf="formEmp.controls.correo.errors.minlenght">Mínimo 4 carácteres</div>
+                      <div class="text text-danger" *ngIf="formEmp.controls.correo.errors.maxlenght">Máximo 30 carácteres</div>
+                      <div class="text text-danger" *ngIf="formEmp.controls.correo.errors.pattern">Error en el campo del formulario. Dato inválido</div>
+                    </span>
                 </div>
                 <div class="form-group">
                   <label   class="control-label campo" for="">Fecha denacimiento:</label>
                   <input style="text-align:center" formControlName="fecha_nac"  type="date" class="form-control input-sm" id="correo" name="correo" placeholder="Correo">
+                   <span *ngIf="formEmp.controls.fecha_nac.errors && formEmp.controls.fecha_nac.dirty">
+                      <div class="text text-danger" *ngIf="form.controls.fecha_nac.errors.required" >Dato obligatorio</div>
+                   </span>
                 </div>
 
                 <button (click)="guardarEmpleado()" class="btn btn-success btn-block">REGISTRAR EMPLEADO</button>

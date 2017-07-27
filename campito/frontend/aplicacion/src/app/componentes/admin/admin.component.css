@@ -28,13 +28,16 @@
 /* The about link: 20px from the top with a green background */
 #about {
     top: 20px;
-    background-color: #4CAF50;
-
+    background-color:rgba(153, 55, 245, 0.7); /* #4CAF50;*/
+}
+#mySidenav  a:hover{
+    background-color:rgba(100, 290, 90, 1);
 }
 
 #blog {
     top: 80px;
-    background-color: #2196F3; /* Blue */
+    background-color: rgba(46, 229, 209, 0.7);/*#2196F3;*/ /* Blue */
+
 
 }
 
@@ -48,5 +51,9 @@
     top: 200px;
     background-color: #555; /* Light Black */
    
+}
+
+.texto{
+    font-family: 'Play', sans-serif;
 }
 

@@ -1,0 +1,164 @@
+
+<link href="https://fonts.googleapis.com/css?family=Architects+Daughter|Rajdhani" rel="stylesheet">
+
+<div class="container-fluid">
+  <div class="row">
+    
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <legend id="legendClient">ALTA DE PROPIEDADES </legend></div>
+          <div class="panel-body pbody">
+              
+              <form enctype="multipart/form-data" class="form-inline" role="form" [formGroup]="form" novalidate>
+               
+                <div class="form-group">
+                  <label   class="control-label campo" for="">Sucursal destino:</label>
+                  <select formControlName="id_sucursal" class="form-control" id="id_sucursal">
+                    <option class="campo" value="1" [selected]="true">Ramos Mejía</option>
+                    <option class="campo" value="2">Capital Federal</option>
+                    <option class="campo" value="3">Turdera</option>
+                  </select>
+                </div>
+                <br>
+                
+                
+                <div class="form-group">
+                  <label  class="control-label campo">Tipo de propiedad:</label>
+                  Casa&nbsp;<input class="radio" style="margin:10px 0px 15px" #valor (change)="mostrarOcultarDpto(valor.value)" type="radio" name="tipo_prop" formControlName="tipo_prop" value="casa" checked>
+                  &nbsp;&nbsp;&nbsp;&nbsp;Departamento&nbsp;<input class="radio" style="margin:10px 0px 15px" #valorOtro (change)="mostrarOcultarDpto(valorOtro.value)" type="radio" name="tipo_prop" formControlName="tipo_prop" value="departamento">
+                </div>
+
+                <div *ngIf="mostrarDatosDpto"  class="form-group">
+                  <label class="control-label campo">Número de piso:</label>
+                  <input style="margin:10px 0px 15px" type="number" class="form-control input-ms" formControlName="num_piso" placeholder="Ingrese el numero de piso">
+                  
+                  <label class="control-label campo">Departamento:</label>
+                  <input   style="margin:10px 0px 15px" type="text" class="form-control input-ms" formControlName="num_depto" placeholder="Ingrese el numero o la letra">
+        
+                </div>
+                <br>
+                <div class="form-group">
+                  <label class="control-label campo">Direccion:</label>
+                  <input  style="margin:10px 0px 15px" class="form-control input-ms" id="direccion" type="text" formControlName="direccion" placeholder="Direccion de la propiedad">
+                   <span *ngIf="form.controls.direccion.errors && form.controls.direccion.dirty" >
+                      <div class="text text-danger" *ngIf="form.controls.direccion.errors.required" >Dato obligatorio</div>
+                      <div class="text text-danger" *ngIf="form.controls.direccion.errors.minlenght">Mínimo 4 carácteres</div>
+                      <div class="text text-danger" *ngIf="form.controls.direccion.errors.maxlenght">Máximo 35 carácteres</div>
+                      <div class="text text-danger" *ngIf="form.controls.direccion.errors.pattern">Error en el campo del formulario. Dato inválido</div>
+                    </span>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label campo">Provincia:</label>
+                  <input   style="margin:10px 0px 15px" class="form-control input-ms" id="provincia" type="text" formControlName="provincia" placeholder="Provincia">
+                   <span *ngIf="form.controls.provincia.errors && form.controls.provincia.dirty">
+                      <div class="text text-danger" *ngIf="form.controls.provincia.errors.required" >Dato obligatorio</div>
+                      <div class="text text-danger" *ngIf="form.controls.provincia.errors.minlenght">Mínimo 4 carácteres</div>
+                      <div class="text text-danger" *ngIf="form.controls.provincia.errors.maxlenght">Máximo 30 carácteres</div>
+                      <div class="text text-danger" *ngIf="form.controls.provincia.errors.pattern">Error en el campo del formulario. Dato inválido</div>
+                       {{form.controls.provincia.errors | json}}
+                    </span>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label campo">Localidad:</label>
+                  <input   style="margin:10px 0px 15px" class="form-control input-ms" id="localidad" type="text" formControlName="localidad" placeholder="Localidad">
+                   <span *ngIf="form.controls.localidad.errors && form.controls.localidad.dirty">
+                      <div class="text text-danger" *ngIf="form.controls.localidad.errors.required" >Dato obligatorio</div>
+                      <div class="text text-danger" *ngIf="form.controls.localidad.errors.minlenght">Mínimo 4 carácteres</div>
+                      <div class="text text-danger" *ngIf="form.controls.localidad.errors.maxlenght">Máximo 30 carácteres</div>
+                      <div class="text text-danger" *ngIf="form.controls.localidad.errors.pattern">Error en el campo del formulario. Dato inválido</div>
+                    </span>
+                </div>
+                <br>
+                <div class="form-group">
+                  <p class="campo">¿Disponible a alquilar?</p><input #verTxt (change)="mostrarOcultarTXTAlquiler($event.target.checked ? ('sí') : 'no')" id="disponibilidad_alquiler" name="disponibilidad_alquiler" formControlName="disponibilidad_alquiler" type="checkbox" value="sí">
+                  <div  *ngIf="mostrarTxtAlquiler">
+                    <label class="campo text text-success">Ingrese precio por día</label>
+                    <input style="margin:10px 0px 15px" id="txtPrecioAlquiler" class="form-control input.sm" type="number" formControlName="precio_alquiler">
+                  </div>
+                </div> 
+                 
+                 <div class="form-group">
+                  <p class="campo">¿Disponible a vender?</p><input #verTxt2 (change)="mostrarOcultarTXTVenta($event.target.checked ? ('sí') : 'no')" id="disponibilidad_venta" name="disponibilidad_venta" formControlName="disponibilidad_venta" type="checkbox" value="sí">
+                  <div *ngIf="mostrarTxtVenta">
+                    <label class="campo text text-success">Ingrese valor  de la propiedad</label>
+                    <input style="margin:10px 0px 15px"  id="txtPrecioVenta" class="form-control input.sm"  formControlName="disponibilidad_venta" type="number" formControlName="precio_venta">
+                  </div>
+                </div>
+                <br>
+                <hr>
+                <div class="form-group"><p class="text text-primary" style="font-size:24px; text-align:center">Datos del Dueño</p>
+                  <label class="campo">Nombre:</label>
+                  <input style="margin:10px 0px 15px" class="form-control input-ms" id="nombre" type="text" formControlName="nombre_duenio" placeholder="Nombre">
+                    <span *ngIf="form.controls.nombre_duenio.errors && form.controls.nombre_duenio.dirty">
+                      <div class="text text-danger" *ngIf="form.controls.nombre_duenio.errors.required" >Dato obligatorio</div>
+                      <div class="text text-danger" *ngIf="form.controls.nombre_duenio.errors.minlenght">Mínimo 4 carácteres</div>
+                      <div class="text text-danger" *ngIf="form.controls.nombre_duenio.errors.maxlenght">Máximo 50 carácteres</div>
+                      <div class="text text-danger" *ngIf="form.controls.nombre_duenio.errors.pattern">Error en el campo del formulario. Dato inválido</div>
+                    </span>
+                  <label class="campo">Apellido:</label>
+                  <input   style="margin:10px 0px 15px" class="form-control input-ms" id="apellido" type="text" formControlName="apellido_duenio" placeholder="Apellido">
+                    <span *ngIf="form.controls.apellido_duenio.errors && form.controls.apellido_duenio.dirty">
+                     
+                      <div class="text text-danger" *ngIf="form.controls.apellido_duenio.errors.required">Dato obligatorio</div>
+                      <div class="text text-danger" *ngIf="form.controls.apellido_duenio.errors.minlenght">Mínimo 4 carácteres</div>
+                      <div class="text text-danger" *ngIf="form.controls.apellido_duenio.errors.maxlenght">Máximo 50 carácteres</div>
+                      <div class="text text-danger" *ngIf="form.controls.apellido_duenio.errors.pattern">Error en el campo del formulario. Dato inválido</div>
+                    </span>
+                  <label class="campo">DNI:</label>
+                  <input style="margin:10px 0px 15px" class="form-control input-ms" id="dni" type="text" formControlName="dni" placeholder="DNI">
+                    <span *ngIf="form.controls.dni.errors && form.controls.dni.dirty">
+                      <div class="text text-danger" *ngIf="form.controls.dni.errors.required">Dato obligatorio</div>
+                      <div class="text text-danger" *ngIf="form.controls.dni.errors.minlenght">Mínimo 8 carácteres</div>
+                      <div class="text text-danger" *ngIf="form.controls.dni.errors.maxlenght">Máximo 8 carácteres</div>
+                      <div class="text text-danger" *ngIf="form.controls.dni.errors.pattern">Error en el campo del formulario. Dato inválido</div>
+                    </span>
+                  <label class="campo">Telefono:</label>
+                  <input   style="margin:10px 0px 15px" class="form-control input-xs" id="telefono" type="text" formControlName="telefono" Telefono="Telefono Contacto" placeholder="Teléfono Contacto">
+                    <span *ngIf="form.controls.telefono.errors && form.controls.telefono.dirty">
+                      <div class="text text-danger" *ngIf="form.controls.telefono.errors.required">Dato obligatorio</div>
+                      <div class="text text-danger" *ngIf="form.controls.telefono.errors.minlenght">Mínimo 8 carácteres</div>
+                      <div class="text text-danger" *ngIf="form.controls.telefono.errors.maxlenght">Máximo 10 carácteres</div>
+                      <div class="text text-danger" *ngIf="form.controls.telefono.errors.pattern">Error en el campo del formulario. Dato inválido</div>
+                    </span>
+                  <label class="campo">Correo:</label>
+                  <input   style="margin:10px 0px 15px" class="form-control input-ms" id="correo" type="email" formControlName="correo" placeholder="Correo Contacto">
+                    <span *ngIf="form.controls.correo.errors && form.controls.correo.dirty">
+                      <div class="text text-danger" *ngIf="form.controls.correo.errors.required">Dato obligatorio</div>
+                      <div class="text text-danger" *ngIf="form.controls.correo.errors.minlenght">Mínimo 8 carácteres</div>
+                      <!--div class="text text-danger" *ngIf="form.controls.correo.errors.maxlenght">Máximo 40 carácteres</div-->
+                      <div class="text text-danger" *ngIf="form.controls.correo.errors.pattern">Máximo 40 carácteres</div>
+                    </span>
+                  <label class="campo">Fecha de Nacimiento:</label>
+                  <input style="margin:10px 0px 15px" class="form-control input-ms" type="date" formControlName="fecha_nac" >
+                   <span *ngIf="form.controls.fecha_nac.errors && form.controls.correo.dirty">
+                      <div class="text text-danger" *ngIf="form.controls.fecha_nac.errors.required">Dato obligatorio</div>
+                   </span>
+                </div>
+
+                  <br>
+                 <image-upload  
+                                 
+                                 (isPending)="disableSendButton($event)" 
+                                 [buttonCaption]="'Subir Imagénes'"
+                                 [max]="4" 
+                                 [preview]="true" 
+                                 [maxFileSize]="5004857" 
+                                 [extensions]="['jpg','png','gif','jpeg']"
+                                 (onRemove)="imageRemoved($event)"
+                                 (onFileUploadFinish)="imageUploaded($event.file)"
+                                 [fileTooLargeMessage]="'Imagen demasiado grande!'"
+                                 [dropBoxMessage]="'Arrastre aquí las imagénes'"
+                                 >
+                  </image-upload> <small style="font-size: 15px;" class="text text-warning">Máximo permitido: 4 fotos</small>
+
+                  <br><br>
+                <button (click)="guardarPropiedad()" class="btn btn-success btn-block" [disabled]="mostrarBtnReg">REGISTRAR NUEVA PROPIEDAD</button>
+                <span *ngIf="mostrarSpan"  class="text text-danger">Necesita cargar al menos 1 imagen de la propiedad</span>
+              </form>
+              
+              <br>
+              <button (click)="volver()" class="btn btn-info btn-block">CANCELAR OPERACION</button>
+    

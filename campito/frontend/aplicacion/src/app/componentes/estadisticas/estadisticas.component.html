@@ -29,8 +29,32 @@
 </div>
 
 
-<h3 class="text text-primary">Comisiones Obtenidas por Sucursal <small class="text text-success">en 2017</small></h3>
-<div>
+<h3 class="text text-primary">Comisiones obtenidas por sucursal en {{categoria}} de:  <strong class="text text-success">{{anio}}</strong></h3>
+<div style="text-align: center">
+    <input (change)="anioAlquileres($event.target.value)" type="radio"  name="categoria"    ><label class="text text-info" >Alquileres</label> 
+    <input (change)="anioVentas($event.target.value)" type="radio"  name="categoria"  checked="checked"><label class="text text-info">Ventas</label> 
+    <input (change)="totalVentas($event.target.value)" type="radio"  name="categoria"  ><label class="text text-info">Total de Alquileres</label>
+    <input (change)="totalAlquileres($event.target.value)" type="radio"  name="categoria"  ><label class="text text-info">Total de Ventas</label>
+<br>
+
+<div class="row">
+  <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12 col-md-offset-4 col-sm-offset-4 col-lg-offset-4">
+    <select (change)="mesAlquileres($event.target.value)" class="form-control" >
+      <option  *ngFor="let item of aniosAlquileresFiltrados"  value="{{item}}">{{item}}</option>
+    </select>
+  </div>
+</div>
+
+<div *ngIf="ocultarCkbox" >
+    <div  class="checkbox" *ngFor="let item of mesesAlquileresFiltrados">
+      <label for="">
+        <input (change)="validarMeses($event.target.value)" type="checkbox" name="meses"   value="{{item}}" checked="checked">
+        {{item}}
+      </label>
+    </div>
+</div>
+
+
   <div style="display: block">
     <canvas baseChart
             [datasets]="barChartData"

@@ -22,13 +22,8 @@ export class ListaClientesService {
       return this.http.get(this.apiUrl).map(this.getDatos).catch(this.error);
   }
 
- /* getClienteCorreo(correo: string): Observable<Cliente>{
-    //console.log('correo en lista-clientes.service.ts: ', correo); LLEGA OK
-    return this.http.get(this.apiUrl + '/' + correo).map(this.getDatos).catch(this.error);
-  } */
 
   getClienteCorreo(correo: string): Observable<Cliente>{
-    //console.log('correo en lista-clientes.service.ts: ', correo);  //LLEGA OK
     return this.http.get(this.apiUrl + '/' + correo)
         .map(r => r.json())
         .catch(this.error);

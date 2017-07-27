@@ -20,12 +20,13 @@ export class LoginComponent implements OnInit {
     error: string;
     user: Usuario = new Usuario('','');
     jwt;
-
+    working:boolean;
   constructor(private router: Router, private auth: AutService, public authHttp: AuthHttp, private servicio: LoginService){} 
 
   ngOnInit() {
     // reset login status
     this.auth.logOut();
+    this.working = false;
   }
 
    btnAdministrador(){
@@ -50,37 +51,45 @@ export class LoginComponent implements OnInit {
   
   loginUsuario(){
     //console.log('usuario:', this.user)
+    this.working = true;
       this.servicio.postUser(this.user).subscribe(
           data => {
-            localStorage.setItem('token', data.token)
+            if(data.token!='usuario invalido'){
+              localStorage.setItem('token', data.token)
             
-            this.auth = new AutService(this.router);
-            let perfil = this.auth.getToken().data[0]['perfil'];
-            //console.log('perfil: ', perfil);
+                this.auth = new AutService(this.router);
+                let perfil = this.auth.getToken().data[0]['perfil'];
+                //console.log('perfil: ', perfil);
 
-            switch (perfil) {
-              case 'administrador':
+              switch (perfil) {
+                  case 'administrador':
                       this.router.navigate(['/admin']);
-                break;
+                  break;
 
-              case 'cliente':
-                      this.router.navigate(['/cliente']);
-                break;
+                  case 'cliente':
+                        this.router.navigate(['/cliente']);
+                  break;
 
-                case 'empleado':
+                  case 'empleado':
                       this.router.navigate(['/empleado']);
-                break;
+                  break;
 
-                case 'encargado':
+                  case 'encargado':
                       this.router.navigate(['/encargado']);
-                break;
+                   break;
             
-              default:
-                this.router.navigate(['/login']);
-                break;
+                  default:
+                        this.router.navigate(['/login']);
+                  break;
+              }
+            
+            }else{
+              this.error = "Datos incorrectos";
+              this.working = false;
             }
-
-        });
+          
+      });
+        
   }
 
 

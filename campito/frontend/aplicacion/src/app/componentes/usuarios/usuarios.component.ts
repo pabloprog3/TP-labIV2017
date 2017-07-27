@@ -86,26 +86,52 @@ export class UsuariosComponent implements OnInit {
     this.formEmp = this.fbe.group({
         id_sucursal: '',
         tipo_emp: '',
-        nombre: '',
-        apellido: '',
-        dni: '',
+        nombre: ['', Validators.compose([
+              Validators.required, Validators.pattern('[A-Za-z ]+')
+        ])],
+        apellido: ['', Validators.compose([
+              Validators.required, Validators.maxLength(35), Validators.minLength(4),Validators.pattern('[A-Za-z ]+')
+        ])],
+        dni: ['', Validators.compose([
+              Validators.required, Validators.maxLength(10), Validators.minLength(8),Validators.pattern('[0-9]+')
+        ])],
         foto: '',
-        fecha_nac: '',
-        sueldo: '',
-        passw: '',
-        telefono: '',
-        correo:''
+        fecha_nac: ['', Validators.required],
+        sueldo: ['', Validators.compose([
+              Validators.required, Validators.maxLength(7), Validators.minLength(4)
+        ])],
+        passw: ['', Validators.compose([
+              Validators.required, Validators.maxLength(15), Validators.minLength(4),Validators.pattern('[A-Za-z]+||[0-9]+')
+        ])],
+        telefono: ['', Validators.compose([
+              Validators.required, Validators.maxLength(10), Validators.minLength(8),Validators.pattern('[0-9]+')
+        ])],
+        correo:['', Validators.compose([
+              Validators.required, Validators.maxLength(30), Validators.minLength(8), Validators.pattern('[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]+')
+        ])]
     });
   }
 
   crearControles(){
     this.form = this.fb.group({
-        nombre: '',
-        apellido: '',
-        dni: '',
-        passw: '',
-        telefono: '',
-        correo: ''
+        nombre: ['', Validators.compose([
+              Validators.required, Validators.maxLength(35), Validators.minLength(4),Validators.pattern('[A-Za-z]+')
+        ])],
+        apellido: ['', Validators.compose([
+              Validators.required, Validators.maxLength(35), Validators.minLength(4),Validators.pattern('[A-Za-z]+')
+        ])],
+        dni: ['', Validators.compose([
+              Validators.required, Validators.maxLength(10), Validators.minLength(8),Validators.pattern('[0-9]+')
+        ])],
+        passw: ['', Validators.compose([
+              Validators.required, Validators.maxLength(15), Validators.minLength(4),Validators.pattern('[A-Za-z]+||[0-9]+')
+        ])],
+        telefono: ['', Validators.compose([
+              Validators.required, Validators.maxLength(10), Validators.minLength(8),Validators.pattern('[0-9]+')
+        ])],
+        correo: ['', Validators.compose([
+              Validators.required, Validators.maxLength(30), Validators.minLength(8), Validators.pattern('[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}')
+        ])]
     });
   }
   
@@ -151,6 +177,15 @@ export class UsuariosComponent implements OnInit {
 
   
   guardarCliente(){
+    let nombre=document.getElementById('nombre');
+    let apellido=document.getElementById('apellido');
+    let dni=document.getElementById('dni');
+    let passw=document.getElementById('passw');
+    let telefono=document.getElementById('telefono');
+    let correo=document.getElementById('correo');
+    
+    console.log('probando console.log', nombre);
+
     this.servicio.postCliente(this.form.value)
         .subscribe(
          // resp => console.log(resp),

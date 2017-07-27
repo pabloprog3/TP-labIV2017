@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import  'rxjs/add/observable/throw';
 import  'rxjs/add/operator/catch';
 import  'rxjs/add/operator/map';
-import { Cliente } from '../clases/Cliente';
+
 import 'rxjs/add/operator/toPromise';
 import { Usuario } from '../clases/Usuario';
 
@@ -18,7 +18,7 @@ export class LoginService {
    headers = new Headers({ 'Content-Type': 'application/json' });
    options = new RequestOptions( {method: RequestMethod.Post, headers: this.headers });
 
-  postUser(user: any): Observable<any>{
+  postUser(user: Usuario): Observable<any>{
 
       return this.http.post(this.apiUrl, JSON.stringify(user), this.options).map(this.getDatos).catch(this.error);
   }

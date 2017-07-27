@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Request, Headers,RequestOptions } from '@angular/http';
+import { Http, Response, Request, Headers,RequestOptions, RequestMethod } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import  'rxjs/add/observable/throw';
 import  'rxjs/add/operator/catch';
@@ -10,6 +10,9 @@ import 'rxjs/add/operator/toPromise';
 export class PropiedadService {
 
 private apiUrl: string = 'http://localhost:8080/TP-labIV2017/campito/backend/ws/apirest/public/index.php/propiedades';
+
+   headers = new Headers({ 'Content-Type': 'application/json' });
+   options = new RequestOptions( {method: RequestMethod.Post, headers: this.headers });
 
   constructor(private http: Http) { }
 
@@ -22,6 +25,9 @@ getPropiedadId(id): Observable<Object>{
     return this.http.get(this.apiUrl + '/' + id).map(this.getDatos).catch(this.error);
     }
 
+postPropiedad(propiedad): Observable<any>{
+  return this.http.post(this.apiUrl + '/agregar', JSON.stringify(propiedad), this.options).map(this.getDatos).catch(this.error);
+}
 
 
 
@@ -37,13 +43,6 @@ private getDatos(data: Response){
     return Observable.throw(msg);
   }
 
-
-
-  private getOptions(): RequestOptions{
-    let auth = new Headers({ 'Authorization': 'Bearer' + localStorage.getItem('token') });
-    let options = new RequestOptions({headers: auth});
-    return options;
-  }
 
 
 }

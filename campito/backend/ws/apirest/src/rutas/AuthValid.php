@@ -27,7 +27,7 @@ class AuthValidate{
            else{
               return 'password invalid';
            }
-        } 
+        }
         
         $empleadoEncontrado = json_decode(Empleado::TraerPorId($correo));
         if($empleadoEncontrado){

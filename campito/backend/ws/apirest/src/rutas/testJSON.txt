@@ -1,0 +1,29 @@
+{
+
+"id_sucursal" : "1",
+"tipo_prop" : "casa",
+"num_piso" : "3",
+"num_depto" : "a",
+"direccion" : "aaaccc",
+"provincia" : "aaaddd",
+"localidad" : "aaaaeee",
+"disponibilidad_alquiler" : "sí",
+"disponibilidad_venta" : "no",
+"precio_alquiler" : "234",
+"precio_venta" : "0",
+"foto1" : "aaa111",
+"foto2" : "aaa112",
+"foto3" : "aaa113",
+"foto4" : "aaaa114",
+"nombre_duenio" : "aaaaaffff",
+"apellido_duenio" : "aaaahhhh",
+"dni" : "3122132",
+"telefono" : "232312",
+"correo" : "dadasd@hotmil.com",
+"fecha_nac" : "1991-03-03"
+
+}
+
+
+
+ 
