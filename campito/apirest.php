@@ -1,18 +1,10 @@
-﻿<?php
-
+<?php
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
 
-$app = new \Slim\App([
-    "settings"  => [
-        "addContentLengthHeader" => false,
-	"displayErrorDetails" => true
-    ]
-]);
-
-
+$app = new \Slim\App;
 
 require_once $_SERVER['DOCUMENT_ROOT']."/TP-labIV2017/campito/backend/ws/apirest/src/model/cliente.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/TP-labIV2017/campito/backend/ws/apirest/src/model/empleado.php";
@@ -34,15 +26,16 @@ $app->add(function ($req, $res, $next) {
             ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
-$app->post("/auth[/]", function (Request $request, Response $response) use($app)
+$app->post("/auth", function (Request $request, Response $response) use($app)
 {
 	$correo = $request->getParam('correo');
 	$passw = $request->getParam('passw');
 
+
 	//devolver token
 	$auth = new AuthValidate();
 	$token=array('token'=> $auth->getToken($correo, $passw));
-	
+
 	return json_encode($token);
 });
 
@@ -50,7 +43,7 @@ $app->post("/auth[/]", function (Request $request, Response $response) use($app)
 
 
 //-----------------------------------------RUTAS DE CLIENTES--------------------------------------
-$app->get("/clientes[/]", function (Request $request, Response $response) use($app)
+$app->get("/clientes", function (Request $request, Response $response) use($app)
 {
 	// RUTA: http://localhost:8080/TP-labIV2017/campito/backend/ws/apirest/public/index.php/clientes
     return $clientesJSON = Cliente::TraerTodos();
@@ -106,7 +99,7 @@ $app->delete("/clientes/eliminar/{correo}", function(Request $request, Response 
 
 //------------------------------------------------RUTAS DE EMPLEADOS------------------------------------------
 
-$app->get("/empleados[/]", function (Request $request, Response $response) use($app)
+$app->get("/empleados", function (Request $request, Response $response) use($app)
 {
    return $empleadosJSON = Empleado::TraerTodos();
 });
@@ -120,14 +113,12 @@ $app->get("/empleados/{correo}", function (Request $request, Response $response)
 
 
 $app->post("/empleados/agregar", function(Request $request, Response $response) use($app){
-
 	$id_sucursal = $request->getParam('id_sucursal');
 	$tipo_emp = $request->getParam('tipo_emp');
 	$nombre = $request->getParam('nombre');
 	$apellido = $request->getParam('apellido');
 	$dni = $request->getParam('dni');
-	$foto = $_FILES['file']; //$request->getUploadedFiles();
-	
+	$foto = $request->getParam('foto');
 	$fecha_nac = $request->getParam('fecha_nac');
 	$sueldo = $request->getParam('sueldo') * 0.83; //aportes jubilatorios + impuesto a las ganancias + obra social=0.17%
 	$passw = $request->getParam('passw');
@@ -135,59 +126,17 @@ $app->post("/empleados/agregar", function(Request $request, Response $response) 
  	$correo = $request->getParam('correo');
 
 	try{
-		if (empty($foto)) {
-			$archivo = fopen($_SERVER['DOCUMENT_ROOT']."/TP-labIV2017/campito/backend/ws/apirest/src/logs/".'logFoto.txt', 'a');
-			fwrite($archivo, "Archivo vacio: ");
-			fwrite($archivo, var_dump($_POST));
-			fwrite($archivo, "\r\n");
-			fclose($archivo);
-		} else {
-			$archivo = fopen($_SERVER['DOCUMENT_ROOT']."/TP-labIV2017/campito/backend/ws/apirest/src/logs/".'logFoto.txt', 'a');
-			fwrite($archivo, "\r\n");
-			fwrite($archivo, "Archivo recibido");
-			fwrite($archivo, var_dump($_POST));
-			fwrite($archivo, $nombre);
-			fwrite($archivo, "\r\n");
-			fclose($archivo);
-		}
-		
-		    	 
-		
-		//$fotoFile = $foto['archivo'];
-		//move_uploaded_file($foto, './koala.jpg');
-
-	
-    	$empleadosJSON = Empleado::Insertar($id_sucursal, $tipo_emp, $nombre, $apellido, $dni, $fotoBlob, $fecha_nac, $sueldo, $passw, $telefono, $correo);
-		return var_dump($foto);
+    	$empleadosJSON = Empleado::Insertar($id_sucursal, $tipo_emp, $nombre, $apellido, $dni, $foto, $fecha_nac, $sueldo, $passw, $telefono, $correo);
 		echo '{ "notice": {"text": "Empleado agregado"}';
 	} catch(PDOException $e){
-		$archivo = fopen($_SERVER['DOCUMENT_ROOT']."/TP-labIV2017/campito/backend/ws/apirest/src/logs/".'logEmpleadoAgregar.txt', 'a');
-		$date = 
-		fwrite($archivo, 'Generado el: '.date("F j, Y, g:i a"));
-		fwrite($archivo, $e->getMessage());
-		fwrite($archivo, "\r\n");
-		fclose($archivo);
 		echo '{ "error": {"text": ' .$e->getMessage().'}';
 	}
-
-
 });
 
 $app->put("/empleados/actualizar/{correo}", function(Request $request, Response $response) use($app){
     $correo = $request->getAttribute('correo');
-
-    $nombre = $request->getParam('nombre');
-	$apellido = $request->getParam('apellido');
-	$dni = $request->getParam('dni');
-	$sueldo = $request->getParam('sueldo');
-	$telefono = $request->getParam('telefono');
-	$fecha_nac = $request->getParam('fecha_nac');
-	$id_sucursal = $request->getParam('id_sucursal');
-	$tipo_empleado = $request->getParam('perfil');
-	$foto = 'no';
-
 	
-    $clienteJSON = Empleado::Actualizar($id_sucursal, $tipo_empleado, $nombre, $apellido, $dni, $foto, $fecha_nac, $sueldo, $telefono, $correo);
+    $clienteJSON = Empleado::Actualizar($id_sucursal, $tipo_empleado, $nombre, $apellido, $dni, $foto, $fecha_nac, $sueldo, $passw, $telefono, $correo);
 });
 
 $app->delete("/empleados/eliminar/{correo}", function(Request $request, Response $response) use($app){
@@ -216,7 +165,7 @@ $app->get("/propiedades/{id}", function (Request $request, Response $response) u
     return $propiedadesJSON = Sucursales::traerPropiedadId($id);
 });
 
-$app->get("/propiedades[/]", function (Request $request, Response $response) use($app)
+$app->get("/propiedades", function (Request $request, Response $response) use($app)
 {
     return $propiedadesJSON = Sucursales::traerTodosPropiedades();
 });
@@ -266,12 +215,13 @@ $app->post("/propiedades/agregar", function(Request $request, Response $response
 	$telefono = $request->getParam('telefono');
  	$correo = $request->getParam('correo');
 
+	 //move_uploaded_file($foto1['name'], '../../../assets/fotos/propiedades/');
 	try{
-
-		$bd='u494222080_campi';
-	    $user='u494222080_pablo';
-	    $passw='7eJhs0eI8ZZS';
-		
+		$fileUpload=$_FILES;
+		Sucursales::subirFotos($fileUpload, $dni);
+		$bd='campito';
+	    $user='root';
+	    $passw='';
         $conn = new PDO('mysql:host=localhost;dbname='.$bd.';charset=utf8', $user, $passw);
         
         $sql = 'INSERT INTO propiedad (id_sucursal, tipo_prop, num_piso, num_depto, direccion, provincia, localidad, disponibilidad_alquiler, 

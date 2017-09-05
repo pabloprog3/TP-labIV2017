@@ -5,8 +5,6 @@ import { Location } from "@angular/common";
 import { PropiedadService } from '../../servicios/propiedad.service';
 
 
-declare var jQuery:any;
-declare var $:any;
 
 @Component({
   selector: 'app-alta-propiedad',
@@ -52,13 +50,13 @@ export class AltaPropiedadComponent implements OnInit {
         num_piso: 1,
         num_depto: '',
         direccion: ['', Validators.compose([
-              Validators.required, Validators.pattern('[a-zA-Z0-9 ]+'), Validators.minLength(5), Validators.maxLength(30)
+              Validators.required, Validators.pattern('[a-zA-Z0-9 ].+'), Validators.minLength(5), Validators.maxLength(30)
         ])],
         provincia: ['', Validators.compose([
               Validators.required, Validators.pattern("[A-Za-z ]+")
         ])],
         localidad: ['', Validators.compose([
-              Validators.required, Validators.maxLength(30),Validators.pattern('[A-Za-z]+')
+              Validators.required, Validators.maxLength(30),Validators.pattern('[A-Za-z ]+')
         ])],
         disponibilidad_alquiler:'',
         precio_alquiler:0,
@@ -81,7 +79,7 @@ export class AltaPropiedadComponent implements OnInit {
               Validators.required, Validators.maxLength(10),Validators.minLength(8), Validators.pattern('[0-9]+')
         ])],
         correo: ['',Validators.compose([
-              Validators.required, Validators.minLength(5), Validators.maxLength(40), Validators.pattern('[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]')
+              Validators.required, Validators.minLength(5), Validators.maxLength(60), Validators.pattern('[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]')
         ])],
         fecha_nac: ['', Validators.compose([
               Validators.required
@@ -91,25 +89,6 @@ export class AltaPropiedadComponent implements OnInit {
   
 
   activarBotonReg(){
-    /*let direccion=$('#direccion').val();
-    let provincia=$('#provincia').val();
-    let localidad=$('#localidad').val();
-    let precioAlquiler=$('#txtPrecioAlquiler').val();
-    let precioVenta=$('#txtPrecioVenta').val();
-    let nombre=$('#nombre').val();
-    let apellido=$('#apellido').val();
-    let dni=$('#dni').val();
-    let telefono=$('#telefono').val();
-    let correo=$('#correo').val();
-    console.log('usando jquery');
-    console.log('direccion', direccion);
-
-    if(direccion!='' && provincia!='' && localidad!='' && (precioAlquiler!='' || precioVenta!='') && nombre!='' && apellido!='' && dni!=''
-       && telefono !='' && correo != ''){
-         this.mostrarBtnReg = false;
-       }else{
-         this.mostrarBtnReg = true;
-       }*/
 
   }
 
@@ -147,26 +126,29 @@ disableSendButton($event){
 
 }
 
-imageUploaded($event){
-  console.log($event);
+imageUploaded(event){
+  //console.log(event);
+
   this.habilitar = true;
+  this.mostrarSpan = false;
   if(this.foto1==''){
-    this.foto1 =$event;//this.path + this.dni + '_' + $event.file.name;
+    this.foto1 =event;//this.path + this.dni + '_' + $event.file.name;
+    console.log('file: ', this.foto1);
     this.form.patchValue({
       foto1: this.foto1
     })
   }else if(this.foto2==''){
-    this.foto2 =  this.path + this.dni + '_' + $event.file.name;
+    this.foto2 =  event;//this.path + this.dni + '_' + event.file.name;
     this.form.patchValue({
       foto2: this.foto2
     })     
   }else if (this.foto3=='') {
-    this.foto3 =  this.path + this.dni + '_' + $event.file.name;
+    this.foto3 = event; // this.path + this.dni + '_' + event.file.name;
     this.form.patchValue({
       foto3: this.foto3
     })
   }else{
-    this.foto4 =  this.path + this.dni + '_' + $event.file.name;
+    this.foto4 = event; // this.path + this.dni + '_' + event.file.name;
     this.form.patchValue({
       foto4: this.foto4
     })
@@ -180,10 +162,6 @@ imageRemoved($event){
 }
 
 guardarPropiedad(){
-  /*if(!this.verificarCheckboxVenta){
-    alert('Debe seleccionar al menos 1 casilla de disponibilidad para venta y/o alquiler')
-  }else{*/
-
        if (!this.habilitar) {
            this.mostrarSpan = true;
       }else{
@@ -202,41 +180,6 @@ volver(){
   this.activarBotonReg();
   this.location.back();
 }
-
-/*
-private verificarCheckboxAlquiler(){
-var suma:number = 0;
-var ckbox = document.getElementById('disponibilidad_alquiler'); 
-    
-    if(ckbox.checked == true){
-    suma++;
-    }
-
- if(suma == 0){
- alert('debe seleccionar una casilla');
- return false;
- }else{
-  alert(suma);
- }
- 
-}
-
-verificarCheckboxVenta(){
-var suma:number = 0;
-var ckbox = document.getElementById('disponibilidad_venta'); 
-
-    if(ckbox.checked == true){
-    suma++;
-}
- 
-if((suma == 0) && (this.verificarCheckboxAlquiler() == false)){
-  alert('debe seleccionar al menos una casilla de venta y/o alquiler');
-  return false;
-  }else{
-    return true;
-  }
- 
-}*/
 
 
 

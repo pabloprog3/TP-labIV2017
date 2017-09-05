@@ -11,9 +11,9 @@
         <div  class="row">
             <div  class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                 <div id="mySidenav" class="sidenav">
-                  <a class="texto" id="about" [routerLink]="['/usuarios']">Usuarios</a>
-                  <a class="texto" id="blog" [routerLink]="['/alta-propiedades']">Propiedades </a>                       
-                  <a class="texto"  [routerLink]="['/estadisticas']" id="projects">Estadisticas</a>
+                  <a *ngIf="perfil=='admin'"  class="texto" id="about" [routerLink]="['/usuarios']">Usuarios</a>
+                  <a *ngIf="perfil=='admin'" class="texto" id="blog" [routerLink]="['/alta-propiedades']">Propiedades </a>                       
+                  <a *ngIf="perfil=='admin'" class="texto"  [routerLink]="['/estadisticas']" id="projects">Estadisticas</a>
                   <a class="texto" id="contact" [routerLink]="['/login']" (click)="salir()">Salir</a>
                 </div>
             </div>

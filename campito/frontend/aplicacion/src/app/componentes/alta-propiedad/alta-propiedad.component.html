@@ -15,7 +15,7 @@
                 <div class="form-group">
                   <label   class="control-label campo" for="">Sucursal destino:</label>
                   <select formControlName="id_sucursal" class="form-control" id="id_sucursal">
-                    <option class="campo" value="1" [selected]="true">Ramos Mejía</option>
+                    <option class="campo" value="1" [selected]=true>Ramos Mejía</option>
                     <option class="campo" value="2">Capital Federal</option>
                     <option class="campo" value="3">Turdera</option>
                   </select>
@@ -129,7 +129,7 @@
                       <div class="text text-danger" *ngIf="form.controls.correo.errors.required">Dato obligatorio</div>
                       <div class="text text-danger" *ngIf="form.controls.correo.errors.minlenght">Mínimo 8 carácteres</div>
                       <!--div class="text text-danger" *ngIf="form.controls.correo.errors.maxlenght">Máximo 40 carácteres</div-->
-                      <div class="text text-danger" *ngIf="form.controls.correo.errors.pattern">Máximo 40 carácteres</div>
+                      <!--div class="text text-danger" *ngIf="form.controls.correo.errors.pattern">Máximo 60 carácteres</div-->
                     </span>
                   <label class="campo">Fecha de Nacimiento:</label>
                   <input style="margin:10px 0px 15px" class="form-control input-ms" type="date" formControlName="fecha_nac" >
@@ -155,7 +155,7 @@
                   </image-upload> <small style="font-size: 15px;" class="text text-warning">Máximo permitido: 4 fotos</small>
 
                   <br><br>
-                <button (click)="guardarPropiedad()" class="btn btn-success btn-block" [disabled]="mostrarBtnReg">REGISTRAR NUEVA PROPIEDAD</button>
+                <button type="button" (click)="guardarPropiedad()" class="btn btn-success btn-block" [disabled]="mostrarBtnReg">REGISTRAR NUEVA PROPIEDAD</button>
                 <span *ngIf="mostrarSpan"  class="text text-danger">Necesita cargar al menos 1 imagen de la propiedad</span>
               </form>
               

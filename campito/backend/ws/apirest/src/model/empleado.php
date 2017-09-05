@@ -34,7 +34,7 @@ class Empleado extends Persona
         $sql = 'select * from empleados where estado = "a"';
         $dbQuery = $conn->prepare($sql);
 	    $dbQuery->execute();
-	    $empleados = $dbQuery->fetchAll(PDO::FETCH_OBJ); 
+	    $empleados = $dbQuery->fetchAll(PDO::FETCH_ASSOC); 
 
 	    $conn = null;
         return json_encode($empleados);
@@ -45,10 +45,15 @@ class Empleado extends Persona
         //$dbPDO = new ConexionPDO();
 	    //$conn = $dbPDO->getConexion();
         //$conn=ConexionPDO::getConexion();
-      	 $bd='campito';
-	     $user='root';
-	     $passw='';
-        $conn = new PDO('mysql:host=localhost;dbname='.$bd.';charset=utf8', $user, $passw);
+         
+         $bd='u494222080_campi';
+	     $user='u494222080_pablo';//'root';
+	     $passw='7eJhs0eI8ZZS';
+         //$bd='id2237525_campito';
+         //$user='id2237525_pablo';
+         //$passw='pablo';
+        
+         $conn = new PDO('mysql:host=localhost;dbname='.$bd.';charset=utf8', $user, $passw);
         //var_dump($conn);
         //$sql = 'select * from empleados where correo=:correo';
 	    $dbQuery = $conn->prepare('select * from empleados where correo = :correo');
@@ -64,10 +69,14 @@ class Empleado extends Persona
     {
         //$dbPDO = new ConexionPDO();
 	    //$conn = $dbPDO->getConexion();
-         $bd='campito';
-	     $user='root';
-	     $passw='';
-        $conn = new PDO('mysql:host=localhost;dbname='.$bd.';charset=utf8', $user, $passw);
+         $bd='u494222080_campi';
+	 $user='u494222080_pablo';//'root';
+	 $password='7eJhs0eI8ZZS';
+         
+         /*$bd='id2237525_campito';
+         $user='id2237525_pablo';
+         $passw='pablo';*/
+        $conn = new PDO('mysql:host=localhost;dbname='.$bd.';charset=utf8', $user, $password);
         
         $sql = 'INSERT INTO empleados (id_sucursal, perfil, nombre, apellido, dni, foto, fecha_nac, sueldo, passw, telefono, correo)
                 VALUES (:id_sucursal, :perfil, :nombre, :apellido, :dni, :foto, :fecha_nac, :sueldo, :passw, :telefono, :correo)';
@@ -101,10 +110,10 @@ class Empleado extends Persona
 	    
     }
 
-    public static function Actualizar($id_suc, $tipo_empleado, $nombre, $apellido, $dni, $foto, $fecha_nac, $sueldo, $passw, $telefono, $correo){
+    public static function Actualizar($id_suc, $tipo_empleado, $nombre, $apellido, $dni, $foto, $fecha_nac, $sueldo, $telefono, $correo){
         $dbPDO = new ConexionPDO();
 	    $conn = $dbPDO->getConexion();
-	    $sql = 'update empleados set id_sucursal=?, perfil=?, nombre=?, apellido=?, dni=?, foto=?, fecha_nac=?, sueldo=?, passw=?, telefono=?, correo=?';
+	    $sql = 'update empleados set id_sucursal=?, perfil=?, nombre=?, apellido=?, dni=?, foto=?, fecha_nac=?, sueldo=?, telefono=?, correo=? where correo=?';
         $dbQuery = $conn->prepare($sql);
 
         $dbQuery->bindParam(1,$id_suc);
@@ -114,19 +123,16 @@ class Empleado extends Persona
         $dbQuery->bindParam(5,$dni);
         $dbQuery->bindParam(6,$foto);
         $dbQuery->bindParam(7,$fecha_nac);
-        $dbQuery->bindParam(8,$id);
-        $dbQuery->bindParam(9,$id);
-        $dbQuery->bindParam(10,$id);
-        $dbQuery->bindParam(11,$id);
+        $dbQuery->bindParam(8,$sueldo);
+        $dbQuery->bindParam(9,$telefono);
+        $dbQuery->bindParam(10,$correo);
+        $dbQuery->bindParam(11,$correo);
 
         $dbQuery->execute();
         
         $conn = null;
     }
 
-    public static function SubirFoto(){
-        
-    }
 
     public function verificarLogin($correo, $passw){
 

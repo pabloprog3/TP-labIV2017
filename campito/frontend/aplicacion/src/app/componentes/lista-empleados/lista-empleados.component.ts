@@ -18,6 +18,7 @@ export class ListaEmpleadosComponent implements OnInit {
   constructor(private servicio: EmpleadosService, private router: Router) { 
     this.servicio.getEmpleados().subscribe(data => { 
       this.lista = data;
+      //this.lista['foto'] = btoa(data['foto']);
     });
   }
 
@@ -50,8 +51,11 @@ exportarCSV(){
     showTitle: false,
     useBom: false
   };
- 
-  new Angular2Csv(data, 'Reporte_Empleados', options);
+
+  if(data)
+    new Angular2Csv(data, 'Lista_Empleados', options);
+  else
+    console.log('no: ', data);
 }
 
 }

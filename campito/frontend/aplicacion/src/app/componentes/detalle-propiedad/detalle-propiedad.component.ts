@@ -74,7 +74,7 @@ export class DetallePropiedadComponent implements OnInit {
           dias: this.dias_alquiler,
           id_sucursal: this.propiedad['id_sucursal']
        });
-    console.log(this.form.value);
+    //console.log(this.form.value);
     this.servicioTrx.postAlquiler(this.form.value).subscribe();
     this.form.reset();
     

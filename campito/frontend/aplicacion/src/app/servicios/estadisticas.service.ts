@@ -11,8 +11,8 @@ export class EstadisticasService {
 
   constructor(private http:Http) { }
 
-  private apiUrl_alquiler: string = 'http://localhost:8080/TP-labIV2017/campito/backend/ws/apirest/public/index.php/estadisticas/alquileres';
-  private apiUrl_venta: string = 'http://localhost:8080/TP-labIV2017/campito/backend/ws/apirest/public/index.php/estadisticas/ventas';
+  private apiUrl_alquiler: string = /*'https://pabloutn.000webhostapp.com/TP-labIV2017/campito/backend/ws/apirest/public/index.php/estadisticas/alquileres/';*/ 'http://pabloutn.esy.es/TP-labIV2017/campito/backend/ws/apirest/public/index.php/estadisticas/alquileres/';
+  private apiUrl_venta: string = /*'https://pabloutn.000webhostapp.com/TP-labIV2017/campito/backend/ws/apirest/public/index.php/estadisticas/ventas/';*/ 'http://pabloutn.esy.es/TP-labIV2017/campito/backend/ws/apirest/public/index.php/estadisticas/ventas/';
 
 
    getAlquileresTotal(): Observable<any>{

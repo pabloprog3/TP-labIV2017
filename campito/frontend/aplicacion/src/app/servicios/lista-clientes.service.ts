@@ -10,7 +10,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class ListaClientesService {
   
-  private apiUrl: string = 'http://localhost:8080/TP-labIV2017/campito/backend/ws/apirest/public/index.php/clientes';
+  private apiUrl: string = /*'https://pabloutn.000webhostapp.com/TP-labIV2017/campito/backend/ws/apirest/public/index.php/clientes/';*/ 'http://pabloutn.esy.es/TP-labIV2017/campito/backend/ws/apirest/public/index.php/clientes/';//'http://localhost:8080/TP-labIV2017/campito/backend/ws/apirest/public/index.php/clientes';
   private cliente: Object;
   
   constructor(private http: Http) { }
@@ -24,23 +24,24 @@ export class ListaClientesService {
 
 
   getClienteCorreo(correo: string): Observable<Cliente>{
-    return this.http.get(this.apiUrl + '/' + correo)
+    return this.http.get(this.apiUrl + correo)
         .map(r => r.json())
         .catch(this.error);
     }
 
   postCliente(entidad: any): Observable<any>{
     let body = JSON.stringify(entidad);
-    return this.http.post(this.apiUrl + '/agregar', body, this.options).map(this.getDatos).catch(this.error);
+    return this.http.post(this.apiUrl + 'agregar', body, this.options).map(this.getDatos).catch(this.error);
   }
 
   deleteCliente(entidad: Cliente){
-    return this.http.delete(this.apiUrl + '/eliminar/' + entidad.correo).catch(this.error);
+    return this.http.delete(this.apiUrl.concat('eliminar/') + entidad.correo).catch(this.error);
   }
 
   updateCliente(entidad: Cliente){
     let eJson = JSON.stringify(entidad);
-    return this.http.put(this.apiUrl + '/actualizar/' + entidad.correo, entidad).catch(this.error);
+    //console.log('ruta: ', this.apiUrl.concat('actualizar/'));
+    return this.http.put(this.apiUrl.concat('actualizar/') + entidad.correo, entidad).catch(this.error);
   }
 
   private getDatos(data: Response){

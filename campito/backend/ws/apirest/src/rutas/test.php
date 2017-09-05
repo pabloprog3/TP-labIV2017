@@ -1,11 +1,16 @@
 <?php
 
-include_once './AuthValid.php';
+/*include_once './AuthValid.php';
 
 $auth = new AuthValidate();
 
-//return $auth->validarUsuario('cliente@cliente.com.ar', 'cliente');
-echo $auth->getToken('cliente@cliente.com.ar', 'cliente'); //trae el token OK
+
+echo $auth->getToken('admin@admin.com', '3333'); //trae el token OK*/
+
+
+/*******************************************************************************************/
+
+var_dump($_FILES);
 
 
 ?>

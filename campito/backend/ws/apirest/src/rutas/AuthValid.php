@@ -2,8 +2,8 @@
 
 require_once $_SERVER['DOCUMENT_ROOT']."/TP-labIV2017/campito/backend/ws/apirest/src/model/cliente.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/TP-labIV2017/campito/backend/ws/apirest/src/model/empleado.php";
-
-require __DIR__ .'..\..\..\vendor\autoload.php';
+require_once $_SERVER['DOCUMENT_ROOT']."/TP-labIV2017/campito/backend/ws/apirest/vendor/autoload.php";
+//require __DIR__ .'..\..\..\vendor\autoload.php';
 use \Firebase\JWT\JWT;
 
 /* CLASE QUE VALIDA AL USUAURIO Y DEVUELVE EL TOKEN */

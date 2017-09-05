@@ -9,7 +9,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class PropiedadService {
 
-private apiUrl: string = 'http://localhost:8080/TP-labIV2017/campito/backend/ws/apirest/public/index.php/propiedades';
+private apiUrl: string = /*'https://pabloutn.000webhostapp.com/TP-labIV2017/campito/backend/ws/apirest/public/index.php/propiedades/';*/ 'http://pabloutn.esy.es/TP-labIV2017/campito/backend/ws/apirest/public/index.php/propiedades/';//'http://localhost:8080/TP-labIV2017/campito/backend/ws/apirest/public/index.php/propiedades';
 
    headers = new Headers({ 'Content-Type': 'application/json' });
    options = new RequestOptions( {method: RequestMethod.Post, headers: this.headers });
@@ -22,11 +22,11 @@ getPropiedades(): Observable<Object>{
   }
 
 getPropiedadId(id): Observable<Object>{
-    return this.http.get(this.apiUrl + '/' + id).map(this.getDatos).catch(this.error);
+    return this.http.get(this.apiUrl + id).map(this.getDatos).catch(this.error);
     }
 
-postPropiedad(propiedad): Observable<any>{
-  return this.http.post(this.apiUrl + '/agregar', JSON.stringify(propiedad), this.options).map(this.getDatos).catch(this.error);
+postPropiedad(propiedad): Observable<Object>{
+  return this.http.post(this.apiUrl + 'agregar', propiedad, this.options).map(this.getDatos).catch(this.error);
 }
 
 

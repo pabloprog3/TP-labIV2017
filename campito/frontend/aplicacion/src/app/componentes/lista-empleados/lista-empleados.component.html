@@ -28,7 +28,7 @@
             <td style="text-align: center;"> {{ item["sueldo"] }} </td>
             <td style="text-align: center;"> {{ item["correo"] }} </td>
             <td style="text-align: center;"> {{ item["fecha_nac"] }} </td>
-            <td style="text-align: center;"> <img style="width: 80px" src="../../../assets/fotos/empleados/{{item['foto']}}" ></td>
+            <td style="text-align: center;"> <img style="width: 80px" src="{{item['foto']}}" ></td>
             <td style="text-align: center;"> <input (click)="editarEmpleado(item)" type="button" class="btn btn-sm btn-warning" name="editar" value="Editar"> </td>
             <td style="text-align: center;"> <input (click)="borrarEmpleado(item)" type="button" class="btn btn-sm btn-danger" name="borrar" value="Eliminar"> </td>
             

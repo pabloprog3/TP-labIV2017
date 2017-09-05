@@ -5,22 +5,22 @@
         </div>
           <div class="panel-body pbody">
 
-              <p style="color: red"  class="legendProp">EDITAR EMPLEADO: {{empleado[0]['nombre']}} </p>
+              <p style="color: red"  class="legendProp"></p>
               
               <form  class="form-inline" role="form" [formGroup]="formEmp">
 
                 <div class="form-group">
                   <label   class="control-label campo" for="">Selecciona sucursal destino:</label>
                   <select formControlName="id_sucursal" class="form-control">
-                    <option [selected]="true" value=1>Ramos Mejía</option>
+                    <option  value=1>Ramos Mejía</option>
                     <option value=2>Capital Federal</option>
                     <option value=3>Turdera</option>
                   </select>
                 </div>
 
                 <div class="radio" >
-                    <input formControlName="tipo_emp" type="radio"  value="encargado">Encargado
-                    <input formControlName="tipo_emp" type="radio"  value="empleado">Empleado
+                    <input formControlName="perfil" type="radio"  value="encargado">Encargado
+                    <input formControlName="perfil" type="radio"  value="empleado">Empleado
                 </div>
               
                 <div class="form-group">
@@ -54,7 +54,7 @@
                 </div>
 
                 <br>
-                <button (click)="modificarEmpleado()" class="btn btn-success btn-block">Modificar</button>
+                <button type="button" (click)="modificarEmpleado()" class="btn btn-success btn-block">Modificar</button>
               </form>
 
            <!-- </dvi>  -->

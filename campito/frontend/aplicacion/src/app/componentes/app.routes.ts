@@ -13,6 +13,7 @@ import { ClienteComponent } from "./cliente/cliente.component";
 import { EmpleadosComponent } from './empleados/empleados.component';
 import { DetallePropiedadComponent } from './detalle-propiedad/detalle-propiedad.component';
 import { AltaPropiedadComponent } from './alta-propiedad/alta-propiedad.component';
+import { EncargadoComponent } from './encargado/encargado.component';
 
 import {VerificarJWTService } from '../servicios/verificar-jwt.service';
 
@@ -21,7 +22,7 @@ const APP_ROUTES: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registrarse', component: RegistrarClienteComponent },
   { path: 'cliente', component: ClienteComponent},
-  { path: 'encargado', component: AdminComponent},
+  { path: 'encargado', component: EncargadoComponent},
   { path: 'empleado', component: RegistrarClienteComponent},
   { path: '**', pathMatch: 'full', redirectTo: 'login' },
   { path: '', component: LoginComponent},

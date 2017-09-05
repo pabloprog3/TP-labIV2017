@@ -27,9 +27,7 @@ class Cliente extends Persona{
     }
 
     public static function TraerPorId($correo){
-        //por parametro le paso el correo
-        //$dbPDO = new ConexionPDO();
-	    //$conn = $dbPDO->getConexion();
+
         $conn=ConexionPDO::getConexion();
         $sql='select * from cliente where correo=:correo';
 	    $dbQuery = $conn->prepare($sql);

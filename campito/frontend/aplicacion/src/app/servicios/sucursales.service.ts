@@ -9,7 +9,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class SucursalesService {
 
-private apiUrl: string = 'http://localhost:8080/TP-labIV2017/campito/backend/ws/vendor/slim/slim/sucursales';
+private apiUrl: string = /*'https://pabloutn.000webhostapp.com/TP-labIV2017/campito/backend/ws/apirest/public/index.php/propiedades/';*/ 'http://pabloutn.esy.es/TP-labIV2017/campito/backend/ws/apirest/public/index.php/propiedades/';//'https://localhost:8080/TP-labIV2017/campito/backend/ws/vendor/slim/slim/sucursales/';
 
   constructor(private http: Http) { }
 

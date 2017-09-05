@@ -10,6 +10,8 @@ import { AutService } from '../../servicios/aut.service';
 })
 export class AdminComponent implements OnInit {
 
+  perfil: string = "admin";
+
   constructor(private router: Router, private auth: AutService) { }
 
   ngOnInit() {

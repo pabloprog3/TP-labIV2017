@@ -99,7 +99,7 @@
 
               <p class="legendProp">AGREGAR NUEVO</p>
               
-              <form  class="form-inline" role="form" [formGroup]="formEmp">
+              <form method="post" enctype="multipart/form-data" class="form-inline" role="form" [formGroup]="formEmp">
 
                 <div class="form-group">
                   <label   class="control-label campo" for="">Selecciona sucursal destino:</label>
@@ -167,8 +167,10 @@
                     </span>
                 </div>
                 <div class="form-group">
-                  <label   class="control-label campo" for="">Sueldo:</label>
-                  <input style="text-align:center" formControlName="sueldo"  type="number" style="margin:10px 0px 15px" class="form-control input-sm" id="telefono" name="telefono" placeholder="Sueldo">
+                  <label   class="control-label campo" for="">Sueldo Bruto:</label>
+                  <input [(ngModel)]="sueldo" style="text-align:center" formControlName="sueldo"  type="number" style="margin:10px 0px 15px" class="form-control input-sm" id="telefono" name="telefono" placeholder="Sueldo">
+                  <br>
+                  <strong class="text text-success"> Sueldo Neto: ${{sueldo * 0.83  | number : '1.2-2'}}</strong>
                   <span *ngIf="formEmp.controls.sueldo.errors && formEmp.controls.sueldo.dirty">
                       <div class="text text-danger" *ngIf="formEmp.controls.sueldo.errors.required" >Dato obligatorio</div>
                       <div class="text text-danger" *ngIf="formEmp.controls.sueldo.errors.minlenght">Mínimo 4 dígitos</div>
@@ -187,14 +189,27 @@
                     </span>
                 </div>
                 <div class="form-group">
-                  <label   class="control-label campo" for="">Fecha denacimiento:</label>
+                  <label   class="control-label campo" for="">Fecha de nacimiento:</label>
                   <input style="text-align:center" formControlName="fecha_nac"  type="date" class="form-control input-sm" id="correo" name="correo" placeholder="Correo">
                    <span *ngIf="formEmp.controls.fecha_nac.errors && formEmp.controls.fecha_nac.dirty">
                       <div class="text text-danger" *ngIf="form.controls.fecha_nac.errors.required" >Dato obligatorio</div>
                    </span>
                 </div>
-
-                <button (click)="guardarEmpleado()" class="btn btn-success btn-block">REGISTRAR EMPLEADO</button>
+                <br>
+                <div class="form-group">
+                  <label  class="upload-button" for="archivo">Foto Perfil</label>
+                  <input (change)="procesarFoto($event)" type="file" id="archivo" name="archivo" style="display:none">
+                   <div *ngIf="mostrarProgreso && mostrarFoto"  id="progreso">
+                     
+                   </div>
+                   <section *ngIf="mostrarFoto"  id="foto">
+                                         
+                  </section>
+          
+                  <div *ngIf="errorFoto" class="text text-danger" >Archivo inválido. Sólo se permiten imagenes</div>  
+                </div>         
+                <br>
+                <button (click)="guardarEmpleado($event)" class="btn btn-success btn-block">REGISTRAR EMPLEADO</button>
               </form>
 
         </div>

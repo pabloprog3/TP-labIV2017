@@ -13,7 +13,7 @@ export class LoginService {
 
   constructor(private http: Http) { }
 
-  private apiUrl: string = 'http://localhost:8080/TP-labIV2017/campito/backend/ws/apirest/public/index.php/auth';
+  private apiUrl: string = /*'https://pabloutn.000webhostapp.com/TP-labIV2017/campito/backend/ws/apirest/public/index.php/auth';*/ 'http://pabloutn.esy.es/TP-labIV2017/campito/backend/ws/apirest/public/index.php/auth';//'http://localhost:8080/TP-labIV2017/campito/backend/ws/apirest/public/index.php/auth'; //
 
    headers = new Headers({ 'Content-Type': 'application/json' });
    options = new RequestOptions( {method: RequestMethod.Post, headers: this.headers });

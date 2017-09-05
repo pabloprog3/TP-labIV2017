@@ -22,7 +22,7 @@ export class PerfilEmpleadoComponent implements OnInit {
 
       this.formEmp = this.fb.group({
       id_sucursal: '',
-      tipo_emp: '',
+      perfil: '',
       nombre: '',
       apellido: '',
       dni: '',
@@ -72,11 +72,13 @@ mostrarDatos(){
           correo: this.empleado[0].correo,
           fecha_nac: this.empleado[0].fecha_nac
        });
-       //console.log(this.clienteForm.getRawValue());
+       //console.log(this.formEmp.getRawValue());
 }
 
 modificarEmpleado(){
-  
+  this.servicio.updateEmpleado(this.formEmp.value).subscribe();
+  //console.log('log: ', this.formEmp.getRawValue());
+  this.router.navigate(['usuarios']);
 }
 
 
